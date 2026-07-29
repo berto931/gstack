@@ -27,10 +27,13 @@
 # and stays out of the way on contributor laptops.
 #
 # SUPPLY-CHAIN NOTE: both payloads are third-party code fetched at install time
-# (agent-reach from its git repo, the NVIDIA catalog via `npx skills`). Version
-# pinning is intentionally NOT baked in here — see PROVISION_PINNING below and
-# the PR discussion. Treat this script as executing code you have chosen to
-# trust from those two upstreams.
+# and executed in remote containers that hold git push credentials — agent-reach
+# from its git `main`, the NVIDIA catalog via `npx skills@latest`. Version
+# pinning is intentionally NOT baked in (reviewed decision: track latest for a
+# self-controlled fork, accepting that a compromised upstream would reach these
+# containers). To harden, pin AGENT_REACH_SRC_GIT to a commit SHA and the
+# `skills`/catalog to exact versions. Treat this script as executing code you
+# have chosen to trust from those two upstreams.
 #
 # Modes:
 #   (none)        provision now, unconditionally
