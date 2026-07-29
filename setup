@@ -1540,9 +1540,11 @@ fi
 # in every agent session plus a 50MB download. Imposing that on every gstack
 # user would be wrong, so setup only touches them when explicitly asked.
 #
-# --external-skills writes a marker under ~/.gstack. The SessionStart hook in
-# .claude/settings.json reads that marker and re-provisions after a container
-# rebuild, which is what makes the install survive an ephemeral environment.
+# --external-skills writes a marker under ~/.gstack that the provisioner reads
+# as its opt-in gate on LOCAL re-runs. In a remote container the marker is gone
+# (wiped with $HOME), so the checked-in SessionStart hook re-provisions by
+# force-setting GSTACK_EXTERNAL_SKILLS=1 there instead. Either way the restore
+# survives an ephemeral environment because the hook lives in the repo.
 _EXTERNAL_SKILLS_SCRIPT="$SOURCE_GSTACK_DIR/scripts/provision-external-skills.sh"
 _EXTERNAL_SKILLS_MARKER="${GSTACK_HOME:-$HOME/.gstack}/external-skills-enabled"
 if [ "$EXTERNAL_SKILLS_MODE" = "yes" ] && [ -x "$_EXTERNAL_SKILLS_SCRIPT" ]; then
