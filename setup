@@ -83,6 +83,7 @@ SKILL_PREFIX_FLAG=0
 TEAM_MODE=0
 NO_TEAM_MODE=0
 PLAN_TUNE_HOOKS_MODE=""   # "" = resolve from env/config/prompt; "yes"/"no" = explicit
+EXTERNAL_SKILLS_MODE=""   # "" = leave as-is; "yes" = provision + persist; "no" = tear down
 while [ $# -gt 0 ]; do
   case "$1" in
     --host) [ -z "$2" ] && echo "Missing value for --host (expected claude, codex, kiro, factory, opencode, openclaw, hermes, gbrain, or auto)" >&2 && exit 1; HOST="$2"; shift 2 ;;
@@ -95,6 +96,8 @@ while [ $# -gt 0 ]; do
     --plan-tune-hooks)    PLAN_TUNE_HOOKS_MODE="yes"; shift ;;
     --no-plan-tune-hooks) PLAN_TUNE_HOOKS_MODE="no"; shift ;;
     --plan-tune-hooks=*)  PLAN_TUNE_HOOKS_MODE="${1#--plan-tune-hooks=}"; shift ;;
+    --external-skills)    EXTERNAL_SKILLS_MODE="yes"; shift ;;
+    --no-external-skills) EXTERNAL_SKILLS_MODE="no"; shift ;;
     -q|--quiet) QUIET=1; shift ;;
     *) shift ;;
   esac
@@ -1528,4 +1531,36 @@ if ! grep -q '^redact_prepush_hook:' "$_GSTACK_CFG_FILE" 2>/dev/null; then
   log "Tip: gstack can block pushes containing credentials (per-repo git hook)."
   log "     Enable once: gstack-config set redact_prepush_hook true — /ship"
   log "     installs the hook automatically in every repo you ship from."
+fi
+
+# ─── External (non-gstack) skills ────────────────────────────────────────────
+# Agent Reach + the NVIDIA/skills catalog are third-party payloads that live
+# outside this repo. They are OPT-IN and default OFF: neither is part of
+# gstack, and the NVIDIA catalog alone costs ~60K tokens of skill descriptions
+# in every agent session plus a 50MB download. Imposing that on every gstack
+# user would be wrong, so setup only touches them when explicitly asked.
+#
+# --external-skills writes a marker under ~/.gstack. The SessionStart hook in
+# .claude/settings.json reads that marker and re-provisions after a container
+# rebuild, which is what makes the install survive an ephemeral environment.
+_EXTERNAL_SKILLS_SCRIPT="$SOURCE_GSTACK_DIR/scripts/provision-external-skills.sh"
+_EXTERNAL_SKILLS_MARKER="${GSTACK_HOME:-$HOME/.gstack}/external-skills-enabled"
+if [ "$EXTERNAL_SKILLS_MODE" = "yes" ] && [ -x "$_EXTERNAL_SKILLS_SCRIPT" ]; then
+  mkdir -p "$(dirname "$_EXTERNAL_SKILLS_MARKER")"
+  touch "$_EXTERNAL_SKILLS_MARKER"
+  log ""
+  log "Provisioning external skills (agent-reach + nvidia/skills)..."
+  if [ "$QUIET" -eq 1 ]; then
+    "$_EXTERNAL_SKILLS_SCRIPT" --quiet || true
+  else
+    "$_EXTERNAL_SKILLS_SCRIPT" || true
+  fi
+elif [ "$EXTERNAL_SKILLS_MODE" = "no" ]; then
+  # Clearing the marker stops the SessionStart hook re-provisioning. Installed
+  # files are left alone on purpose — removing 323 skills is destructive and
+  # belongs to an explicit `npx skills remove`, not a setup flag.
+  rm -f "$_EXTERNAL_SKILLS_MARKER"
+  log ""
+  log "External skills disabled (marker cleared; installed files left in place)."
+  log "  Remove them with: npx skills@latest remove nvidia/skills --all -g"
 fi
