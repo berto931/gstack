@@ -173,12 +173,19 @@ an end, and the archive is a record, not a shop. The site architecture in §4 tr
 8. No algorithmic recommendation surfaces in v1 — curation only.
 9. No native app. Mobile web is the complete experience.
 10. No gendered top-level navigation split.
+11. No seasonal framing. Drops are numbered and dated.
+12. No price concealment — price visible on every card, never "on request."
+13. No client-side-only commerce primitives. Price, size availability, sold-out state,
+    and bag count are server-rendered.
+14. No region selector until more than one region ships.
 
 A full teardown of the live LV USA site — navigation, category merchandising, seasonal
-storytelling, product presentation, Maison content, services, account and wishlist,
-accessibility, and mobile — is in
-[`AXIOM_PHASE0_BRAND_FOUNDATION.md`](./AXIOM_PHASE0_BRAND_FOUNDATION.md) §3.3, with 13
-derived Axiom recommendations. Guardrails 7–10 come from that pass.
+storytelling, product presentation, Maison content, services and client advisors, account
+and wishlist and bag, accessibility, region selector, app promotion, and mobile — is in
+[`AXIOM_PHASE0_BRAND_FOUNDATION.md`](./AXIOM_PHASE0_BRAND_FOUNDATION.md) §3.3, with 17
+derived Axiom recommendations and a three-tier evidence model separating fetch-verified
+findings from browser-verified and still-unverified ones. Guardrails 7–14 come from that
+pass.
 
 ### 3.3 Visual system
 
@@ -555,7 +562,26 @@ Supabase for: product catalog, drops/releases, stock by size, email capture, acc
 saved items. Checkout/payments depend on the commerce decision in §12. If a hosted
 commerce platform is chosen instead, Supabase narrows to email capture + editorial content.
 
-### 10.4 Deployment
+### 10.4 Rendering strategy — open tension
+
+Guardrail 13 (no client-side-only commerce primitives) comes from the LV teardown: on
+that site, price, save, and bag count all render client-side, arriving after hydration.
+For a brand claiming every piece is intentional, the price cannot be the last thing to
+paint.
+
+Lovable's default stack is a client-rendered React SPA. Delivering server-rendered price,
+size availability, sold-out state, and bag count therefore needs an explicit decision at
+project creation — a framework preference stated in the initial message, or an accepted
+trade with a defined mitigation (server-rendered poster values, no layout shift on
+hydration, `noscript` fallbacks for price).
+
+This is not a blocker and it is not resolved here. It is the kind of choice that is cheap
+at project creation and expensive in Phase 5.
+
+`Needs confirmation` **25** — rendering approach: SSR-capable framework at project
+creation, or SPA with a stated mitigation for commerce primitives?
+
+### 10.5 Deployment
 
 `mcp__Lovable__deploy_project` per phase to a staging URL. Custom domain, analytics,
 and search-console verification at Phase 7.
@@ -644,6 +670,16 @@ Nothing below is assumed. Each blocks or reshapes real work.
 23. `Needs confirmation` — Launch date, and whether it is tied to a specific drop.
 24. `Needs confirmation` — Who holds final creative approval, and what the review
     turnaround is (this, not build time, usually sets the schedule).
+
+**Rendering**
+25. `Needs confirmation` — Rendering approach: an SSR-capable framework declared at Lovable
+    project creation, or a client-rendered SPA with a stated mitigation for commerce
+    primitives? Derived from guardrail 13 and the LV render-tier finding (Phase 0
+    §3.3.11). Cheap to decide at project creation, expensive in Phase 5. See §10.4.
+
+Phase 0 adds a further register, items `0.1`–`0.20`, in
+[`AXIOM_PHASE0_BRAND_FOUNDATION.md`](./AXIOM_PHASE0_BRAND_FOUNDATION.md) §6. All remain
+open.
 
 ---
 

@@ -177,22 +177,37 @@ the strategic finding of this teardown.
 
 Conducted 2026-07-31 against the live US site.
 
-**Observation method and its limits.** The homepage, the accessibility FAQ, the services
-FAQ set, and the Maison/magazine index were fetched and read directly. **Deep category
-and product-detail URLs returned 404/410 to automated fetching**, so PDP internals and
-category-grid mechanics could not be verified first-hand. Those two rows are marked
-*Unverified* below and carry a `Needs confirmation` rather than a claim. Baymard has
-benchmarked LV across 517 design elements, but the scores sit behind a paid subscription
-and were not accessible. Nothing in this teardown is inferred and presented as observed.
+#### 3.3.1 Evidence tiers
 
-#### 3.3.1 Navigation
+Every finding below carries a tier. Nothing is asserted above the tier it was observed at.
+
+| Tier | Meaning |
+|---|---|
+| **[V]** Fetch-verified | Read directly from the live page's served markup. Exact labels quoted. |
+| **[B]** Browser-verified | Present on the live rendered page in a real browser, reported by the client. Not observable in served markup — these are client-side rendered. Consistent with, but not confirmable by, our fetch. |
+| **[U]** Unverified | Could not be observed by either route. Carries a `Needs confirmation`. Never filled in with inference. |
+
+The homepage, accessibility FAQ, services FAQ set, and Maison/magazine index were fetched
+and read directly. **Deep category and product-detail URLs returned 404/410 to automated
+fetching**, so PDP internals and category-grid mechanics remain `[U]`. Baymard has
+benchmarked LV across 517 design elements, but the scores sit behind a paid subscription
+and were not accessible.
+
+The `[V]`/`[B]` split matters practically: the elements that turned out to be client-side
+rendered are exactly the commerce controls (price, save, bag). That is itself a finding —
+see §3.3.11.
+
+#### 3.3.2 Navigation `[V]`
 
 Eleven top-level entries, in order: **Women · Men · Monogram Anniversary · Gifts and
 Personalization · Bags and Wallets · Perfumes and Beauty · Jewelry · Watches ·
 Trunks/Travel/Home · Services · The Maison Louis Vuitton.**
 
-Utility cluster (upper right): **search · Contact Us · Wishlist · MyLV** account, plus an
-**enhanced-contrast** accessibility toggle.
+Utility cluster: **search · Contact Us · Wishlist · MyLV**, plus an accessibility control
+labeled exactly **"Accessibility: Enhanced Contrast"** and a region selector labeled
+**"Ship to:"** with current value **"United States of America"** (with flag icon).
+
+Shopping bag / cart with item count: `[B]` — not present in served markup.
 
 The finding worth naming: that bar mixes **five incompatible taxonomies** — audience
 (Women, Men), campaign (Monogram Anniversary), product type (Bags and Wallets, Jewelry,
@@ -206,132 +221,178 @@ real estate** (Monogram Anniversary), and **Services and The Maison sit at full 
 with commerce categories**. LV is asserting that aftercare and brand narrative are not
 footer material.
 
-#### 3.3.2 Category merchandising
+#### 3.3.3 Category merchandising `[V]` / `[B]`
 
-The homepage is a sequence of rotating category showcases, each with a **"Shop Now"**
-call to action, followed by a shop-by-category tile set (handbags, small leather goods,
-shoes, accessories, split by gender). Merchandising is push-driven: the site tells you
-what to look at rather than helping you narrow.
+`[V]` The homepage carries **inline product cards** rather than only category tiles.
+Observed cards name individual products — e.g. **"Squire East-West"**, **"LV Drop 300
+Sneaker"** — each with a product image. Category showcases rotate, each with a
+**"Shop Now"** call to action, followed by a shop-by-category tile set (handbags, small
+leather goods, shoes, accessories, split by gender).
 
-*Unverified:* grid density, filter and sort controls, hover-to-alternate-image behavior,
-in-grid editorial interleaving, and merchandising labels (New / Exclusive / Online Only).
-Category URLs returned 410 to fetching.
+`[B]` Visible pricing on those cards, and a card-level wishlist/save control.
 
-#### 3.3.3 Seasonal storytelling
+`[U]` Category-page grid density, filter and sort controls, hover-to-alternate-image
+behavior, in-grid editorial interleaving, and merchandising labels (New / Exclusive /
+Online Only). Category URLs returned 410.
 
-**Fall-Winter 2026** is the active season, surfaced through dedicated homepage blocks for
-both women's and men's. The **Monogram Anniversary** campaign is elevated out of seasonal
-rotation into the permanent nav. Editorial lives under `/magazine`, organized as **The
-Latest · La Maison · Fashion Shows · Arts and Culture · Sustainability**.
+The pattern: LV puts **transactable product on the homepage**, not just navigation into
+it. The homepage is a merchandising surface, not a brand gateway.
 
-The model: the season merchandises the homepage, while the campaign gets architectural
-permanence. Story and shop are interleaved continuously rather than separated.
+#### 3.3.4 Seasonal storytelling `[V]`
 
-#### 3.3.4 Product presentation
+Four seasonal labels observed on the homepage: **"Fall-Winter 2026"**, **"Men's
+Fall-Winter 2026"**, **"Women's High Summer Collection"**, and **"New This Season"**.
+The **Monogram Anniversary** campaign is elevated out of seasonal rotation into the
+permanent nav. Editorial lives under `/magazine`, organized as **The Latest · La Maison ·
+Fashion Shows · Arts and Culture · Sustainability**.
 
-*Largely unverified — PDP URLs returned 404 to fetching.* What is confirmed from other
-surfaces: machine-learning recommendations suggest complementary accessories and
-cross-collection items based on browsing; personalization (hot stamping) is offered as a
-configurable option at purchase time rather than as a separate flow; and the store locator
-flags which physical stores offer personalization.
+Two seasons run concurrently on one homepage (High Summer and Fall-Winter 2026), split by
+gender. The model: the season merchandises the homepage, while the campaign gets
+architectural permanence. Story and shop are interleaved continuously.
+
+#### 3.3.5 Product presentation `[U]` / `[B]`
+
+`[U]` PDP internals — gallery structure, zoom, accordion sections, below-fold content.
+PDP URLs returned 404 to fetching.
+
+`[B]` Price and save controls render client-side on cards.
+
+`[V]` from adjacent surfaces: machine-learning recommendations suggest complementary
+accessories and cross-collection items based on browsing; personalization (hot stamping)
+is offered as a configurable option at purchase time rather than as a separate flow; the
+store locator flags which physical stores offer personalization.
 
 `Needs confirmation` **0.13** — whether to commission a manual walkthrough of LV's PDP and
 category pages. Automated access is blocked; a human session would close this gap.
 
-#### 3.3.5 Maison content
+#### 3.3.6 Maison content `[V]`
 
 Six pillars, all non-shoppable, all high-production: **La Maison** (history, Spirit of
 Travel), **Savoir-faire** — presented as an episodic series, *The Art of Craftsmanship* —
 **Fashion Shows** (women's and men's), **Arts and Culture** (exhibitions, book launches,
 collaborations, *Espace Louis Vuitton* exhibition spaces), **Sustainability** ("Our
-Committed Journey"), and the **Fondation Louis Vuitton**.
+Committed Journey"), and the **Fondation Louis Vuitton**. A dedicated homepage section
+surfaces this content, and **"The Maison Louis Vuitton"** holds a top-level nav slot.
 
 The strategic move: LV spends enormous production budget on content that sells nothing
 directly, and gives it nav parity with the shop. It is a legitimacy engine. The
 craftsmanship series in particular is the closest thing in this competitive set to what
 Axiom's drop films should be — though the subject matter must differ completely.
 
-#### 3.3.6 Services
+#### 3.3.7 Services and client advisors `[V]`
 
 | Service | Detail as published |
 |---|---|
+| Client Advisors | **"Our Client Advisors are available to assist you by phone at +1.866.VUITTON, or you may also chat with us"** — phone **and** live chat, surfaced on the homepage |
 | Repairs | Leather goods, handbags, luggage, shoes, accessories. Assessed individually. Complimentary repair or alternative offered where the issue is craftsmanship-related. Up to **6 weeks**. Requested via the LV App or in store. |
 | Hot stamping | **Complimentary.** Small leather goods, luggage tags, select soft-sided luggage. Requested in store, online, or by phone at order time. |
 | Personalization | Broader configurator offering; stores offering it are marked with a dedicated icon in the store locator. |
-| Gifting | Presented as its own service category and merged into a nav entry with personalization. |
+| Gifting | Its own service category, merged into the **"Gifts and Personalization"** nav entry. |
 | Appointments | Book with a **Care Expert** or **Client Advisor**; repair requests submitted in-app. |
-| Client Services | **+1.866.VUITTON**, plus email. |
 
-Two things stand out. **The most-promoted service is free** (hot stamping), which converts
-a service page into a reason to buy rather than a cost center. And **repair is framed as
-lifetime stewardship**, not warranty administration — an argument for the product's
-permanence made through operations rather than copy.
+Three things stand out. **The most-promoted service is free** (hot stamping), which
+converts a service page into a reason to buy rather than a cost center. **Repair is framed
+as lifetime stewardship**, not warranty administration — an argument for the product's
+permanence made through operations rather than copy. And **human contact is offered on the
+homepage itself**, not buried in support: a named phone number plus live chat, above the
+fold of the footer.
 
-#### 3.3.7 Account and wishlist
+#### 3.3.8 Account, wishlist, and bag `[V]` / `[B]`
 
-**MyLV** account and **Wishlist** both occupy the persistent utility cluster. Wishlist
-being top-level rather than buried is a deliberate bet on considered, returning purchase
-behavior — high-consideration goods are saved before they are bought.
+`[V]` **MyLV** account and **Wishlist** both occupy the persistent utility cluster. The
+wishlist link carries a state-bearing accessible label — **"(There are items in your
+wishlist)"** — surfaced on an unauthenticated fetch, which *suggests* wishlist state
+persists without sign-in. Not conclusive: the label may be a conditionally-rendered
+template. Treat as suggestive.
 
-*Unverified:* whether wishlist persists for guests, whether it syncs across devices, and
-whether it triggers back-in-stock or price notifications.
+`[B]` Shopping bag with item count.
 
-#### 3.3.8 Accessibility
+Wishlist being top-level rather than buried is a deliberate bet on considered, returning
+purchase behavior — high-consideration goods are saved before they are bought. Giving the
+control a *stateful* label rather than a static one is a small, real accessibility win.
 
-This is the weakest surface on the site, and the finding is unusually clear.
+`[U]` Whether wishlist syncs across devices, and whether it triggers back-in-stock or
+price notifications.
 
-An **enhanced-contrast toggle** exists in the utility nav — a real, if narrow, feature.
-But the published accessibility commitment is a single sentence in a FAQ answer:
+#### 3.3.9 Accessibility `[V]`
+
+Genuinely mixed, and the split is instructive.
+
+**What exists:** an **"Accessibility: Enhanced Contrast"** control promoted into the top
+navigation — not a footer link, not an overlay widget, a first-class toggle in the primary
+chrome. A separate **"Accessibility"** footer link routes to an FAQ. The wishlist's
+stateful label (§3.3.8) shows some real assistive-technology consideration.
+
+**What does not exist:** the published commitment is a single sentence in a FAQ answer:
 
 > "Louis Vuitton is dedicated to creating a digitally accessible experience for our users
 > and welcomes your feedback."
 
-**No WCAG version. No conformance level. No audit. No remediation partner. No overlay.**
-Remedy is a phone number and an email address. For context, LVMH has previously been named
-in ADA digital-accessibility litigation ([Cruz v. LVMH, 2020](https://www.accessibility.com/digital-lawsuits/shael-lvmh-2020-02-25)).
+**No WCAG version. No conformance level. No audit. No remediation partner.** Remedy is a
+phone number and an email address. For context, LVMH has previously been named in ADA
+digital-accessibility litigation ([Cruz v. LVMH, 2020](https://www.accessibility.com/digital-lawsuits/shael-lvmh-2020-02-25)).
 
-The competitive read: **a house with effectively unlimited budget publishes no conformance
-claim at all.** A genuine, specific accessibility statement is therefore cheap
-differentiation for Axiom and simultaneously reduces legal exposure. This upgrades the
-`/legal/accessibility` route in the plan from compliance checkbox to brand asset.
+The competitive read: **a house with effectively unlimited budget ships a contrast toggle
+but publishes no conformance claim at all.** A contrast toggle is also, quietly, an
+admission — a site whose default palette met AA comfortably would not need one. Both
+halves are useful to Axiom, in opposite directions.
 
-#### 3.3.9 Mobile behavior
+#### 3.3.10 Mobile and app `[V]` / `[U]`
 
-The **LV App** is load-bearing rather than supplementary: repair requests, Care Expert
-appointments, and service flows route through it. App download sits in the footer services
-group.
+`[V]` **"Download our Apps"** sits in the footer Services group. The **LV App** is
+load-bearing rather than supplementary: repair requests, Care Expert appointments, and
+service flows route through it.
 
-*Unverified:* responsive web breakpoints, mobile nav pattern, and mobile PDP gallery
-behavior. Automated fetching returns desktop markup and blocks the deep URLs where this
-would be observable.
+`[U]` Responsive web breakpoints, mobile nav pattern, and mobile PDP gallery behavior.
+Automated fetching returns desktop markup and blocks the deep URLs where this would be
+observable.
 
 `Needs confirmation` **0.14** — whether a manual mobile-device audit of LV is wanted as
 input to Axiom's own mobile spec.
 
-#### 3.3.10 Findings → Axiom recommendations
+#### 3.3.11 What the render-tier split reveals
+
+The elements that proved client-side rendered are precisely the commerce controls: price,
+save-to-wishlist, bag count. Everything brand-bearing — navigation, campaign labels,
+Maison content, client-advisor contact, the accessibility toggle, the region selector —
+is in the served markup.
+
+That ordering has a cost. Price and save arriving after hydration means they are late to
+paint, invisible to a fetch, and dependent on JavaScript succeeding. For a site whose
+customers largely already intend to buy, LV can absorb that. **Axiom cannot.** A brand
+arguing that every piece is intentional cannot have the price arrive last. This is the
+strongest argument in the teardown for server-rendering Axiom's commerce primitives —
+see recommendation 14.
+
+#### 3.3.12 Findings → Axiom recommendations
 
 Each recommendation is derived from an LV observation but deliberately inverted or
-narrowed. None imports LV's visual or structural language.
+narrowed. None imports LV's visual or structural language. Tier of the source finding is
+shown so the strength of each derivation is visible.
 
-| # | LV observation | Axiom recommendation | Rationale |
-|---|---|---|---|
-| 1 | 11 top-level entries mixing 5 taxonomies | **Keep the 3-entry nav** (`SHOP / DROPS / MANIFESTO`) and hold the line under pressure | LV can afford incoherence because it is a destination. Axiom's nav must teach the brand's logic in one glance. Restraint here is the position. |
-| 2 | Campaign holds permanent nav real estate | **`DROPS` is the permanent equivalent** — but it is a structure, not a campaign | Gets LV's benefit (narrative permanence) without re-cutting the nav every season. |
-| 3 | Services and Maison at commerce parity | **Promote `/manifesto` to top-level nav; keep support in the footer** | Brand narrative earns parity. Aftercare does not, until services actually exist. |
-| 4 | Non-shoppable Maison content as legitimacy engine | **Drop films and the manifesto are Axiom's legitimacy engine** — no product cards inside them | Confirms the plan's decision to keep drop stories editorial, with a single shop CTA at the end. |
-| 5 | Episodic craftsmanship series | **Make construction visible: fabric weight, stitch, cut, in the PDP and drop story** | The specificity rule in the voice charter (§4.2.5) is the same instinct, at lower cost. |
-| 6 | Most-promoted service is free (hot stamping) | **If any service ships, make it free, small, and identity-bearing** — e.g. a numbered edition card or drop-number stamp | Converts a cost line into a reason to buy. `Needs confirmation` 0.15. |
-| 7 | Repair framed as lifetime stewardship | **Publish a real garment-care and repair position** at `/support/care` | Argues for permanence through operations, not adjectives. Fits a brand claiming intention. |
-| 8 | Wishlist top-level in utility nav | **Ship saved-items in v1, in the utility cluster** | Limited drops make saving *more* valuable than in permanent catalogs — it is the natural home for notify-me. |
-| 9 | ML recommendations across collections | **Do not build recommendations in v1.** Use editorially curated "complete the look" | Algorithmic cross-sell contradicts "every collection is intentional." Curation is the on-brand mechanic and needs no data. |
-| 10 | Enhanced-contrast toggle, no conformance claim | **Publish a specific accessibility statement**: WCAG 2.2 AA target, audit date, known gaps, contact route | The cheapest available differentiation against every competitor in the set, and it lowers legal exposure. |
-| 11 | Push merchandising ("Shop Now" everywhere) | **One CTA per view; never "Shop Now."** Use `VIEW DROP 004` or `ADD` | Directly enforces the red-discipline and voice rules already set. |
-| 12 | App is load-bearing for services | **No app. Mobile web must be the complete experience.** | An app is unjustifiable at this scale and would fragment a brand whose whole argument is singular focus. |
-| 13 | Season merchandises home; campaign gets permanence | **Home is merchandised by the current drop; the archive gives every past drop permanence** | Same two-speed structure, expressed through scarcity rather than seasonality. |
+| # | Source | LV observation | Axiom recommendation | Rationale |
+|---|---|---|---|---|
+| 1 | `[V]` | 11 top-level entries mixing 5 taxonomies | **Keep the 3-entry nav** (`SHOP / DROPS / MANIFESTO`) and hold the line under pressure | LV can afford incoherence because it is a destination. Axiom's nav must teach the brand's logic in one glance. |
+| 2 | `[V]` | Campaign holds permanent nav real estate | **`DROPS` is the permanent equivalent** — a structure, not a campaign | Gets the narrative permanence without re-cutting the nav every season. |
+| 3 | `[V]` | Services and Maison at commerce parity | **Promote `/manifesto` to top-level; keep support in the footer** | Brand narrative earns parity. Aftercare does not, until services actually exist. |
+| 4 | `[V]` | Non-shoppable Maison content as legitimacy engine | **Drop films and the manifesto are Axiom's legitimacy engine** — no product cards inside them | Confirms keeping drop stories editorial, with one shop CTA at the end. |
+| 5 | `[V]` | Episodic craftsmanship series | **Make construction visible: fabric weight, stitch, cut**, in the PDP and drop story | Same instinct as the voice charter's specificity rule (§4.2.5), at far lower cost. |
+| 6 | `[V]` | Most-promoted service is free (hot stamping) | **If any service ships, make it free, small, and identity-bearing** — a numbered edition card or drop-number stamp | Converts a cost line into a reason to buy. `Needs confirmation` 0.15. |
+| 7 | `[V]` | Repair framed as lifetime stewardship | **Publish a real garment-care and repair position** at `/support/care` | Argues for permanence through operations, not adjectives. |
+| 8 | `[V]` | Wishlist top-level, with a stateful accessible label | **Ship saved-items in v1, in the utility cluster, with a live count in the accessible name** | Limited drops make saving *more* valuable than in permanent catalogs. The stateful label is a free a11y win worth copying at the pattern level. |
+| 9 | `[V]` | ML recommendations across collections | **Do not build recommendations in v1.** Editorially curated "complete the look" only | Algorithmic cross-sell contradicts "every collection is intentional." Curation needs no data. |
+| 10 | `[V]` | Contrast toggle in top nav; no conformance claim | **Meet AA in the default palette so no toggle is needed; publish a specific statement** — WCAG 2.2 AA target, audit date, known gaps, contact route | A toggle is an admission the default fails. Our §2.2 contrast work already sets up the stronger position. Cheapest differentiation available. |
+| 11 | `[V]` | Push merchandising, "Shop Now" everywhere | **One CTA per view; never "Shop Now."** Use `VIEW DROP 004` or `ADD` | Enforces the red-discipline and voice rules already set. |
+| 12 | `[V]` | App is load-bearing for services | **No app. Mobile web must be the complete experience.** | An app is unjustifiable at this scale and fragments a brand whose argument is singular focus. |
+| 13 | `[V]` | Two concurrent seasons, gender-split, "New This Season" | **No seasons and no gender split. Drops are numbered and dated.** | Seasonality implies a next one just like it. A numbered drop implies it is gone. |
+| 14 | `[B]`/`[V]` | Price, save, and bag render client-side | **Server-render price, size availability, sold-out state, and the bag count.** No commerce primitive may depend on hydration. | A brand claiming intention cannot have the price arrive last. Also protects the LCP budget in §D3's remit. |
+| 15 | `[V]` | Inline product cards on the homepage | **Home carries the current drop's actual pieces, with price visible on the card** — curated, not merchandised | Take the transactability, refuse the rotation. Never "price on request": concealing price is a validation-seeking move and breaks the axiom. |
+| 16 | `[V]` | Region selector: "Ship to: United States of America" | **If Axiom ships one region at launch, state it plainly in the footer.** No selector until there is something to select. | A selector with one option is theater. `Needs confirmation` 0.18. |
+| 17 | `[V]` | Client Advisors by phone **and** live chat, on the homepage | **Do not ship a chat widget that cannot be staffed.** A single honest contact route beats a fake concierge. | An unanswered chat bubble does more damage to a certainty-brand than no chat at all. `Needs confirmation` 0.19. |
 
 **Guardrail additions from this teardown** (appended to §3.4): no "Shop Now" microcopy; no
 algorithmic recommendation surfaces in v1; no native app; no gendered top-level navigation
-split.
+split; no seasonal framing; no price concealment; no client-side-only commerce primitives.
 
 Sources: [LV USA homepage](https://us.louisvuitton.com/eng-us/homepage) ·
 [accessibility FAQ](https://us.louisvuitton.com/eng-us/faq/services/do-you-have-a-question-or-comment-related-to-accessibility) ·
@@ -354,12 +415,18 @@ Enforced by A1 at every design review. A violation is a blocker, not a note.
 7. No "since / established" heritage framing in copy. See §4.4 and `Needs confirmation` on
    the 1995 date.
 
-Added from the LV deep teardown (§3.3.10):
+Added from the LV deep teardown (§3.3.12):
 
 8. No "Shop Now" microcopy anywhere. See §4.5 for on-voice replacements.
 9. No algorithmic recommendation surfaces in v1 — editorial curation only.
 10. No native app. Mobile web is the complete experience.
 11. No gendered top-level navigation split.
+12. No seasonal framing (no "Fall-Winter," no "New This Season"). Drops are numbered
+    and dated.
+13. No price concealment. Price is visible on every card and never "on request."
+14. No client-side-only commerce primitives. Price, size availability, sold-out state,
+    and bag count are server-rendered.
+15. No region selector until more than one region ships.
 
 ---
 
@@ -497,6 +564,9 @@ needs an answer before Phase 2 scheduling is meaningful.
 | 0.15 | **Will Axiom offer any service at launch** (numbered edition card, drop-number stamp, repair)? | Phase 2 sitemap, Phase 5 | Determines whether `/support/care` and a services surface are real routes or omitted |
 | 0.16 | **Ship saved-items/wishlist in v1?** (recommended: yes) | Phase 2 UX, Phase 4 | Limited drops make saving more valuable than in a permanent catalog; also the natural home for notify-me |
 | 0.17 | **Publish a specific accessibility statement** naming WCAG 2.2 AA, audit date, and known gaps? (recommended: yes) | Phase 7, `/legal/accessibility` | No competitor in the set publishes a conformance claim; cheap differentiation and lower legal exposure |
+| 0.18 | **How many shipping regions at launch?** | Phase 2 sitemap, footer, checkout | Determines whether a region selector exists at all. One region = a plain footer statement, no selector (§3.3.12 rec 16) |
+| 0.19 | **Will human support be staffed** — phone, email, or live chat? | Phase 2 `/support`, Phase 5 | LV offers phone plus live chat on the homepage. An unstaffed chat widget damages a certainty-brand more than no chat (§3.3.12 rec 17) |
+| 0.20 | **Commission a rendered-DOM capture of LV's homepage** to lift the `[B]` findings to `[V]`? | Nothing — optional rigor | Price-on-card, card-level save, and bag count are client-rendered and currently browser-reported rather than fetch-verified (§3.3.1) |
 
 Commerce, technical, and program questions carry forward unchanged from
 [`AXIOM_USA_WEBSITE_PLAN.md`](./AXIOM_USA_WEBSITE_PLAN.md) §12 items 7–11 and 16–24. All
