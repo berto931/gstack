@@ -34,9 +34,12 @@ signage**, not heritage crest.
 | Black bucket hat | Globe icon, blackletter "Axiom Studios" over white script "1995", "THE STANDARD IS SET / BASED IN NYC". |
 | Black polo + shorts set | Small-format badge lockup, chest-left and hem-right placement. Uniform logic. |
 
-**Tension to resolve before design lock:** the assets carry three different sub-identities
-(racing badge / collegiate-equestrian / streetwear-blackletter). A luxury site cannot
-present all three as peers. See `Needs confirmation` §12.
+**Resolved.** Nineteen assets were ultimately supplied, carrying seven visual systems,
+five names and two monograms. The brand architecture pass in
+[`AXIOM_PHASE0_BRAND_FOUNDATION.md`](./AXIOM_PHASE0_BRAND_FOUNDATION.md) §6 resolves them
+into one house (AXIOM, capsule-A badge, three stars), two permanent lines (ATHLETICS,
+CLUB), and numbered drop graphics for everything else. Sixteen of nineteen assets survive
+in some form.
 
 ---
 
@@ -189,6 +192,12 @@ pass.
 
 ### 3.3 Visual system
 
+**Brand architecture.** One house (AXIOM, capsule-A badge, three stars), two permanent
+lines (AXIOM ATHLETICS, AXIOM CLUB), and everything else as numbered drop graphics. Full
+resolution in [`AXIOM_PHASE0_BRAND_FOUNDATION.md`](./AXIOM_PHASE0_BRAND_FOUNDATION.md) §6.
+The two-line structure gives the collection grid a real top-level split and gives future
+graphic experiments somewhere to live without destabilising the house.
+
 **Color — primarily black and white, controlled red.**
 
 | Token | Value (proposed) | Use |
@@ -236,6 +245,8 @@ cut, not a shake.
 ```
 /                          Home — cinematic entry, manifesto, featured drop, collection grid
 /collections               Index of all collections
+  /collections/athletics   AXIOM ATHLETICS — permanent line
+  /collections/club        AXIOM CLUB — permanent line
   /collections/:slug       Collection page — editorial + product grid
 /products/:slug            PDP — product detail
 /drops                     Drop archive / release calendar
@@ -677,9 +688,11 @@ Nothing below is assumed. Each blocks or reshapes real work.
     primitives? Derived from guardrail 13 and the LV render-tier finding (Phase 0
     §3.3.11). Cheap to decide at project creation, expensive in Phase 5. See §10.4.
 
-Phase 0 adds a further register, items `0.1`–`0.20`, in
-[`AXIOM_PHASE0_BRAND_FOUNDATION.md`](./AXIOM_PHASE0_BRAND_FOUNDATION.md) §6. All remain
-open.
+Phase 0 adds a further register, items `0.1`–`0.23`, in
+[`AXIOM_PHASE0_BRAND_FOUNDATION.md`](./AXIOM_PHASE0_BRAND_FOUNDATION.md) §8. The brand
+architecture pass closed `0.1` (sub-identity), `0.6` (horse) and `0.8` (tagline), revised
+`0.2` (naming), and added `0.21` (garment colour sampling), `0.22` (two-line ceiling) and
+`0.23` (artwork revision ownership). The rest remain open.
 
 ---
 

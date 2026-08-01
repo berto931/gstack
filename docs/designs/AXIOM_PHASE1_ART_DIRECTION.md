@@ -5,8 +5,9 @@ Status: **Delivered as written specification. Provisional pending Phase 0 confir
 No assets generated or modified. No Higgsfield. No Lovable. No credits spent.
 Owners: A3 Art Director, with B2 Design System Architect on tokens and type.
 
-Written against **Route A (Institutional / Motorsport)** per the Phase 0 recommendation.
-Every point where Route B or C would change the outcome is marked **[Route-dependent]**.
+Written against the **house / lines / drops architecture** resolved in Phase 0 §6. The
+house register is institutional; the two permanent lines (ATHLETICS, CLUB) carry their own
+vocabulary beneath it, and drop graphics are free within the guardrails.
 
 > **Scope note.** The approved plan put style-anchor still generation in Phase 1. That
 > work is **deferred** under the no-generation instruction. What follows is the complete
@@ -101,9 +102,10 @@ scroll.
 | **Body / UI** | Neutral grotesque, regular/medium, generous line-height | Legibility; deliberately recessive so display and product carry the page |
 | **Meta** | Monospace, uppercase, tracking `+0.08em` | Drop numbers, SKUs, sizes, prices, timestamps. The single strongest "technical authority" cue available. |
 
-**[Route-dependent]** Under Route B the display voice becomes a collegiate slab or
-athletic serif and the mono voice largely disappears. Under Route C the display voice
-becomes blackletter for drop graphics while the UI stays grotesque.
+These three voices are the **house** system and govern every site surface. Line and drop
+graphics may use their own lettering on garments — CLUB's script, a drop's blackletter —
+but those never enter the site's interface typography. The arched collegiate wordmark is
+retired outright (guardrail 16).
 
 ### 3.2 Candidates
 
@@ -142,8 +144,8 @@ Line-height: 0.92 display, 1.55 body, 1.2 meta. Measure capped at 68 characters.
 1. Display is always uppercase. Body is always sentence case.
 2. Never more than one display element per viewport.
 3. Mono is never used for prose — only for values, identifiers, and labels.
-4. No italics anywhere. **[Route-dependent]** — Routes B and C both use script/italic
-   accents, so this rule relaxes under either.
+4. No italics anywhere in interface type. Script and italic lettering is permitted inside
+   CLUB and drop artwork, never in the UI.
 5. Numerals in product context are always mono, always tabular.
 
 ---
@@ -258,20 +260,29 @@ hero placement, and whether disclosure is required in your shipping markets.
 
 ## 7. House codes
 
-Four ownable devices, used consistently enough to become recognizable without the logo.
+Confirmed by the Phase 0 brand architecture pass (Phase 0 §6). Four devices, used
+consistently enough to become recognisable without the wordmark.
 
 | Code | Form | Where it appears |
 |---|---|---|
+| **Capsule-A badge** | The house mark. Compact form drops the rule box and wordmark, leaving capsule-A plus three stars | Header, favicon, packaging, neck and care labels, checkout, order confirmation, and a small chest or hem hit on every garment |
 | **Three stars** | From the primary mark | Section dividers, loading state, footer, packaging |
-| **Capsule frame** | The enclosing shape around the monogram | Image masks, button geometry on select CTAs, badge lockups |
 | **Red rule** | 1–2px red hairline | Scroll progress, active nav, card hover draw-in, drop markers |
 | **Numbered drop** | Mono, zero-padded — `DROP 004` | PDP, drop archive, packaging, order confirmation |
 
-These replace the crest/check/monogram function that the competitors rely on. They are
+These replace the crest/check/monogram function the competitors rely on. They are
 structural rather than decorative, which is what keeps the site from needing pattern fill
 to feel branded.
 
----
+**Line-level vocabulary** sits below the house codes and never replaces them:
+
+| Line | Vocabulary |
+|---|---|
+| AXIOM ATHLETICS | Wordmark, single star, horizontal rules, box lockups |
+| AXIOM CLUB | Script wordmark, laurel wreath, single star |
+
+**Retired** and not to be reintroduced: heraldic crest, AW monogram, globe, arched
+collegiate wordmark. See Phase 0 §6.7 and guardrails 2, 16, 17.
 
 ## 8. Mood board specification
 
@@ -280,7 +291,7 @@ both out of scope under the current instruction.
 
 | Board | Contents | Purpose |
 |---|---|---|
-| **B1 — Institutional** | Motorsport liveries, standards-body signage, technical certification marks, aerospace placards | Establishes the Route A register |
+| **B1 — Institutional** | Motorsport liveries, standards-body signage, technical certification marks, aerospace placards | Establishes the house register |
 | **B2 — Light** | Hard-key studio product work, single-source shadow studies, black-on-black texture | Locks the lighting contract |
 | **B3 — Type** | Condensed grotesque signage, mono data tables, numbered edition marks | Locks the three-voice system |
 | **B4 — Space** | Editorial layouts with extreme vertical rhythm, single-image viewports | Justifies the 192px section padding before it gets compressed |
@@ -296,7 +307,7 @@ B5 is the one most teams skip and the one that saves the most review cycles.
 |---|---|---|
 | Brand red | **Provisional** | `Needs confirmation` 0.4 — authoritative hex/Pantone |
 | Typeface selection | **Two viable systems specified, neither selected** | `Needs confirmation` 0.11 — licensing budget |
-| Sub-identity | **Recommended (Route A), not confirmed** | `Needs confirmation` 0.1 |
+| Sub-identity | **RESOLVED** — house / lines / drops architecture | Closed by Phase 0 §6 |
 | Style-anchor stills | **Specified, not generated** | Current no-generation instruction |
 | Mood boards | **Specified, not produced** | Current no-generation instruction |
 | Logo application rules | **Cannot finalize** | `Needs confirmation` 0.5 — vector suite absent |

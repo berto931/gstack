@@ -63,77 +63,62 @@ is the opposite of an axiom: it argues. See §4.4 banned lexicon.
 
 ## 2. Sub-identity analysis
 
-The four supplied assets present three incompatible identities. This is the highest-value
-question in Phase 0 because it gates all of Phase 1's visual work.
+Nineteen assets have now been supplied. They present **seven visual systems, five names,
+two monograms, and five base colours.** This is the highest-value question in Phase 0
+because it gates all of Phase 1's visual work.
 
 ### 2.1 What was supplied
 
-| Asset | Identity signals |
-|---|---|
-| Primary mark | Black rule box, 3 red stars, capsule-enclosed angular "A" monogram, heavy condensed red AXIOM wordmark. **Motorsport / institutional badge.** |
-| White oversized tee | Collegiate arch "AXIOM" red with black outline, galloping horse, script "Worldwide", "EST. 1995". **Collegiate-equestrian heritage.** |
-| Black bucket hat | Wireframe globe, blackletter "Axiom Studios" over white script "1995", "THE STANDARD IS SET / BASED IN NYC". **NYC blackletter streetwear.** |
-| Black polo + shorts | Badge lockup, chest-left and hem-right, small format. **Uniform logic — consistent with the badge identity.** |
+| # | System | Vocabulary | Colourways |
+|---|---|---|---|
+| S1 | Capsule badge | rule box · 3 red stars · capsule-enclosed A · AXIOM wordmark | 1 (+ primary mark) |
+| S2 | Collegiate horse | arched AXIOM · galloping horse · "Worldwide" script · EST. 1995 | 4 |
+| S3 | Axiom Studios | blackletter · 1995 · globe · THE STANDARD IS SET · BASED IN NYC | 3 |
+| S4 | Axiom Club | script · laurel wreath · star · EST. 1995 | 4 |
+| S5 | Standard Is Set | script line · AXIOM in red box · WORLDWIDE · AW monogram | 3 |
+| S6 | Axiom Athletics | AXIOM ATHLETICS · star in box · rules | 1 |
+| S7 | Shield crest | heraldic shield · laurel · 3 stars · BASED IN NYC · EST. 1995 | 1 |
 
-Three of four assets can be reconciled. The tee cannot.
+**Names:** Axiom USA · Axiom Worldwide · Axiom Studios · Axiom Club · Axiom Athletics
+**Monograms:** capsule A · AW
+**Base colours:** black · white · grey · navy, with red as accent
 
-### 2.2 The three routes
+### 2.2 The problem, stated plainly
 
-**Route A — Institutional / Motorsport (badge as house identity)**
+The brand line is *"An axiom is a truth that does not require validation."* Seven parallel
+identities is, structurally, validation-seeking: a brand trying seven ways to be
+recognised. The graphics contradict the proposition.
 
-The mark, the polo, and the shorts already agree. Reads as a racing team, a standards
-body, a technical authority. Condensed grotesque, mono meta text, hard rules, numbered
-editions.
+**But the catalogue is real.** Four colourways of Axiom Club, four of the horse, three of
+Standard Is Set, three of Studios. Nobody builds that depth on concepts. This is not a
+brand auditioning for itself — it is a brand with a working catalogue and no hierarchy.
+That distinction matters, because it makes the fix **organisation, not deletion.**
 
-- *Fits the brand line best.* An axiom is a stated standard; institutional design language
-  is literally the visual grammar of stated standards.
-- *Competitive whitespace:* strongest. None of Polo, Burberry, or LV occupy it.
-- *Cost:* the tee's horse and collegiate arch retire or become a one-off capsule.
-- *Risk:* can read cold or corporate if the photography isn't excellent. Mitigated by
-  §Phase 1's lighting and casting direction.
+### 2.3 The connective tissue already present
 
-**Route B — Collegiate-Equestrian heritage (tee as house identity)**
+Before cutting anything, note what already recurs across otherwise-unrelated systems:
 
-Arch wordmark, horse device, "EST. 1995," script accents.
+- **Stars** — S1 (3), S7 (3), S4 (1), S6 (1). Present in four of seven systems.
+- **Red** — all seven, consistent hue.
+- **EST. 1995** — S2, S3, S4, S7.
+- **THE STANDARD IS SET** — S3, S5.
+- **Worldwide / global reference** — S2, S3 (globe), S5.
 
-- *Fits the brand line poorly.* Heritage-by-implication is a validation claim — precisely
-  what an axiom does not need.
-- *Competitive whitespace:* almost none. Polo owns equestrian-collegiate outright, and
-  Burberry owns the equestrian knight. This route walks directly into two incumbents.
-- **Not recommended.** It is the one route with a real imitation risk.
+The star is the strongest shared device in the range and had not been treated as the house
+code. That is the finding this architecture is built on.
 
-**Route C — NYC Blackletter Studios (hat as house identity)**
+### 2.4 Recommendation
 
-Blackletter, globe, city stamp, "THE STANDARD IS SET."
+**A three-tier structure: one house, two permanent lines, everything else episodic.**
+The full architecture is in §6.
 
-- *Fits the brand line partially.* "THE STANDARD IS SET" is genuinely on-message and is
-  the strongest line in the supplied assets after the axiom line itself.
-- *Competitive whitespace:* moderate, but the category is crowded with streetwear labels
-  using identical blackletter-plus-globe vocabulary. Differentiation would have to come
-  entirely from execution.
-- *Cost:* caps the price ceiling. Blackletter streetwear reads at a lower price point than
-  the badge identity does.
+The earlier three-route framing (badge / collegiate / blackletter, pick one) is superseded.
+It asked the wrong question. With nineteen assets and real colourway depth, the question is
+not *which identity wins* but *which mark is the institution and which are episodes*.
 
-### 2.3 Recommendation
-
-**Route A as the house identity, Route C as a graphic vocabulary available to individual
-drops, Route B retired or spent as a single named capsule.**
-
-Rationale: the house identity is what appears in the header, the favicon, the packaging,
-the footer, and the checkout — it must be the most durable and the most ownable, and that
-is unambiguously the badge. Drop graphics can be freer, because a drop is an episode, not
-the institution. That structure also gives the brand somewhere to put future graphic
-experiments without destabilizing the house.
-
-"THE STANDARD IS SET" should be lifted out of the hat artwork and promoted to a
-brand-level line, used alongside the axiom line.
-
-`Needs confirmation` — **this is a client decision, not ours.** Phase 1's art direction
-document is written against Route A, and flags every point where Route B or C would
-change the outcome. If you choose differently, Phase 1's type and imagery direction is
-revised, not discarded.
-
----
+Route A is promoted — but as the **house mark**, not as the house *style*. Routes B and C
+survive as drop graphics rather than being retired. See §6.7 for retain/retire detail and §7
+for commercial impact.
 
 ## 3. Competitive teardown
 
@@ -527,7 +512,7 @@ but it is an absolute blocker for Phase 2 onward.
 | OG / share images | 1200×630 | None | Total | Phase 7 |
 | Product photography | 4–6 shots × every SKU, calibrated | None | **Total** | Phase 2 wireframes, Phase 4 build |
 | Editorial photography | 8–12 per collection | None | Total | Phase 5 |
-| Video masters | Per §8 shot list | None | Total | Phase 6 |
+| Video masters | Per plan §8 shot list | None | Total | Phase 6 |
 | Product data (SKU, price, fabric, sizes, stock) | Structured | None | **Total** | Phase 2, Phase 4 |
 | Size charts per garment type | Numeric | None | Total | Phase 5 |
 | Legal copy (shipping, returns, privacy, terms) | Text | None | Total | Phase 5 |
@@ -543,18 +528,189 @@ needs an answer before Phase 2 scheduling is meaningful.
 
 ---
 
-## 6. Phase 0 `Needs confirmation` register
+## 6. Brand architecture
+
+Resolves the seven visual systems, five names, two monograms, and five base colours into a
+single structure. Recommendation approved by the client.
+
+### 6.1 The three tiers
+
+```
+                        AXIOM                          <- house
+              capsule-A badge - 3 stars
+        "THE STANDARD IS SET" - BASED IN NYC
+                         |
+         +---------------+---------------+
+    AXIOM ATHLETICS              AXIOM CLUB            <- lines (permanent)
+   technical / performance    heritage / community
+   wordmark - star - rules    script - laurel - star
+                         |
+              DROP 001 ... DROP 0NN                    <- graphics (episodic)
+        horse - blackletter - 1995 - experiments
+```
+
+### 6.2 Tier 1 — House: AXIOM
+
+| Element | Decision |
+|---|---|
+| Brand name | **AXIOM** (no suffix) |
+| Full lockup | **AXIOM WORLDWIDE** |
+| Legal entity | May remain *Axiom USA*. An entity name is not a brand name; no registration change is needed to fix the brand. |
+| House mark | **Capsule-A badge**, simplified for small sizes |
+| House code | **Three stars** |
+| Tagline | **THE STANDARD IS SET** |
+| Meta line | **BASED IN NYC** |
+
+**Why the capsule badge.** It is the only device in the range that is not a category
+trope. Wreaths, crests, horses, blackletter, globes and arched collegiate wordmarks are
+standard-issue vocabulary shared by hundreds of labels; the capsule-A is specific to this
+brand. It already works small — the original polo and shorts used it chest-left and
+hem-right, which is exactly the house-mark job.
+
+**Where it appears:** site header, favicon, packaging, neck label, care label, checkout,
+order confirmation, and a small chest or hem hit on **every** garment regardless of line.
+That last part is what makes the architecture real rather than theoretical — the house
+mark is the thing every product has in common.
+
+**Why "Worldwide" over "USA".** It is the most-used descriptor in the range (S2, S5), and
+a brand asserting a universal truth is poorly served by a national qualifier. "Axiom USA"
+also sits awkwardly beside "Worldwide" on the same garment.
+
+### 6.3 Tier 2 — Lines (two, permanent)
+
+**AXIOM ATHLETICS** — technical, performance, institutional. Vocabulary: AXIOM ATHLETICS
+wordmark, single star, horizontal rules, box lockups. Register: motorsport livery,
+standards-body signage. Grows from S6 and S5.
+
+**AXIOM CLUB** — heritage, community, membership. Vocabulary: script wordmark, laurel
+wreath, single star. Register: victory laurel, athletic award. Grows from S4.
+
+Two lines is the ceiling (guardrail 18). A third fragments the house again, which is the
+condition this pass exists to end.
+
+### 6.4 Tier 3 — Drop graphics (episodic)
+
+Everything else: numbered, dated, explicitly temporary. The horse, the blackletter, the
+1995 numerals, and future experiments become drop graphics rather than permanent devices.
+A drop graphic can be as loud as it likes precisely because it is not claiming to be the
+institution. This is where existing catalogue depth goes without contaminating the house.
+
+### 6.5 Conflict resolutions
+
+**Crest — RETIRE.** The heraldic shield is the most Polo-and-Burberry-adjacent form in the
+range, and it landed on the most premium garment, where the comparison is most damaging.
+It also *replaced* the capsule badge on that polo, displacing the one genuinely ownable
+mark with the least ownable one. No reframing is available; a shield crest is a shield
+crest.
+
+**Laurel and wreath — RETAIN, scoped to AXIOM CLUB.** See guardrail 2 for the reasoning.
+
+**Horse — RETAIN the horse, RETIRE the framing.** The Polo read does not come from the
+horse. It comes from the complete package: **arched collegiate wordmark + horse + script
+descriptor + EST. date** — Polo's formula, assembled almost element-for-element. Break the
+package and the horse stops reading as Polo:
+
+- Retire the arched collegiate wordmark (the most Polo-specific element).
+- Retire the script "Worldwide" in that lockup.
+- Retire EST. 1995 from the lockup.
+- Keep the horse, redrawn in the house register: geometric or technical rather than
+  naturalistic-equestrian.
+
+Four colourways survive as a drop graphic instead of being written off.
+
+**Monogram — RETAIN capsule-A, RETIRE AW.** Two monograms is one too many for a brand
+built on restraint. The capsule-A is distinctive; AW is a generic two-letter monogram of
+the kind every apparel label has.
+
+**Capsule — PROMOTE to house mark.** Simplified for small-size legibility: the rule box
+and wordmark drop away in the compact form, leaving capsule-A plus three stars.
+
+**THE STANDARD IS SET — PROMOTE to house tagline.** Currently buried inside two graphic
+lockups (S3, S5) where it competes with other type. It is the strongest line in the range
+after the axiom line itself, and it is on-voice: declarative, unhedged, closed. Set in
+mono; removed from graphic lockups so it stops competing with itself.
+
+**Globe — RETIRE.** Generic trope, and redundant: "WORLDWIDE" already carries the meaning
+in words.
+
+### 6.6 Naming resolution
+
+| Name | Decision |
+|---|---|
+| **AXIOM** | House brand. Primary, used alone. |
+| **AXIOM WORLDWIDE** | Full lockup. Formal contexts, packaging, footer. |
+| **AXIOM ATHLETICS** | Line name. Permanent. |
+| **AXIOM CLUB** | Line name. Permanent. |
+| **AXIOM STUDIOS** | Retire as a name. The blackletter/1995 graphic survives as a drop graphic without carrying a brand name. |
+| **Axiom USA** | Retire as a brand name. May remain the legal entity. |
+
+Five names collapse to one brand, one descriptor, two lines.
+
+### 6.7 Retain / retire
+
+**RETAIN**
+
+| Element | Scope |
+|---|---|
+| Capsule-A badge | House mark, all surfaces and garments |
+| Three stars | House code |
+| Red | Accent, unchanged discipline (5% ceiling) |
+| Laurel wreath | AXIOM CLUB only |
+| Script wordmark | AXIOM CLUB only |
+| Wordmark + star + rules | AXIOM ATHLETICS only |
+| Horse | Drop graphic, redrawn, no collegiate arch |
+| Blackletter + 1995 | Drop graphic only |
+| THE STANDARD IS SET | House tagline, mono |
+| BASED IN NYC | Meta line, mono |
+
+**RETIRE**
+
+| Element | Reason |
+|---|---|
+| Shield crest | Polo/Burberry-adjacent; displaced the house mark |
+| AW monogram | Generic; duplicates the capsule |
+| Globe | Trope; redundant with "WORLDWIDE" |
+| Arched collegiate wordmark | The Polo-specific element |
+| Script "Worldwide" in the horse lockup | Completes the Polo formula |
+| EST. 1995 in graphic lockups | Conditional — see below |
+| "Axiom USA" as brand name | Conflicts with WORLDWIDE |
+| "Axiom Studios" as brand name | Fifth name; graphic survives without it |
+
+**EST. 1995 is conditional on `0.3`.** If the date is real, it belongs on the house mark
+only, once. If it is aesthetic, retire it entirely: a fabricated founding date is the most
+direct possible contradiction of *a truth that does not require validation*, and an
+advertising-claims risk in some markets. Cannot be resolved without the client.
+
+## 7. Commercial impact
+
+Stated plainly, because the recommendation costs something.
+
+| Line | Colourways | Outcome |
+|---|---|---|
+| Axiom Club (wreath) | 4 | **Survives** as a permanent line |
+| Collegiate horse | 4 | **Survives** as a drop graphic, artwork revised |
+| Standard Is Set | 3 | **Survives**, AW swapped for capsule |
+| Axiom Studios | 3 | **Survives** as a drop graphic, name retired |
+| Axiom Athletics | 1 | **Promoted** to a permanent line |
+| Capsule badge | 1 | **Promoted** to house mark |
+| Shield crest | 1 | **Retired** |
+
+**16 of 19 assets survive in some form.** One garment set is retired outright; four
+require artwork revision (horse redraw, AW swap x3). This is a reorganisation, not a cull,
+which is the correct outcome given the catalogue is real.
+
+## 8. Phase 0 `Needs confirmation` register
 
 | # | Question | Blocks | Why it matters |
 |---|---|---|---|
-| 0.1 | **Sub-identity: confirm Route A, B, or C** (recommendation: A) | Phase 1 lock, all of Phase 3 | Wrong choice invalidates the entire visual system |
-| 0.2 | **Legal / primary brand name** — Axiom USA, Axiom Worldwide, or Axiom Studios | Phase 1, metadata, schema, legal | Three names appear across brief and assets; one must be primary |
-| 0.3 | **"EST. 1995" — real or aesthetic?** | Copy, `/manifesto`, footer, schema | A false founding date is a credibility risk and, in some markets, an advertising-claims risk |
+| ~~0.1~~ | ~~Sub-identity~~ | — | **CLOSED** by the architecture pass. House = capsule badge; lines = Athletics, Club; everything else = drops. See §6. |
+| 0.2 | **REVISED.** Brand name recommended as **AXIOM** / **AXIOM WORLDWIDE** (§6.6). Confirm whether *Axiom USA* remains the legal entity | Metadata, schema, legal | Entity name and brand name can differ; no registration change is required to fix the brand |
+| 0.3 | **"EST. 1995" — real or aesthetic?** **Now load-bearing.** | House mark, copy, `/manifesto`, footer, schema | Determines whether the date survives once on the house mark or is retired entirely (§6.7). A fabricated founding date is the most direct possible contradiction of the brand line, and an advertising-claims risk in some markets |
 | 0.4 | **Authoritative brand red** (hex + Pantone) | Phase 1 color lock | Sampled value is not authoritative; contrast math depends on it |
-| 0.5 | **Vector logo suite** | Phase 3 | Raster logos cannot render cleanly across the required sizes |
-| 0.6 | **Is the horse/equestrian device permanent or seasonal?** | Phase 1, house codes | Tied to 0.1; a permanent horse forces Route B |
+| 0.5 | **Vector logo suite** — **now more urgent** | Phase 3 | The capsule becomes the house mark and must render at favicon size. Raster cannot. |
+| ~~0.6~~ | ~~Horse permanent or seasonal~~ | — | **CLOSED.** Drop graphic, redrawn without the collegiate arch. See §6.5. |
 | 0.7 | **Audience research** — does any exist? | Phase 2 copy deck | §1.3 is currently an inferred hypothesis, not a finding |
-| 0.8 | **Promote "THE STANDARD IS SET" to a brand-level line?** | Phase 2 copy | Strongest supplied line after the axiom line |
+| ~~0.8~~ | ~~Promote "THE STANDARD IS SET"~~ | — | **CLOSED.** Adopted as the house tagline. See §6.2. |
 | 0.9 | **Does real product photography exist?** | **Phase 2 scheduling** | If a shoot is needed, the shoot is the critical path |
 | 0.10 | **Full product catalog** — SKUs, sizes, prices, stock | Phase 2, Phase 4 | Cannot wireframe a PDP or grid without knowing the real range |
 | 0.11 | **Font licensing budget** | Phase 1 lock | Named display faces are commercial; open alternatives shift the look |
@@ -567,6 +723,9 @@ needs an answer before Phase 2 scheduling is meaningful.
 | 0.18 | **How many shipping regions at launch?** | Phase 2 sitemap, footer, checkout | Determines whether a region selector exists at all. One region = a plain footer statement, no selector (§3.3.12 rec 16) |
 | 0.19 | **Will human support be staffed** — phone, email, or live chat? | Phase 2 `/support`, Phase 5 | LV offers phone plus live chat on the homepage. An unstaffed chat widget damages a certainty-brand more than no chat (§3.3.12 rec 17) |
 | 0.20 | **Commission a rendered-DOM capture of LV's homepage** to lift the `[B]` findings to `[V]`? | Nothing — optional rigor | Price-on-card, card-level save, and bag count are client-rendered and currently browser-reported rather than fetch-verified (§3.3.1) |
+| 0.21 | **Sample `--garment-grey` and `--garment-navy`** from production garments, not mockups | Phase 1 §2.5, PDP swatches | Mockup colours are not colour-accurate; swatches must match real goods |
+| 0.22 | **Approve the two-line ceiling** (Athletics, Club) and confirm nothing else is intended as permanent | Phase 2 sitemap, §6.3 | Guardrail 18 caps permanent lines at two |
+| 0.23 | **Who owns artwork revision** (horse redraw, AW→capsule swaps)? Internal, or does it return to us as a spec? | Phase 6 | Four assets need revision; ownership is unassigned |
 
 Commerce, technical, and program questions carry forward unchanged from
 [`AXIOM_USA_WEBSITE_PLAN.md`](./AXIOM_USA_WEBSITE_PLAN.md) §12 items 7–11 and 16–24. All
