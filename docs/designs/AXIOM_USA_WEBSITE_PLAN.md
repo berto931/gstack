@@ -169,6 +169,16 @@ an end, and the archive is a record, not a shop. The site architecture in §4 tr
 4. No serif display face. All three lean historical; our position is institutional-modern.
 5. No warm/golden campaign grade, no estate or countryside settings.
 6. No celebrity-led campaign structure.
+7. No "Shop Now" microcopy anywhere.
+8. No algorithmic recommendation surfaces in v1 — curation only.
+9. No native app. Mobile web is the complete experience.
+10. No gendered top-level navigation split.
+
+A full teardown of the live LV USA site — navigation, category merchandising, seasonal
+storytelling, product presentation, Maison content, services, account and wishlist,
+accessibility, and mobile — is in
+[`AXIOM_PHASE0_BRAND_FOUNDATION.md`](./AXIOM_PHASE0_BRAND_FOUNDATION.md) §3.3, with 13
+derived Axiom recommendations. Guardrails 7–10 come from that pass.
 
 ### 3.3 Visual system
 
