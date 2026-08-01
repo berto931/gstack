@@ -390,17 +390,24 @@ Sources: [LV USA homepage](https://us.louisvuitton.com/eng-us/homepage) ·
 ### 3.4 Anti-copy guardrails
 
 Enforced by A1 at every design review. A violation is a blocker, not a note.
+Revised after the brand architecture pass (§6); changes are marked.
 
 1. No repeating-pattern monogram treatment, at any scale, anywhere. LV's territory.
-2. No crest, shield, laurel, wreath, or knight device. Polo and Burberry.
+2. **REVISED.** No heraldic **crest, shield, or knight** device. **Laurel wreath is
+   permitted, scoped to AXIOM CLUB.** *(Was a blanket ban on laurel and wreath. A laurel
+   wreath and a heraldic crest are different signals: the wreath reads as victory laurel —
+   Olympic, athletic, award — while the crest reads as inherited nobility. Polo and
+   Burberry own the second, not the first. The blanket ban would have cost the deepest
+   line in the catalogue for a risk that does not exist.)*
 3. No check, plaid, or tartan.
-4. No serif display typeface. All three lean historical; Axiom is institutional-modern.
+4. No serif display typeface. All three competitors lean historical; Axiom is
+   institutional-modern.
 5. No warm or golden campaign grade; no estate, countryside, or heritage-interior setting.
 6. No celebrity-led campaign structure.
-7. No "since / established" heritage framing in copy. See §4.4 and `Needs confirmation` on
-   the 1995 date.
+7. No "since / established" heritage framing in copy. See §4.4 and `Needs confirmation`
+   `0.3` on the 1995 date.
 
-Added from the LV deep teardown (§3.3.12):
+From the LV deep teardown (§3.3.12):
 
 8. No "Shop Now" microcopy anywhere. See §4.5 for on-voice replacements.
 9. No algorithmic recommendation surfaces in v1 — editorial curation only.
@@ -413,7 +420,13 @@ Added from the LV deep teardown (§3.3.12):
     and bag count are server-rendered.
 15. No region selector until more than one region ships.
 
----
+From the brand architecture pass (§6):
+
+16. **NEW.** No arched collegiate wordmark. This is the Polo-specific element; the horse
+    survives without it.
+17. **NEW.** One monogram only — the capsule-A. No secondary monogram, including AW.
+18. **NEW.** No more than two permanent lines beneath the house. Additional ideas ship as
+    numbered drops.
 
 ## 4. Voice charter
 

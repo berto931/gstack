@@ -165,30 +165,32 @@ an end, and the archive is a record, not a shop. The site architecture in §4 tr
 `/drops` as a first-class narrative surface for exactly this reason.
 
 **Anti-copy guardrails (A1 enforces at every review):**
-1. No repeating-pattern monogram treatment. Ever. That is LV's territory and reads as
-   imitation instantly.
-2. No crest, shield, laurel, or knight. That is Polo and Burberry.
+1. No repeating-pattern monogram treatment. Ever. That is LV's territory.
+2. **REVISED.** No heraldic crest, shield, or knight device. Laurel wreath is permitted,
+   scoped to AXIOM CLUB — the victory-laurel reading, not the heraldic one.
 3. No check, plaid, or tartan.
 4. No serif display face. All three lean historical; our position is institutional-modern.
 5. No warm/golden campaign grade, no estate or countryside settings.
 6. No celebrity-led campaign structure.
-7. No "Shop Now" microcopy anywhere.
-8. No algorithmic recommendation surfaces in v1 — curation only.
-9. No native app. Mobile web is the complete experience.
-10. No gendered top-level navigation split.
-11. No seasonal framing. Drops are numbered and dated.
-12. No price concealment — price visible on every card, never "on request."
-13. No client-side-only commerce primitives. Price, size availability, sold-out state,
-    and bag count are server-rendered.
-14. No region selector until more than one region ships.
+7. No "since / established" heritage framing in copy.
+8. No "Shop Now" microcopy anywhere.
+9. No algorithmic recommendation surfaces in v1 — curation only.
+10. No native app. Mobile web is the complete experience.
+11. No gendered top-level navigation split.
+12. No seasonal framing. Drops are numbered and dated.
+13. No price concealment — price visible on every card, never "on request."
+14. No client-side-only commerce primitives.
+15. No region selector until more than one region ships.
+16. **NEW.** No arched collegiate wordmark — the Polo-specific element.
+17. **NEW.** One monogram only, the capsule-A. No secondary monogram, including AW.
+18. **NEW.** No more than two permanent lines beneath the house.
 
-A full teardown of the live LV USA site — navigation, category merchandising, seasonal
-storytelling, product presentation, Maison content, services and client advisors, account
-and wishlist and bag, accessibility, region selector, app promotion, and mobile — is in
-[`AXIOM_PHASE0_BRAND_FOUNDATION.md`](./AXIOM_PHASE0_BRAND_FOUNDATION.md) §3.3, with 17
-derived Axiom recommendations and a three-tier evidence model separating fetch-verified
-findings from browser-verified and still-unverified ones. Guardrails 7–14 come from that
-pass.
+Guardrails 2 and 16–18 come from the brand architecture pass in
+[`AXIOM_PHASE0_BRAND_FOUNDATION.md`](./AXIOM_PHASE0_BRAND_FOUNDATION.md) §6. Guardrails
+8–15 come from the Louis Vuitton teardown in §3.3 of the same document, which covers
+navigation, category merchandising, seasonal storytelling, product presentation, Maison
+content, services, account and wishlist, accessibility, region selector, app promotion,
+and mobile, with 17 derived recommendations and a three-tier evidence model.
 
 ### 3.3 Visual system
 
