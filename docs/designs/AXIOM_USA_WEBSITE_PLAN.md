@@ -1,7 +1,12 @@
 # Axiom USA — Website Plan (Lovable Build)
 
-Status: **PLAN ONLY — awaiting approval. Nothing built. No credits spent.**
-Date: 2026-08-01
+Status: **Phases 0–1 approved and delivered as written work. Phases 2+ not started.**
+Nothing built. No assets generated or modified. No Higgsfield or Lovable credits spent.
+Date: 2026-07-31
+
+**Companion documents:**
+- Phase 0 — [`AXIOM_PHASE0_BRAND_FOUNDATION.md`](./AXIOM_PHASE0_BRAND_FOUNDATION.md)
+- Phase 1 — [`AXIOM_PHASE1_ART_DIRECTION.md`](./AXIOM_PHASE1_ART_DIRECTION.md)
 Target platform: Lovable (React + TypeScript + Tailwind + shadcn/ui), Supabase backend where needed.
 
 ---
@@ -133,15 +138,37 @@ exists and the agent works from the brief plus web research.
 flat and unhedged. No exclamation marks, no "shop now," no urgency theater. Space and
 silence carry the luxury; red carries the conviction.
 
-### 3.2 Competing with Polo and Burberry without copying
+### 3.2 Competing with Polo, Burberry, and Louis Vuitton without copying
 
-| They do | We do instead |
-|---|---|
-| Heritage crests, serif nostalgia, archival warmth | Institutional precision — signage typography, rules, numbers, registration marks |
-| Lifestyle-estate photography, soft golden light | Hard studio light, high-contrast black/white, controlled red |
-| Endless catalog depth | Deliberate scarcity — few products, each one an event |
-| Trench/tartan house codes | Axiom house codes: the **3 stars**, the **capsule frame**, the **red rule**, the **numbered drop** |
-| Warm, welcoming, inherited | Cold, certain, earned |
+| | Polo Ralph Lauren | Burberry | Louis Vuitton | **Axiom** |
+|---|---|---|---|---|
+| Core claim | Inherited American aspiration | British heritage, re-authored | Status made legible at a glance | Certainty that needs no proof |
+| House code | Crest, pony, tartan-adjacent prep | Check, trench, equestrian knight | Monogram, Damier, trunk hardware | 3 stars, capsule frame, red rule, numbered drop |
+| Type voice | Serif nostalgia, engraved | Reformed grotesque, high-fashion neutral | Wide luxury grotesque, monogram-as-type | Condensed institutional grotesque + mono meta |
+| Imagery | Estate lifestyle, golden light, family | Cinematic Britain, weather, moodboard warmth | Spectacle, celebrity, scale, saturated color | Hard studio light, black/white seamless, no warmth |
+| Color logic | Navy/cream/multi, seasonal | Beige-check + shifting seasonal palette | Brown/gold monogram + loud seasonal color | Black/white with red under a 5% ceiling |
+| Availability | Deep, permanent catalog | Broad seasonal catalog | Broad, with engineered waitlists | Genuinely limited, numbered, gone |
+| Web behavior | Merchandised grid, catalog-first | Editorial carousels, heavy campaign media | Oversized media, motion spectacle, logo density | Restraint; silence and space as the luxury signal |
+| Emotional register | Belonging | Refinement | Arrival | Conviction |
+
+**Where the whitespace actually is.** All three competitors are *logo-dense* — LV most of
+all, where the monogram repeating across a surface is the entire product proposition.
+Axiom's mark is strong enough to work the opposite way: used once, small, and never
+repeated. Restraint is the position no one in that set occupies.
+
+The second gap is **temporal**. Polo and LV are permanent; you can buy the thing next
+year. Burberry is seasonal. Axiom is *episodic* — a drop is an event with a beginning and
+an end, and the archive is a record, not a shop. The site architecture in §4 treats
+`/drops` as a first-class narrative surface for exactly this reason.
+
+**Anti-copy guardrails (A1 enforces at every review):**
+1. No repeating-pattern monogram treatment. Ever. That is LV's territory and reads as
+   imitation instantly.
+2. No crest, shield, laurel, or knight. That is Polo and Burberry.
+3. No check, plaid, or tartan.
+4. No serif display face. All three lean historical; our position is institutional-modern.
+5. No warm/golden campaign grade, no estate or countryside settings.
+6. No celebrity-led campaign structure.
 
 ### 3.3 Visual system
 
@@ -531,8 +558,8 @@ Effort shown as human-team vs. CC+gstack, per house convention.
 
 | Phase | Contents | Gate to pass | Human team | CC+gstack |
 |---|---|---|---|---|
-| **0. Foundation** | Brand brief, sub-identity resolution, voice charter, competitive teardown, asset audit | A1+A3 sign-off; `Needs confirmation` list closed | 1 week | ~3 hrs |
-| **1. Direction** | Art direction bible, mood boards, type + color lock, style-anchor stills via Higgsfield | Client approves the look. **No code yet.** | 1 week | ~4 hrs |
+| **0. Foundation** ✅ | Brand brief, sub-identity analysis, voice charter, competitive teardown (Polo / Burberry / LV), asset audit | **Delivered** — see `AXIOM_PHASE0_BRAND_FOUNDATION.md`. Sub-identity recommended, not confirmed. | 1 week | ~3 hrs |
+| **1. Direction** ✅ | Art direction bible, color + contrast system, type system, photography & motion direction, house codes, mood-board specs | **Delivered as written spec** — see `AXIOM_PHASE1_ART_DIRECTION.md`. Style-anchor stills and mood boards specified but **not generated** (no-generation instruction). Red and typeface remain provisional. | 1 week | ~4 hrs |
 | **2. Structure** | Sitemap lock, wireframes all pages, flow diagrams, copy deck v1 | UX + copy approved | 1 week | ~4 hrs |
 | **3. Design system** | Tokens, Tailwind config, all 42 components spec'd, motion spec | B2+B3 sign-off | 1 week | ~3 hrs |
 | **4. Build core** | Lovable project, system in place, Home + PDP + Collection built | Three pages pass a11y/perf/device gate | 2 weeks | ~6 hrs |
