@@ -708,7 +708,7 @@ Stated plainly, because the recommendation costs something.
 | Capsule badge | 1 | **Promoted** to house mark |
 | Shield crest | 1 | **Retired** |
 
-**16 of 19 assets survive in some form.** One garment set is retired outright; four
+**16 of the 17 distinct garment colourways survive in some form.** One garment set is retired outright; four
 require artwork revision (horse redraw, AW swap x3). This is a reorganisation, not a cull,
 which is the correct outcome given the catalogue is real.
 

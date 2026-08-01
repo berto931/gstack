@@ -38,8 +38,8 @@ signage**, not heritage crest.
 five names and two monograms. The brand architecture pass in
 [`AXIOM_PHASE0_BRAND_FOUNDATION.md`](./AXIOM_PHASE0_BRAND_FOUNDATION.md) §6 resolves them
 into one house (AXIOM, capsule-A badge, three stars), two permanent lines (ATHLETICS,
-CLUB), and numbered drop graphics for everything else. Sixteen of nineteen assets survive
-in some form.
+CLUB), and numbered drop graphics for everything else. Sixteen of the seventeen
+distinct garment colourways survive in some form.
 
 ---
 
