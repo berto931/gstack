@@ -90,6 +90,33 @@ always light (product truth needs a neutral ground). Manifesto and drop-story se
 always dark. The header inverts on scroll. Roughly 60/40 light-to-dark across a full home
 scroll.
 
+### 2.5 Garment colours — a separate token group
+
+The product range is **black, white, grey, and navy**, plus red. The brand surface system
+above contains only black, white, red and neutral greys. Navy and grey exist on garments
+and nowhere in the design system.
+
+**The navy problem, named explicitly:** navy + red + white is the Polo palette. Adopting
+navy as a brand *surface* colour would undo much of the differentiation work in Phase 0 §3.
+
+**Resolution — garment colours are not surface colours.** The site stays monochrome.
+Garment colours live in a separate, restricted token group.
+
+```
+/* Garment colours — swatches and product chrome ONLY. Never page surfaces. */
+--garment-black   #0A0A0A
+--garment-white   #FAFAFA
+--garment-grey    #C9C9C9   (provisional — see 0.21)
+--garment-navy    #1B2A4A   (provisional — see 0.21)
+```
+
+**Rule:** a `--garment-*` token may appear only inside `ColorSwatches`, `ProductCard`
+swatch dots, and the PDP colour selector. Any other use is a review blocker. This keeps
+the site's restraint intact while representing product truth honestly.
+
+`Needs confirmation` **0.21** — both provisional values must be sampled from real
+production garments, not from mockups.
+
 ---
 
 ## 3. Typography
@@ -312,6 +339,7 @@ B5 is the one most teams skip and the one that saves the most review cycles.
 | Mood boards | **Specified, not produced** | Current no-generation instruction |
 | Logo application rules | **Cannot finalize** | `Needs confirmation` 0.5 — vector suite absent |
 | Photography direction validation | **Written, unproven** | `Needs confirmation` 0.9 — no photography exists |
+| Garment colour values | **Provisional** | `Needs confirmation` 0.21 — grey and navy must be sampled from production goods |
 
 Everything above is written specification ready to execute. None of it required
 assumptions to be made on your behalf, and none were.
