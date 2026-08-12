@@ -61,6 +61,23 @@ lighting on seamless white.
 | `onyx-bronze-accent.jpg` | Brushed bronze collar + base plate |
 | `onyx-marble-veined-alt.jpg` | Alt model take (Seedream, 6K) — different carving read; likeness slightly looser than the Nano set |
 
+### Materials board (`statue/materials/`)
+
+The flagship bust re-carved in nine premium materials — same pose, likeness,
+and museum lighting, so they read as one family.
+
+| File | Material |
+|------|----------|
+| `bust-carrara-marble.jpg` | Classical white statuary marble, soft gray veining |
+| `bust-black-galaxy-granite.jpg` | Jet-black granite with gold/copper flecks |
+| `bust-obsidian.jpg` | Volcanic glass, faint iridescent sheen |
+| `bust-smoky-quartz.jpg` | Semi-translucent crystal with inner wisps |
+| `bust-imperial-jade.jpg` | Deep green jade, waxy luster |
+| `bust-lapis-lazuli.jpg` | Royal blue with pyrite gold flecks |
+| `bust-tigers-eye.jpg` | Golden chatoyant banding |
+| `bust-alabaster.jpg` | Warm translucent ivory |
+| `bust-benin-bronze.jpg` | Patinated bronze, Benin royal-sculpture tradition |
+
 ### Presentation (`statue/presentation/`)
 
 | File | Use case |
