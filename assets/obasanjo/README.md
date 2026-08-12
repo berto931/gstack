@@ -41,6 +41,34 @@ lighting on seamless white.
 | `statue/alternates/onyx-full-figure-statue.jpg` | Monument-style full figure in agbada |
 | `statue/details/onyx-cap-fretwork-macro.jpg` | Section dividers / background texture |
 
+| `statue/primary/onyx-bust-back-view.jpg` | Back three-quarter (completes the 4-view set) |
+
+### Formats & poses (`statue/formats/`)
+
+| File | Use case |
+|------|----------|
+| `onyx-thinker-half-figure.jpg` | Reflection / legacy sections |
+| `onyx-seated-figure.jpg` | Monument energy, about page |
+| `onyx-full-figure-arms-crossed.jpg` | Strength / leadership sections |
+| `onyx-relief-medallion.jpg` | Awards, seal-like accents |
+
+### Finishes (`statue/finishes/`)
+
+| File | Use case |
+|------|----------|
+| `onyx-gold-veined.jpg` | Luxury finish variant (natural gold veining) |
+| `onyx-matte-basalt.jpg` | Velvet no-gloss variant |
+| `onyx-bronze-accent.jpg` | Brushed bronze collar + base plate |
+| `onyx-marble-veined-alt.jpg` | Alt model take (Seedream, 6K) — different carving read; likeness slightly looser than the Nano set |
+
+### Presentation (`statue/presentation/`)
+
+| File | Use case |
+|------|----------|
+| `onyx-stepped-plinth.jpg` | Two-tier base with engraved fretwork frieze |
+| `onyx-museum-mount.jpg` | Gallery steel-rod mount on marble disc |
+| `onyx-gallery-spotlight.jpg` | Exhibition mood, overhead spotlight + long shadow |
+
 ### Website-ready crops & compositions (`statue/crops/`)
 
 Derived from the masters above (the face detail comes from the 4K flagship),
