@@ -112,6 +112,22 @@ Included per request for side-by-side comparison with the statue direction.
 | `pixel/obasanjo-pixel-full-body.png` | Retro full body |
 | `pixel/onyx-bust-pixel.png` | Statue-meets-pixel bridge piece |
 
+## Transparent cutouts (`transparent/`)
+
+Every statue and bust where clean subject isolation was possible — 27 PNGs
+with true alpha, tight-cropped to the subject with a small margin, floor
+reflections removed, edges defringed. Same filenames as their source
+masters, so pairing is obvious. Compose them on any background color or
+photo. Originals are untouched.
+
+Made locally (U2Net segmentation + luminance refinement) — no generation
+credits were used.
+
+Intentionally skipped (no clean single subject to isolate): the wide-hero
+composites, the gallery-spotlight mood shot (the lighting is the image),
+the fretwork macro/banner textures, and the derived crops. The circle
+avatar already ships with transparency.
+
 ## Ready-to-drop sizes
 
 `web-ready/` has pre-scaled copies of the most-used assets (512px avatar,
