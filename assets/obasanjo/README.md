@@ -41,6 +41,22 @@ lighting on seamless white.
 | `statue/alternates/onyx-full-figure-statue.jpg` | Monument-style full figure in agbada |
 | `statue/details/onyx-cap-fretwork-macro.jpg` | Section dividers / background texture |
 
+### Website-ready crops & compositions (`statue/crops/`)
+
+Derived from the masters above (the face detail comes from the 4K flagship),
+so they match pixel-for-pixel.
+
+| File | Use case |
+|------|----------|
+| `onyx-three-views-lineup.jpg` | Front + three-quarter + profile family strip |
+| `onyx-bust-face-detail-4x5.jpg` | Editorial close-up |
+| `onyx-bust-square.jpg` | Cards / social tiles (1:1) |
+| `onyx-general-square.jpg` | Military-era tile (1:1) |
+| `onyx-full-figure-mobile-9x16.jpg` | Mobile hero |
+| `onyx-fretwork-banner-3x1.jpg` | Page divider band |
+| `onyx-bust-profile-right.jpg` | Mirrored profile (faces page content) |
+| `onyx-statue-avatar-circle.png` | Round avatar, transparent PNG |
+
 ## Pixel (comparison options)
 
 Included per request for side-by-side comparison with the statue direction.
