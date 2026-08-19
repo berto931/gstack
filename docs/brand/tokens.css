@@ -1,0 +1,156 @@
+/* ============================================================
+   ARMOSPECTRA — DESIGN TOKENS
+   Brand System v1.0 · Dark-first
+   Source of truth: docs/brand/BRAND_SYSTEM.md
+   Dark is the default, not a theme. Do not auto-invert these
+   values for a light mode — light is a separate project with
+   its own contrast study.
+   ============================================================ */
+
+:root{
+  /* ---- Foundation: the ground ---- */
+  --as-ink-900:#050507;  /* page base, deepest corners        */
+  --as-ink-800:#0B0B0F;  /* primary surface, cards            */
+  --as-ink-700:#131318;  /* raised panel, inputs              */
+  --as-ink-600:#1C1C22;  /* hairlines, borders                */
+  --as-ink-500:#26262E;  /* disabled, inert states            */
+
+  /* ---- Accent: the only chromatic family ---- */
+  --as-blue-300:#BFDBFF; /* chrome highlight stop, hover text */
+  --as-blue-400:#6BB4FF; /* inline emphasis, eyebrows, glow   */
+  --as-blue-500:#3B8EF0; /* primary accent, CTA border, rules */
+  --as-blue-600:#1F63C4; /* gradient mid, divider glow        */
+  --as-blue-800:#0E2E5C; /* arc motif, ambient wash           */
+
+  /* ---- Neutrals: cool-biased, not pure grey ---- */
+  --as-white:#FFFFFF;    /* headlines, logo, labels           */
+  --as-gray-200:#D8DADE; /* body copy                         */
+  --as-gray-400:#9AA0A8; /* secondary, captions, metadata     */
+  --as-gray-600:#5A5F66; /* photo mid-tones, slide footers    */
+
+  /* ---- Typefaces ---- */
+  --as-font-display:"Montserrat","Archivo","Helvetica Neue",system-ui,sans-serif;
+  --as-font-script:"Great Vibes","Snell Roundhand",cursive;
+  --as-font-mono:"JetBrains Mono","SFMono-Regular",ui-monospace,monospace;
+
+  /* ---- Weights ---- */
+  --as-weight-wordmark:200;
+  --as-weight-lede:300;
+  --as-weight-body:400;
+  --as-weight-label:500;
+  --as-weight-headline:800;
+  --as-weight-display:900;
+
+  /* ---- Tracking ---- */
+  --as-track-wordmark:0.32em;
+  --as-track-label:0.28em;
+  --as-track-eyebrow:0.22em;
+  --as-track-nav:0.18em;
+  --as-track-display:-0.005em;
+
+  /* ---- Type scale (px @ 1440pt viewport) ---- */
+  --as-size-display-xl:84px; --as-lh-display-xl:0.94;
+  --as-size-display-l:58px;  --as-lh-display-l:0.96;
+  --as-size-display-m:40px;  --as-lh-display-m:1.00;
+  --as-size-heading:21px;    --as-lh-heading:1.15;
+  --as-size-lede:19px;       --as-lh-lede:1.55;
+  --as-size-body:16px;       --as-lh-body:1.50;
+  --as-size-label:14px;
+  --as-size-caption:13px;    --as-lh-caption:1.45;
+  --as-size-eyebrow:12px;
+  --as-size-micro:11px;
+
+  /* ---- Spacing: base unit 8px, seven values only ---- */
+  --as-space-1:8px;    /* inline gaps, icon padding   */
+  --as-space-2:16px;   /* label to value              */
+  --as-space-3:24px;   /* card padding, grid gap      */
+  --as-space-5:40px;   /* block separation            */
+  --as-space-7:56px;   /* section opener              */
+  --as-space-9:72px;   /* major section break         */
+  --as-space-12:96px;  /* page/spread padding         */
+
+  /* ---- Layout ---- */
+  --as-page-margin:10.4%;
+  --as-grid-columns:12;
+  --as-grid-gutter:16px;
+  --as-measure:66ch;
+
+  /* ---- Fixed component metrics ---- */
+  --as-capability-row:74px;
+  --as-icon-box:44px;
+  --as-icon-stroke:1.5;
+  --as-cta-height:56px;
+  --as-rule-width:70px;
+  --as-rule-height:2px;
+  --as-radius-card:12px;
+  --as-radius-pill:9999px;
+
+  /* ---- Gradients & light ---- */
+  --as-chrome:linear-gradient(180deg,#FFFFFF 0%,#DCE9FF 30%,#7FB6F5 62%,#2E6FD0 100%);
+  --as-ambient:radial-gradient(120% 120% at 75% 0%,#1A1B20 0%,#050507 70%);
+  --as-divider:linear-gradient(90deg,#1C1C22 0%,#3B8EF0 85%,transparent 100%);
+  --as-bloom:radial-gradient(60% 100% at 50% 100%,rgba(59,142,240,.45) 0%,rgba(5,5,7,0) 70%);
+  --as-glow:0 0 40px rgba(59,142,240,.35);
+  --as-glow-soft:0 0 24px rgba(59,142,240,.30);
+  --as-focus-ring:0 0 0 3px rgba(59,142,240,.16);
+  --as-grain-opacity:0.035;
+
+  /* ---- Motion ---- */
+  --as-motion-duration:400ms;
+  --as-motion-travel:12px;
+  --as-motion-ease:cubic-bezier(.22,.61,.36,1);
+}
+
+/* ------------------------------------------------------------
+   Reference implementations of the signature devices.
+   Copy these rather than re-deriving them.
+   ------------------------------------------------------------ */
+
+.as-chrome{
+  background:var(--as-chrome);
+  -webkit-background-clip:text;background-clip:text;
+  -webkit-text-fill-color:transparent;
+  color:var(--as-blue-300);           /* fallback where clip is dropped */
+  filter:drop-shadow(0 0 26px rgba(59,142,240,.30));
+  /* Rule 04: display type only, max two words, never below 48px. */
+}
+
+.as-divider{height:1px;border:0;background:var(--as-divider)}
+
+.as-rule{
+  width:var(--as-rule-width);height:var(--as-rule-height);border:0;
+  background:var(--as-blue-500);box-shadow:var(--as-glow);
+}
+
+.as-cta{
+  display:inline-flex;align-items:center;justify-content:center;
+  height:var(--as-cta-height);padding:0 var(--as-space-5);
+  border-radius:var(--as-radius-pill);
+  border:1px solid var(--as-blue-500);background:transparent;
+  color:var(--as-white);font-family:var(--as-font-display);
+  font-size:var(--as-size-label);font-weight:var(--as-weight-label);
+  text-transform:uppercase;letter-spacing:var(--as-track-label);cursor:pointer;
+  transition:border-color .25s,box-shadow .25s,color .25s;
+  /* Rule 11: transparent fill. White on Blue 500 is 3.33:1 and fails AA. */
+}
+.as-cta:hover{border-color:var(--as-blue-400);box-shadow:var(--as-glow);color:var(--as-blue-300)}
+.as-cta:focus-visible{outline:2px solid var(--as-blue-400);outline-offset:3px}
+
+.as-capability-row{
+  display:flex;align-items:center;gap:var(--as-space-3);
+  height:var(--as-capability-row);
+}
+.as-capability-row span{
+  font-size:var(--as-size-label);font-weight:var(--as-weight-label);
+  text-transform:uppercase;letter-spacing:var(--as-track-label);color:var(--as-white);
+}
+
+.as-grain::after{
+  content:"";position:fixed;inset:0;pointer-events:none;z-index:200;
+  opacity:var(--as-grain-opacity);
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='140' height='140'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/></filter><rect width='140' height='140' filter='url(%23n)'/></svg>");
+}
+
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.001ms!important;transition-duration:.001ms!important}
+}
