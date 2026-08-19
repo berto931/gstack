@@ -101,7 +101,7 @@ module.exports = {
 
       // Logo stencil. Set `--as-logo` to the official artwork and
       // `--as-logo-ratio` to its exact intrinsic ratio; every instance follows.
-      // The deck currently ships interim placeholder geometry in this slot.
+      // Installed: official artwork, ratio 818/832 (see assets/LOGO.md).
       maskImage: {
         logo: 'var(--as-logo)',
       },

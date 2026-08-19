@@ -83,6 +83,60 @@ def validate(root, raw):
     return warn, drawables
 
 
+def install_raster(src, check_only=False):
+    """Install a transparent-background PNG master.
+
+    Ratio comes from the file's own pixel dimensions, so it is exact by
+    construction. The image is embedded verbatim, base64-encoded: no
+    resampling, no recolouring, no re-encoding.
+    """
+    import base64
+    from PIL import Image
+
+    im = Image.open(src)
+    w, h = im.size
+    if im.mode not in ('RGBA', 'LA', 'PA'):
+        fail(f"master has mode {im.mode} with no alpha channel. A flat-background "
+             "raster masks as a solid block. Supply a transparent PNG.")
+
+    alpha = im.getchannel('A')
+    lo, hi = alpha.getextrema()
+    if hi == 0:
+        fail("master's alpha channel is empty — nothing would render")
+    if lo > 250:
+        fail("master's alpha is fully opaque everywhere — this is a background plate, "
+             "not a knocked-out mark")
+
+    raw = open(src, 'rb').read()
+    print(f"  OK    valid PNG, mode {im.mode}")
+    print(f"  OK    intrinsic size {w} x {h} px")
+    print(f"  OK    aspect ratio  {w}/{h}  = {w/h:.5f}")
+    print(f"  OK    alpha range {lo}..{hi} (transparent background present)")
+
+    uri = 'data:image/png;base64,' + base64.b64encode(raw).decode('ascii')
+    print(f"  OK    data URI {len(uri):,} bytes")
+    if check_only:
+        print("\n  --check: nothing written.\n")
+        return
+    write_tokens(uri, f"{w}/{h}")
+
+
+def write_tokens(uri, ratio_css):
+    targets = [os.path.join(HERE, 'tokens.css'),
+               os.path.join(HERE, 'armospectra-brand-deck.html')]
+    for t in targets:
+        s = open(t, encoding='utf-8').read()
+        before = s
+        s = re.sub(r'--as-logo:\s*[^;]+;', lambda _: f'--as-logo:url("{uri}");', s, count=1)
+        s = re.sub(r'--as-logo-ratio:\s*[^;]+;', f'--as-logo-ratio:{ratio_css};', s, count=1)
+        s = re.sub(r'--as-logo-installed:\s*0;', '--as-logo-installed:1;', s, count=1)
+        if s == before:
+            fail(f"no --as-logo token found in {os.path.basename(t)}")
+        open(t, 'w', encoding='utf-8').write(s)
+        print(f"  OK    patched {os.path.basename(t)}")
+    print("\n  Installed.\n")
+
+
 def main():
     args = [a for a in sys.argv[1:] if not a.startswith('-')]
     check_only = '--check' in sys.argv
@@ -93,9 +147,11 @@ def main():
     if not os.path.exists(src):
         fail(f"not found: {src}\n        Commit the vector master to "
              f"docs/brand/assets/armospectra-logo.svg and re-run.")
+    if src.lower().endswith('.png'):
+        return install_raster(src, check_only)
     if not src.lower().endswith('.svg'):
-        fail("this installer takes SVG. AI/EPS need Ghostscript or Inkscape, neither of "
-             "which is available here — export to SVG first.")
+        fail("this installer takes SVG or a transparent PNG. AI/EPS need Ghostscript or "
+             "Inkscape, neither of which is available here — export first.")
 
     raw = open(src, encoding='utf-8').read()
     try:
@@ -120,20 +176,7 @@ def main():
         print("\n  --check: nothing written.\n")
         return
 
-    ratio_css = f"{w:g}/{h:g}"
-    targets = [os.path.join(HERE, 'tokens.css'),
-               os.path.join(HERE, 'armospectra-brand-deck.html')]
-    for t in targets:
-        s = open(t, encoding='utf-8').read()
-        before = s
-        s = re.sub(r'--as-logo:\s*[^;]+;', f'--as-logo:url("{uri}");', s, count=1)
-        s = re.sub(r'--as-logo-ratio:\s*[^;]+;',
-                   f'--as-logo-ratio:{ratio_css};', s, count=1)
-        s = re.sub(r'--as-logo-installed:\s*0;', '--as-logo-installed:1;', s, count=1)
-        if s == before:
-            fail(f"no --as-logo token found in {os.path.basename(t)}")
-        open(t, 'w', encoding='utf-8').write(s)
-        print(f"  OK    patched {os.path.basename(t)}")
+    write_tokens(uri, f"{w:g}/{h:g}")
 
     print("\n  Installed. Remaining manual steps:")
     print("    1. Remove the ARTWORK PENDING banner from the logo spread (spread 03).")

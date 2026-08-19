@@ -12,8 +12,11 @@ which remains the primary source of truth for anything these files do not cover.
 | [`tokens.css`](tokens.css) | CSS custom properties + reference implementations of the signature devices |
 | [`tokens.json`](tokens.json) | Design tokens in DTCG-style JSON, including measured contrast ratios |
 | [`tailwind.preset.js`](tailwind.preset.js) | Tailwind theme preset with `.text-chrome`, `.btn-brand`, `.divider-brand` |
-| `assets/LOGO.md` | Logo slot spec — **artwork pending**, see below |
+| `assets/armospectra-logo.jpg` | The supplied master, byte-identical |
+| `assets/armospectra-logo*.png` | Transparent + stencil derivatives |
+| `assets/LOGO.md` | Logo provenance, key method, reinstall steps |
 | `assets/arc-motif.svg` | Ambient arc anchor |
+| `install-logo.py` | One-command logo install (SVG or transparent PNG) |
 | `assets/icons/*.svg` | Six capability icons — 24 px canvas, 1.5 stroke, outline only |
 
 ## Using the tokens
@@ -40,28 +43,28 @@ SVGs are stroked with `currentColor`, so they inherit from their container:
 </span>
 ```
 
-## The logo is not installed yet
+## The logo
 
-The deck renders **interim placeholder geometry**, not the ArmoSpectra logo. The
-previously committed constructed lockups have been removed so none of them can be
-used in production by mistake.
+The official artwork is **installed**, sourced from
+`armospectra-team-portal/public/armospectra-logo.jpg` (sha256 `03d95cb8…`). Its
+flat `#F2F4F3` background was keyed out by luminance distance, which preserves the
+original antialiased edges exactly. The mark's pixels and its 818 × 832 bounding
+box are unmodified — nothing redrawn, traced, recoloured, or resampled. The
+untouched original ships alongside as `assets/armospectra-logo.jpg`.
 
-Installing the real artwork is a **two-value change** that updates all 28 logo
-instances across the deck plus every export file:
+All 28 logo instances render from one token, `--as-logo`, used as a CSS mask. One
+file serves every colourway — white on ink, ink on white, 22% watermark — by
+tinting the stencil rather than editing the file. `aspect-ratio` is bound to
+`--as-logo-ratio` (`818/832`) and instances are sized by height only, so
+distortion is structurally impossible rather than merely prohibited.
 
-```css
---as-logo: url("data:image/svg+xml,<the artwork, URL-encoded>");
---as-logo-ratio: <exact width>/<exact height>;
+To replace it (a vector master, when one exists):
+
+```bash
+python3 docs/brand/install-logo.py path/to/armospectra-logo.svg
 ```
 
-The logo renders as a CSS mask, so one file serves every colourway — white on ink,
-ink on white, 22% watermark — by tinting the stencil rather than editing the file.
-`aspect-ratio` is bound to `--as-logo-ratio`, so distortion is structurally
-impossible: instances are sized by height only.
-
-This requires a **transparent-background** master (SVG preferred, PNG at 4×
-acceptable). A flattened JPG cannot serve the dark surfaces the brand is built on.
-Full spec: [`assets/LOGO.md`](assets/LOGO.md).
+Provenance, key method, and rules: [`assets/LOGO.md`](assets/LOGO.md).
 
 ## The five rules people break first
 

@@ -53,10 +53,10 @@ of the identity.
 
 ## 3. Logo
 
-> **Status: awaiting official artwork.** The deck currently renders interim
-> placeholder geometry. The rules in this section are final and apply to the
-> official artwork as written. See [`assets/LOGO.md`](assets/LOGO.md) for the
-> file spec and the two-value install.
+> **Status: installed.** The official artwork is in, keyed out of the supplied
+> master. The mark's pixels and its 818 × 832 bounding box are unmodified —
+> nothing redrawn, traced, recoloured, or resampled. See
+> [`assets/LOGO.md`](assets/LOGO.md) for provenance and reinstall steps.
 
 The logo is a **single swappable stencil**, not artwork copied onto each surface.
 One token (`--as-logo`) drives all 28 instances in the deck and every export file.
@@ -93,10 +93,16 @@ or apply the chrome gradient · add glow, shadow, or outline effects · place it
 chromatic or photographic background · retype the wordmark in another typeface ·
 close the stack gap or remove the wordmark tracking.
 
-**File requirement.** The master must have a **transparent background**. That is
-what lets one file serve every colourway. A flattened JPG on a light background
-renders as a pale rectangle on a near-black surface, and knocking the background
-out by hand would mean altering the supplied file.
+**Master.** `assets/armospectra-logo-mask.png` — 818 × 832, alpha keyed from the
+supplied JPG's flat `#F2F4F3` background by luminance distance, which preserves
+the original antialiased edges exactly (70,032 partial-alpha pixels survive the
+key). `L == A` so it masks correctly whether a renderer reads alpha or luminance.
+The untouched original is kept alongside it as `assets/armospectra-logo.jpg`.
+
+**Resolution headroom.** At the 26 mm print minimum the 818 px master resolves to
+roughly 800 DPI, so the raster is not a constraint at any specified size. A vector
+master is still preferable for large-format print and should replace this when one
+exists — `install-logo.py` takes SVG directly.
 
 ---
 
