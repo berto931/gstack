@@ -8,7 +8,8 @@ Dark-first visual identity. This document is the written specification; the
 source. All four stay in sync — change the spec, then change the tokens.
 
 Derived from the ArmoSpectra CEO poster, which remains the primary source of truth
-for anything not covered here.
+for anything not covered here. The deck is also available as a
+[23-page PDF](armospectra-brand-deck.pdf) with fonts embedded.
 
 ---
 
