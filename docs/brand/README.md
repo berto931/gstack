@@ -12,9 +12,7 @@ which remains the primary source of truth for anything these files do not cover.
 | [`tokens.css`](tokens.css) | CSS custom properties + reference implementations of the signature devices |
 | [`tokens.json`](tokens.json) | Design tokens in DTCG-style JSON, including measured contrast ratios |
 | [`tailwind.preset.js`](tailwind.preset.js) | Tailwind theme preset with `.text-chrome`, `.btn-brand`, `.divider-brand` |
-| `assets/logo-mark.svg` | Mark, construction reference |
-| `assets/logo-lockup-vertical.svg` | Primary lockup |
-| `assets/logo-lockup-horizontal.svg` | Secondary lockup |
+| `assets/LOGO.md` | Logo slot spec — **artwork pending**, see below |
 | `assets/arc-motif.svg` | Ambient arc anchor |
 | `assets/icons/*.svg` | Six capability icons — 24 px canvas, 1.5 stroke, outline only |
 
@@ -42,17 +40,28 @@ SVGs are stroked with `currentColor`, so they inherit from their container:
 </span>
 ```
 
-## Two things to know before you ship
+## The logo is not installed yet
 
-**The mark is a construction reference.** `logo-mark.svg` and the two lockups
-encode the stroke weight, proportion, and geometry rules. They are not a
-substitute for the original vector artwork. Replace them with the supplied
-production file before anything is printed or published.
+The deck renders **interim placeholder geometry**, not the ArmoSpectra logo. The
+previously committed constructed lockups have been removed so none of them can be
+used in production by mistake.
 
-**The lockup SVGs use live text.** The wordmark is a `<text>` element in
-Montserrat, not outlined paths. That keeps it editable and keeps tracking
-adjustable, but it means the file renders correctly only where Montserrat is
-available. Convert to outlines before sending to a printer or an external party.
+Installing the real artwork is a **two-value change** that updates all 28 logo
+instances across the deck plus every export file:
+
+```css
+--as-logo: url("data:image/svg+xml,<the artwork, URL-encoded>");
+--as-logo-ratio: <exact width>/<exact height>;
+```
+
+The logo renders as a CSS mask, so one file serves every colourway — white on ink,
+ink on white, 22% watermark — by tinting the stencil rather than editing the file.
+`aspect-ratio` is bound to `--as-logo-ratio`, so distortion is structurally
+impossible: instances are sized by height only.
+
+This requires a **transparent-background** master (SVG preferred, PNG at 4×
+acceptable). A flattened JPG cannot serve the dark surfaces the brand is built on.
+Full spec: [`assets/LOGO.md`](assets/LOGO.md).
 
 ## The five rules people break first
 

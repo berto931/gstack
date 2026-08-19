@@ -99,6 +99,13 @@ module.exports = {
         'focus-ring': '0 0 0 3px rgba(59,142,240,.16)',
       },
 
+      // Logo stencil. Set `--as-logo` to the official artwork and
+      // `--as-logo-ratio` to its exact intrinsic ratio; every instance follows.
+      // The deck currently ships interim placeholder geometry in this slot.
+      maskImage: {
+        logo: 'var(--as-logo)',
+      },
+
       transitionTimingFunction: {
         brand: 'cubic-bezier(.22,.61,.36,1)',
       },
@@ -148,6 +155,25 @@ module.exports = {
           },
           '&:focus-visible': { outline: '2px solid #6BB4FF', outlineOffset: '3px' },
         },
+        // Size by height only; width follows from the master's ratio.
+        // Setting both width and height is the one way to distort the mark.
+        '.logo-brand': {
+          display: 'inline-block',
+          flex: 'none',
+          aspectRatio: 'var(--as-logo-ratio)',
+          backgroundColor: 'currentColor',
+          color: '#FFFFFF',
+          '-webkit-maskImage': 'var(--as-logo)',
+          maskImage: 'var(--as-logo)',
+          '-webkit-maskSize': 'contain',
+          maskSize: 'contain',
+          '-webkit-maskRepeat': 'no-repeat',
+          maskRepeat: 'no-repeat',
+          '-webkit-maskPosition': 'center',
+          maskPosition: 'center',
+        },
+        '.logo-brand-ink': { color: '#050507' },
+        '.logo-brand-watermark': { opacity: '0.22' },
         '.divider-brand': {
           height: '1px',
           border: '0',

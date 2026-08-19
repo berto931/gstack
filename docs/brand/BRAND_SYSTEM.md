@@ -53,18 +53,31 @@ of the identity.
 
 ## 3. Logo
 
+> **Status: awaiting official artwork.** The deck currently renders interim
+> placeholder geometry. The rules in this section are final and apply to the
+> official artwork as written. See [`assets/LOGO.md`](assets/LOGO.md) for the
+> file spec and the two-value install.
+
+The logo is a **single swappable stencil**, not artwork copied onto each surface.
+One token (`--as-logo`) drives all 28 instances in the deck and every export file.
+The artwork is used as a CSS mask, so colourways come from tinting the stencil —
+the file itself is never recoloured, redrawn, or edited.
+
 | Element | Spec |
 |---|---|
-| Mark | Single-weight outline primate, walking pose, long curled tail. No fill, rounded joins. |
+| Mark | Single-weight outline primate, walking pose, long curled tail. No fill. |
 | Wordmark | `ARMOSPECTRA`, uppercase, weight 200–300, tracking **0.32em**, optically matched to the mark's width. |
 | Vertical lockup | Mark centred over wordmark. Stack gap = **0.4× mark height**. Primary. |
 | Horizontal lockup | Mark left of wordmark. Navigation, letterhead, signatures. |
 | Mark alone | Avatars, favicons, watermarks. |
 | Clearspace | Wordmark cap-height (**1×**) on all four sides. Nothing enters it — not type, not the arc motif, not a photo edge. |
-| Stroke | Scales with the mark. Never below **1.25px** rendered. |
+
+**Sizing.** Size by **height only**; width follows from the master's intrinsic
+ratio via `aspect-ratio`. Setting both width and height is the one way to distort
+the mark, and the stencil is built so that it cannot happen by accident.
 
 **Colourways:** white on ink (primary) · ink on white (invert only) · 22% white
-(watermark). Never blue, never chrome, never filled.
+(watermark). Applied by tinting the stencil. Never blue, never chrome, never filled.
 
 **Minimum sizes**
 
@@ -75,9 +88,15 @@ of the identity.
 | Mark alone | 32 px | 9 mm |
 | Wordmark alone | 120 px wide | 30 mm |
 
-**Never:** colour the mark · fill it or apply the chrome gradient · place it on a
-chromatic or photographic background · stretch or distort it · thicken the stroke ·
-remove the wordmark tracking · reset the wordmark in another typeface.
+**Never:** recolour · redraw, trace, or reinterpret · distort or stretch · fill it
+or apply the chrome gradient · add glow, shadow, or outline effects · place it on a
+chromatic or photographic background · retype the wordmark in another typeface ·
+close the stack gap or remove the wordmark tracking.
+
+**File requirement.** The master must have a **transparent background**. That is
+what lets one file serve every colourway. A flattened JPG on a light background
+renders as a pale rectangle on a near-black surface, and knocking the background
+out by hand would mean altering the supplied file.
 
 ---
 
@@ -427,7 +446,7 @@ When two rules conflict, the lower number wins.
 3. **Blue never exceeds ~5% of pixels.** If a comp looks blue, reduce the accent first.
 4. **Chrome gradient on display type only, max two words.** Below 48 px the stops compress; on a full headline the emphasis cancels.
 5. **Two brand typefaces. Hard cap.** The script appears once, for a person's name.
-6. **The logo is monochrome, outline, unfilled — always.**
+6. **The logo is monochrome, outline, unfilled — always.** One stencil token, tinted; never an edited copy.
 7. **Uppercase + wide tracking marks structure;** body stays sentence case.
 8. **Icons are 1.5 px outline strokes.** No fills, no tiles.
 9. **Dividers glow. Containers don't.** No drop shadows, no added boxes.

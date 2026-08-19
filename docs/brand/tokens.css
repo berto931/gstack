@@ -95,6 +95,16 @@
   --as-focus-ring:0 0 0 3px rgba(59,142,240,.16);
   --as-grain-opacity:0.035;
 
+  /* ---- Logo ----
+     The logo is a single swappable stencil. Set --as-logo to the official
+     artwork (transparent-background SVG or PNG data URI) and --as-logo-ratio
+     to its exact intrinsic width/height. Every logo surface updates at once.
+
+     !! The deck currently ships INTERIM PLACEHOLDER geometry in this slot,
+     !! not the official ArmoSpectra logo. See docs/brand/assets/LOGO.md. */
+  --as-logo:none;
+  --as-logo-ratio:1;              /* set exactly from the master */
+
   /* ---- Motion ---- */
   --as-motion-duration:400ms;
   --as-motion-travel:12px;
@@ -154,3 +164,27 @@
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{animation-duration:.001ms!important;transition-duration:.001ms!important}
 }
+
+/* ------------------------------------------------------------
+   Logo stencil.
+   The artwork is used as a MASK, so colourways come from `color`.
+   The artwork itself is never recoloured, redrawn, or distorted;
+   `aspect-ratio` makes distortion structurally impossible.
+   ------------------------------------------------------------ */
+.as-logo{
+  display:inline-block;flex:none;
+  aspect-ratio:var(--as-logo-ratio);
+  background-color:currentColor;
+  color:var(--as-white);
+  -webkit-mask-image:var(--as-logo);    mask-image:var(--as-logo);
+  -webkit-mask-size:contain;            mask-size:contain;
+  -webkit-mask-repeat:no-repeat;        mask-repeat:no-repeat;
+  -webkit-mask-position:center;         mask-position:center;
+  /* Size by height; width follows from the master's ratio.
+     Never set both width and height — that is the one way to distort it. */
+}
+.as-logo--ink{color:var(--as-ink-900)}        /* invert colourway, light grounds */
+.as-logo--watermark{opacity:.22}              /* 22% white watermark */
+
+/* Clearspace: 1x wordmark cap-height on all four sides. */
+.as-logo-clearspace{padding:var(--as-logo-clearspace,1em)}

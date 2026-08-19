@@ -389,6 +389,61 @@ ul{margin:0;padding-left:18px} li{margin-bottom:7px;line-height:1.55}
 li::marker{color:var(--blue-500)}
 </style>
 
+<style>
+/* ============================================================
+   LOGO — single swappable stencil
+   ------------------------------------------------------------
+   Every logo instance in this deck (28 of them) renders from the
+   two tokens below. The artwork is used as a MASK, so colourways
+   come from `color` and the artwork itself is never recoloured,
+   redrawn, or distorted. `aspect-ratio` makes distortion
+   structurally impossible.
+
+   TO INSTALL THE OFFICIAL ARTWORK, CHANGE THESE TWO VALUES ONLY:
+     --as-logo        the artwork, as a transparent-background
+                      SVG or PNG data URI
+     --as-logo-ratio  its exact intrinsic width/height
+
+   !! The value below is an INTERIM PLACEHOLDER, not the official
+   !! ArmoSpectra logo. It is provisional geometry standing in
+   !! until the official file is supplied. Do not print, publish,
+   !! or share any surface rendered from it.
+   ============================================================ */
+:root{
+  --as-logo:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20140%20120%22%20fill%3D%22none%22%20stroke%3D%22%23000%22%20stroke-width%3D%222.6%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M96%2052c0-14%2010-22%2020-19%209%203%2012%2014%206%2022-4%205-11%206-16%203%22%2F%3E%3Cpath%20d%3D%22M96%2052c-12-8-28-8-40%200-8%205-12%2012-13%2020%22%2F%3E%3Cpath%20d%3D%22M106%2058c-2%208-8%2014-16%2016-12%203-24%200-32-6%22%2F%3E%3Cpath%20d%3D%22M100%2070v18c0%204-3%207-7%207M88%2074v16c0%204-3%207-7%207%22%2F%3E%3Cpath%20d%3D%22M52%2070c0%2010%202%2018%206%2023M44%2074c-1%2010%201%2018%205%2022%22%2F%3E%3Cpath%20d%3D%22M43%2072c-13%202-23-6-23-19s10-23%2022-23c9%200%2015%207%2013%2014-2%206-9%207-12%203%22%2F%3E%3Ccircle%20cx%3D%22114%22%20cy%3D%2241%22%20r%3D%222.2%22%20fill%3D%22%23000%22%20stroke%3D%22none%22%2F%3E%3C%2Fsvg%3E");
+  --as-logo-ratio:140/120;      /* INTERIM — set exactly from the master */
+  --as-logo-installed:0;        /* flip to 1 when official artwork is in */
+}
+
+.as-logo{
+  display:inline-block;flex:none;
+  aspect-ratio:var(--as-logo-ratio);
+  background-color:currentColor;
+  color:var(--white);
+  -webkit-mask-image:var(--as-logo);          mask-image:var(--as-logo);
+  -webkit-mask-size:contain;                  mask-size:contain;
+  -webkit-mask-repeat:no-repeat;              mask-repeat:no-repeat;
+  -webkit-mask-position:center;               mask-position:center;
+}
+/* Approved colourways — the stencil is tinted, the artwork is untouched. */
+.as-logo.is-ink{color:var(--ink-900)}
+.as-logo.is-watermark{opacity:.22}
+/* Misuse demonstrations only. Never use these outside spread 04. */
+.as-logo.is-blue{color:var(--blue-500)}
+.as-logo.is-filled{background:var(--chrome);filter:drop-shadow(0 0 10px rgba(59,142,240,.6))}
+.as-logo.is-effects{filter:drop-shadow(0 0 14px rgba(59,142,240,.85)) drop-shadow(0 0 5px rgba(255,255,255,.9))}
+.as-logo.is-stretched{aspect-ratio:auto;-webkit-mask-size:100% 100%;mask-size:100% 100%}
+
+/* Pending-artwork banner */
+.pending{
+  display:flex;gap:calc(var(--u)*2);align-items:flex-start;
+  border:1px dashed #7A5A2B;border-radius:var(--radius-card);
+  background:rgba(122,90,43,.08);padding:calc(var(--u)*2.5) calc(var(--u)*3);
+}
+.pending .t{font-family:var(--font-mono);font-size:11px;letter-spacing:.08em;color:#E0A34B;flex:none}
+.pending .b{font-size:13px;line-height:1.55;color:var(--gray-200)}
+</style>
+
 <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
   <defs>
     <g id="i-visibility"><path d="M2 12s3.6-6.5 10-6.5S22 12 22 12s-3.6 6.5-10 6.5S2 12 2 12Z"/><circle cx="12" cy="12" r="3.1"/></g>
@@ -399,15 +454,8 @@ li::marker{color:var(--blue-500)}
     <g id="i-ai"><path d="M12.8 3.4a3.4 3.4 0 0 0-5.9 2.3 3.2 3.2 0 0 0-1.6 5.6 3.3 3.3 0 0 0 .9 5.3 3.3 3.3 0 0 0 6.6.4Z"/><path d="M12.8 8.2h3.4M16.2 8.2a1.5 1.5 0 1 0 3 0 1.5 1.5 0 0 0-3 0Z"/><path d="M12.8 14.2h4.6M17.4 14.2a1.5 1.5 0 1 0 3 0 1.5 1.5 0 0 0-3 0Z"/><path d="M9 6.4v11.4"/></g>
     <g id="i-arrow"><path d="M4 12h15M13.4 6.4 19 12l-5.6 5.6"/></g>
 
-    <g id="mark">
-      <path d="M96 52c0-14 10-22 20-19 9 3 12 14 6 22-4 5-11 6-16 3"/>
-      <path d="M96 52c-12-8-28-8-40 0-8 5-12 12-13 20"/>
-      <path d="M106 58c-2 8-8 14-16 16-12 3-24 0-32-6"/>
-      <path d="M100 70v18c0 4-3 7-7 7M88 74v16c0 4-3 7-7 7"/>
-      <path d="M52 70c0 10 2 18 6 23M44 74c-1 10 1 18 5 22"/>
-      <path d="M43 72c-13 2-23-6-23-19s10-23 22-23c9 0 15 7 13 14-2 6-9 7-12 3"/>
-      <circle cx="114" cy="41" r="2.2" fill="currentColor" stroke="none"/>
-    </g>
+    <!-- The ArmoSpectra logo is NOT drawn here. It is a single swappable
+         stencil: see the --as-logo token and the .as-logo class. -->
   </defs>
 </svg>
 
@@ -448,9 +496,7 @@ li::marker{color:var(--blue-500)}
     <div class="split" style="align-items:center;gap:clamp(40px,6vw,90px)">
       <div class="stack" style="gap:calc(var(--u)*4)">
         <div class="lockup">
-          <svg viewBox="0 0 140 120" width="112" height="96" fill="none" stroke="#FFFFFF"
-               stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" role="img"
-               aria-label="ArmoSpectra mark"><use href="#mark"/></svg>
+          <span class="as-logo" style="height:96px" role="img" aria-label="ArmoSpectra"></span>
           <span class="wordmark" style="font-size:23px">ArmoSpectra</span>
         </div>
 
@@ -693,10 +739,24 @@ li::marker{color:var(--blue-500)}
       </p>
     </header>
 
+    <div class="pending" style="margin-bottom:calc(var(--u)*5)">
+      <span class="t">ARTWORK&nbsp;PENDING</span>
+      <span class="b">
+        The marks shown on this spread and throughout the deck are
+        <b style="color:var(--white)">interim placeholder geometry</b>, not the official
+        ArmoSpectra logo. Every instance renders from one token
+        (<code>--as-logo</code>) used as a mask, so installing the supplied artwork is a
+        two-value change that updates all 28 instances at once. The rules on this spread —
+        clearspace, minimum sizes, colourways, misuse — are final and apply to the
+        official artwork as written. Nothing rendered from the placeholder should be
+        printed, published, or shared.
+      </span>
+    </div>
+
     <div class="grid g3" style="margin-bottom:calc(var(--u)*6)">
       <div class="card" style="align-items:center;padding:calc(var(--u)*5) calc(var(--u)*3);gap:calc(var(--u)*3)">
         <div class="lockup" style="align-items:center">
-          <svg viewBox="0 0 140 120" width="96" height="82" fill="none" stroke="#FFF" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><use href="#mark"/></svg>
+          <span class="as-logo" style="height:82px" role="img" aria-label="ArmoSpectra"></span>
           <span class="wordmark" style="font-size:17px">ArmoSpectra</span>
         </div>
         <div class="stack-sm" style="align-items:center">
@@ -707,7 +767,7 @@ li::marker{color:var(--blue-500)}
 
       <div class="card" style="align-items:center;justify-content:center;padding:calc(var(--u)*5) calc(var(--u)*3);gap:calc(var(--u)*3)">
         <div class="lockup lockup--h">
-          <svg viewBox="0 0 140 120" width="60" height="51" fill="none" stroke="#FFF" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><use href="#mark"/></svg>
+          <span class="as-logo" style="height:51px" role="img" aria-label="ArmoSpectra"></span>
           <span class="wordmark" style="font-size:13px">ArmoSpectra</span>
         </div>
         <div class="stack-sm" style="align-items:center">
@@ -717,7 +777,7 @@ li::marker{color:var(--blue-500)}
       </div>
 
       <div class="card" style="align-items:center;justify-content:center;padding:calc(var(--u)*5) calc(var(--u)*3);gap:calc(var(--u)*3)">
-        <svg viewBox="0 0 140 120" width="78" height="67" fill="none" stroke="#FFF" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><use href="#mark"/></svg>
+        <span class="as-logo" style="height:67px" role="img" aria-label="ArmoSpectra"></span>
         <div class="stack-sm" style="align-items:center">
           <p class="label">Mark alone</p>
           <p class="micro">Avatars, favicons, watermarks, stamps</p>
@@ -730,7 +790,7 @@ li::marker{color:var(--blue-500)}
         <h3>Construction &amp; clearspace</h3>
         <div class="clearspace">
           <div class="lockup" style="align-items:center">
-            <svg viewBox="0 0 140 120" width="88" height="75" fill="none" stroke="#FFF" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><use href="#mark"/></svg>
+            <span class="as-logo" style="height:75px" role="img" aria-label="ArmoSpectra"></span>
             <span class="wordmark" style="font-size:15px">ArmoSpectra</span>
           </div>
         </div>
@@ -761,19 +821,19 @@ li::marker{color:var(--blue-500)}
         <div class="grid g3" style="gap:calc(var(--u)*2)">
           <div class="stack-sm">
             <div style="background:var(--ink-900);border:1px solid var(--ink-600);border-radius:8px;height:88px;display:flex;align-items:center;justify-content:center">
-              <svg viewBox="0 0 140 120" width="54" height="46" fill="none" stroke="#FFF" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><use href="#mark"/></svg>
+              <span class="as-logo" style="height:46px" role="img" aria-label="ArmoSpectra"></span>
             </div>
             <p class="micro">White on ink — primary</p>
           </div>
           <div class="stack-sm">
             <div style="background:#FFFFFF;border:1px solid var(--ink-600);border-radius:8px;height:88px;display:flex;align-items:center;justify-content:center">
-              <svg viewBox="0 0 140 120" width="54" height="46" fill="none" stroke="#050507" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><use href="#mark"/></svg>
+              <span class="as-logo is-ink" style="height:46px" role="img" aria-label="ArmoSpectra"></span>
             </div>
             <p class="micro">Ink on white — invert only</p>
           </div>
           <div class="stack-sm">
             <div style="background:var(--ink-700);border:1px solid var(--ink-600);border-radius:8px;height:88px;display:flex;align-items:center;justify-content:center">
-              <svg viewBox="0 0 140 120" width="54" height="46" fill="none" stroke="#FFFFFF" stroke-opacity=".22" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><use href="#mark"/></svg>
+              <span class="as-logo is-watermark" style="height:46px" role="img" aria-label="ArmoSpectra"></span>
             </div>
             <p class="micro">Watermark — 22% white</p>
           </div>
@@ -799,37 +859,37 @@ li::marker{color:var(--blue-500)}
 
     <div class="grid g4">
       <div class="dd is-do">
-        <div class="vis"><svg viewBox="0 0 140 120" width="72" height="62" fill="none" stroke="#FFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><use href="#mark"/></svg></div>
+        <div class="vis"><span class="as-logo" style="height:62px" role="img" aria-label="ArmoSpectra"></span></div>
         <div class="cap2"><span class="mark">DO</span><span>Single-weight white outline on a near-black ground.</span></div>
       </div>
       <div class="dd is-no">
-        <div class="vis"><svg viewBox="0 0 140 120" width="72" height="62" fill="none" stroke="#3B8EF0" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><use href="#mark"/></svg></div>
+        <div class="vis"><span class="as-logo is-blue" style="height:62px" role="img" aria-label="ArmoSpectra"></span></div>
         <div class="cap2"><span class="mark">DON'T</span><span>Never colour the mark blue. Blue is for accents, never identity.</span></div>
       </div>
       <div class="dd is-no">
         <div class="vis">
-          <svg viewBox="0 0 140 120" width="72" height="62" stroke="none" style="filter:drop-shadow(0 0 10px rgba(59,142,240,.6))"><use href="#mark" fill="#7FB6F5"/></svg>
+          <span class="as-logo is-filled" style="height:62px" role="img" aria-label="ArmoSpectra"></span>
         </div>
         <div class="cap2"><span class="mark">DON'T</span><span>Never fill the mark or apply the chrome gradient to it.</span></div>
       </div>
       <div class="dd is-no">
         <div class="vis" style="background:linear-gradient(120deg,#C2432E,#F2B23C)">
-          <svg viewBox="0 0 140 120" width="72" height="62" fill="none" stroke="#FFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><use href="#mark"/></svg>
+          <span class="as-logo" style="height:62px" role="img" aria-label="ArmoSpectra"></span>
         </div>
         <div class="cap2"><span class="mark">DON'T</span><span>Never place the mark on a chromatic or photographic background.</span></div>
       </div>
       <div class="dd is-no">
-        <div class="vis"><svg viewBox="0 0 140 120" width="104" height="46" preserveAspectRatio="none" fill="none" stroke="#FFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><use href="#mark"/></svg></div>
+        <div class="vis"><span class="as-logo is-stretched" style="width:104px;height:46px" role="img" aria-label="ArmoSpectra"></span></div>
         <div class="cap2"><span class="mark">DON'T</span><span>Never stretch, squash, or distort the proportions.</span></div>
       </div>
       <div class="dd is-no">
-        <div class="vis"><svg viewBox="0 0 140 120" width="72" height="62" fill="none" stroke="#FFF" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"><use href="#mark"/></svg></div>
-        <div class="cap2"><span class="mark">DON'T</span><span>Never thicken the stroke. The line weight is fixed to the mark size.</span></div>
+        <div class="vis"><span class="as-logo is-effects" style="height:62px" role="img" aria-label="ArmoSpectra"></span></div>
+        <div class="cap2"><span class="mark">DON'T</span><span>Never add glow, shadow, or outline effects to the mark.</span></div>
       </div>
       <div class="dd is-no">
         <div class="vis">
           <div class="lockup" style="align-items:center;gap:2px">
-            <svg viewBox="0 0 140 120" width="52" height="45" fill="none" stroke="#FFF" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><use href="#mark"/></svg>
+            <span class="as-logo" style="height:45px" role="img" aria-label="ArmoSpectra"></span>
             <span class="wordmark" style="font-size:12px;letter-spacing:0">ArmoSpectra</span>
           </div>
         </div>
@@ -838,7 +898,7 @@ li::marker{color:var(--blue-500)}
       <div class="dd is-no">
         <div class="vis">
           <div class="lockup lockup--h" style="gap:10px">
-            <svg viewBox="0 0 140 120" width="46" height="39" fill="none" stroke="#FFF" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"><use href="#mark"/></svg>
+            <span class="as-logo" style="height:39px" role="img" aria-label="ArmoSpectra"></span>
             <span style="font-family:Georgia,serif;font-size:15px;color:#fff;letter-spacing:.02em">ArmoSpectra</span>
           </div>
         </div>
@@ -1079,7 +1139,7 @@ li::marker{color:var(--blue-500)}
       <div class="stack" style="gap:calc(var(--u)*3)">
         <h3>Hierarchy in place</h3>
         <div class="card" style="padding:calc(var(--u)*4);gap:calc(var(--u)*2.5)">
-          <div class="lockup lockup--h"><svg viewBox="0 0 140 120" width="40" height="34" fill="none" stroke="#FFF" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><use href="#mark"/></svg><span class="wordmark" style="font-size:10px">ArmoSpectra</span></div>
+          <div class="lockup lockup--h"><span class="as-logo" style="height:34px" role="img" aria-label="ArmoSpectra"></span><span class="wordmark" style="font-size:10px">ArmoSpectra</span></div>
           <p style="font-size:clamp(26px,3vw,40px);font-weight:800;text-transform:uppercase;line-height:.96;color:var(--white);margin-top:8px">Build the <span class="chrome">system</span><br>behind your growth.</p>
           <hr class="rule">
           <p style="font-size:17px;font-weight:300;color:var(--gray-200)">Growth Operating Systems for <span class="accent">Modern Businesses</span>.</p>
@@ -1631,7 +1691,7 @@ li::marker{color:var(--blue-500)}
         <div class="site">
           <div class="sitenav">
             <div class="lockup lockup--h" style="gap:10px">
-              <svg viewBox="0 0 140 120" width="30" height="26" fill="none" stroke="#FFF" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"><use href="#mark"/></svg>
+              <span class="as-logo" style="height:26px" role="img" aria-label="ArmoSpectra"></span>
               <span class="wordmark" style="font-size:8px">ArmoSpectra</span>
             </div>
             <div class="lnk"><span>System</span><span style="color:#6BB4FF">Work</span><span>About</span><span>Contact</span></div>
@@ -1696,7 +1756,7 @@ li::marker{color:var(--blue-500)}
             <g fill="none" stroke="#0E2E5C" stroke-width="1"><circle cx="130" cy="130" r="56"/><circle cx="130" cy="130" r="84"/><circle cx="130" cy="130" r="108"/><circle cx="130" cy="130" r="126"/></g>
           </svg>
           <div class="lockup lockup--h" style="gap:9px;position:relative">
-            <svg viewBox="0 0 140 120" width="28" height="24" fill="none" stroke="#FFF" stroke-width="4.6" stroke-linecap="round" stroke-linejoin="round"><use href="#mark"/></svg>
+            <span class="as-logo" style="height:24px" role="img" aria-label="ArmoSpectra"></span>
             <span class="wordmark" style="font-size:7.5px">ArmoSpectra</span>
           </div>
           <div class="stack-sm" style="position:relative;gap:10px">
@@ -1711,7 +1771,7 @@ li::marker{color:var(--blue-500)}
       <div class="stack-sm">
         <div class="story">
           <div class="lockup" style="gap:6px;align-items:flex-start">
-            <svg viewBox="0 0 140 120" width="30" height="26" fill="none" stroke="#FFF" stroke-width="4.6" stroke-linecap="round" stroke-linejoin="round"><use href="#mark"/></svg>
+            <span class="as-logo" style="height:26px" role="img" aria-label="ArmoSpectra"></span>
             <span class="wordmark" style="font-size:7px">ArmoSpectra</span>
           </div>
           <div class="stack-sm" style="gap:9px">
@@ -1732,7 +1792,7 @@ li::marker{color:var(--blue-500)}
               <g fill="none" stroke="#0E2E5C" stroke-width="1"><circle cx="100" cy="100" r="44"/><circle cx="100" cy="100" r="66"/><circle cx="100" cy="100" r="85"/><circle cx="100" cy="100" r="97"/></g>
             </svg>
             <div class="lockup lockup--h" style="gap:10px;position:relative">
-              <svg viewBox="0 0 140 120" width="26" height="22" fill="none" stroke="#FFF" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"><use href="#mark"/></svg>
+              <span class="as-logo" style="height:22px" role="img" aria-label="ArmoSpectra"></span>
               <span class="wordmark" style="font-size:7px">ArmoSpectra</span>
             </div>
             <p style="font-size:clamp(11px,1.5vw,17px);font-weight:800;text-transform:uppercase;line-height:1;color:#fff;position:relative">Growth Operating Systems for <span class="chrome">modern businesses.</span></p>
@@ -1743,7 +1803,7 @@ li::marker{color:var(--blue-500)}
         <div class="row" style="gap:calc(var(--u)*3);align-items:flex-start">
           <div class="stack-sm" style="align-items:center">
             <div class="avatar">
-              <svg viewBox="0 0 140 120" width="56" height="48" fill="none" stroke="#FFF" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"><use href="#mark"/></svg>
+              <span class="as-logo" style="height:48px" role="img" aria-label="ArmoSpectra"></span>
             </div>
             <p class="micro">Avatar — mark only</p>
           </div>
@@ -1804,7 +1864,7 @@ li::marker{color:var(--blue-500)}
             <g fill="none" stroke="#0E2E5C" stroke-width="1"><circle cx="120" cy="120" r="52"/><circle cx="120" cy="120" r="78"/><circle cx="120" cy="120" r="100"/><circle cx="120" cy="120" r="116"/></g>
           </svg>
           <div class="lockup" style="gap:6px;position:relative">
-            <svg viewBox="0 0 140 120" width="42" height="36" fill="none" stroke="#FFF" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"><use href="#mark"/></svg>
+            <span class="as-logo" style="height:36px" role="img" aria-label="ArmoSpectra"></span>
             <span class="wordmark" style="font-size:8px">ArmoSpectra</span>
           </div>
           <div class="stack-sm" style="gap:8px;position:relative">
@@ -1906,7 +1966,7 @@ li::marker{color:var(--blue-500)}
             <g fill="none" stroke="#0E2E5C" stroke-width="1"><circle cx="90" cy="90" r="38"/><circle cx="90" cy="90" r="58"/><circle cx="90" cy="90" r="76"/><circle cx="90" cy="90" r="88"/></g>
           </svg>
           <div class="lockup" style="gap:7px;position:relative">
-            <svg viewBox="0 0 140 120" width="40" height="34" fill="none" stroke="#FFF" stroke-width="3.8" stroke-linecap="round" stroke-linejoin="round"><use href="#mark"/></svg>
+            <span class="as-logo" style="height:34px" role="img" aria-label="ArmoSpectra"></span>
             <span class="wordmark" style="font-size:7.5px">ArmoSpectra</span>
           </div>
           <div class="stack-sm" style="gap:3px;position:relative">
@@ -1921,7 +1981,7 @@ li::marker{color:var(--blue-500)}
 
       <div class="stack-sm">
         <div class="bcard" style="align-items:center;justify-content:center;background:#050507">
-          <svg viewBox="0 0 140 120" width="66" height="57" fill="none" stroke="#FFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><use href="#mark"/></svg>
+          <span class="as-logo" style="height:57px" role="img" aria-label="ArmoSpectra"></span>
         </div>
         <p class="micro">Business card — reverse · mark only, centred at 58% width</p>
       </div>
@@ -1929,7 +1989,7 @@ li::marker{color:var(--blue-500)}
       <div class="stack-sm">
         <div class="letter">
           <div class="lockup lockup--h" style="gap:8px">
-            <svg viewBox="0 0 140 120" width="24" height="21" fill="none" stroke="#FFF" stroke-width="5.4" stroke-linecap="round" stroke-linejoin="round"><use href="#mark"/></svg>
+            <span class="as-logo" style="height:21px" role="img" aria-label="ArmoSpectra"></span>
             <span class="wordmark" style="font-size:6px">ArmoSpectra</span>
           </div>
           <span style="display:block;width:100%;height:1px;background:var(--divider)"></span>
@@ -1969,7 +2029,7 @@ li::marker{color:var(--blue-500)}
         <h3>Email signature</h3>
         <div class="card" style="gap:calc(var(--u)*1.5);padding:calc(var(--u)*3)">
           <div class="lockup lockup--h" style="gap:10px">
-            <svg viewBox="0 0 140 120" width="28" height="24" fill="none" stroke="#FFF" stroke-width="4.8" stroke-linecap="round" stroke-linejoin="round"><use href="#mark"/></svg>
+            <span class="as-logo" style="height:24px" role="img" aria-label="ArmoSpectra"></span>
             <span class="wordmark" style="font-size:8px">ArmoSpectra</span>
           </div>
           <span style="display:block;width:100%;height:1px;background:var(--divider);margin:6px 0"></span>
@@ -2195,18 +2255,19 @@ li::marker{color:var(--blue-500)}
           <div class="filerow"><svg viewBox="0 0 24 24" fill="none" stroke="#6BB4FF" stroke-width="1.5"><use href="#i-automation"/></svg><span class="p">tokens.json</span><span class="d">Design tokens (DTCG)</span></div>
           <div class="filerow"><svg viewBox="0 0 24 24" fill="none" stroke="#6BB4FF" stroke-width="1.5"><use href="#i-automation"/></svg><span class="p">tailwind.preset.js</span><span class="d">Tailwind theme preset</span></div>
           <div class="filerow"><svg viewBox="0 0 24 24" fill="none" stroke="#6BB4FF" stroke-width="1.5"><use href="#i-followup"/></svg><span class="p">BRAND_SYSTEM.md</span><span class="d">Written specification</span></div>
-          <div class="filerow"><svg viewBox="0 0 24 24" fill="none" stroke="#6BB4FF" stroke-width="1.5"><use href="#i-visibility"/></svg><span class="p">assets/logo-mark.svg</span><span class="d">Mark, construction reference</span></div>
-          <div class="filerow"><svg viewBox="0 0 24 24" fill="none" stroke="#6BB4FF" stroke-width="1.5"><use href="#i-visibility"/></svg><span class="p">assets/logo-lockup-vertical.svg</span><span class="d">Primary lockup</span></div>
-          <div class="filerow"><svg viewBox="0 0 24 24" fill="none" stroke="#6BB4FF" stroke-width="1.5"><use href="#i-visibility"/></svg><span class="p">assets/logo-lockup-horizontal.svg</span><span class="d">Secondary lockup</span></div>
+          <div class="filerow"><svg viewBox="0 0 24 24" fill="none" stroke="#E0A34B" stroke-width="1.5"><use href="#i-visibility"/></svg><span class="p" style="color:#E0A34B">assets/LOGO.md</span><span class="d">Logo slot spec — artwork pending</span></div>
           <div class="filerow"><svg viewBox="0 0 24 24" fill="none" stroke="#6BB4FF" stroke-width="1.5"><use href="#i-capture"/></svg><span class="p">assets/icons/*.svg</span><span class="d">Six capability icons</span></div>
           <div class="filerow" style="border-bottom:0"><svg viewBox="0 0 24 24" fill="none" stroke="#6BB4FF" stroke-width="1.5"><use href="#i-ai"/></svg><span class="p">assets/arc-motif.svg</span><span class="d">Ambient arc anchor</span></div>
         </div>
 
         <div class="note">
-          The mark in these files is a <span style="color:var(--white)">construction reference</span> —
-          it encodes the stroke weight, proportion, and geometry rules, and it is not
-          a substitute for the original vector artwork. Replace it with the supplied
-          production file before anything is printed or published.
+          Every logo instance in this deck renders from a single token,
+          <code>--as-logo</code>, used as a mask. Installing the official artwork is a
+          two-value change that updates all 28 instances at once — no per-surface edits,
+          and no way to distort it, because <code>aspect-ratio</code> is locked to the
+          master's intrinsic dimensions.
+          <span style="color:#E0A34B">The token currently holds interim placeholder
+          geometry, not the official ArmoSpectra logo.</span>
         </div>
       </div>
 
@@ -2251,7 +2312,7 @@ li::marker{color:var(--blue-500)}
 
     <div class="row" style="justify-content:space-between;align-items:flex-end;gap:calc(var(--u)*4)">
       <div class="lockup">
-        <svg viewBox="0 0 140 120" width="72" height="62" fill="none" stroke="#FFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><use href="#mark"/></svg>
+        <span class="as-logo" style="height:62px" role="img" aria-label="ArmoSpectra"></span>
         <span class="wordmark" style="font-size:14px">ArmoSpectra</span>
       </div>
       <div class="stack-sm" style="align-items:flex-end;text-align:right">
