@@ -1,0 +1,2289 @@
+<title>ArmoSpectra Brand System</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400;500;600;800;900&family=Great+Vibes&family=JetBrains+Mono:wght@400;500&display=swap">
+
+<style>
+/* ============================================================
+   ARMOSPECTRA BRAND SYSTEM — DECK STYLESHEET
+   Single-theme dark by brand rule: "Dark is the default, not a
+   theme." Every color is painted explicitly so the page holds on
+   any host ground. No auto-inversion.
+   ============================================================ */
+
+:root{
+  /* Foundation */
+  --ink-900:#050507; --ink-800:#0B0B0F; --ink-700:#131318; --ink-600:#1C1C22;
+  --ink-500:#26262E;
+  /* Accent */
+  --blue-300:#BFDBFF; --blue-400:#6BB4FF; --blue-500:#3B8EF0;
+  --blue-600:#1F63C4; --blue-800:#0E2E5C;
+  /* Neutrals (cool-biased, chosen not inherited) */
+  --white:#FFFFFF; --gray-200:#D8DADE; --gray-400:#9AA0A8; --gray-600:#5A5F66;
+
+  --font-display:"Montserrat","Archivo","Helvetica Neue",system-ui,sans-serif;
+  --font-script:"Great Vibes","Snell Roundhand",cursive;
+  --font-mono:"JetBrains Mono","SFMono-Regular",ui-monospace,monospace;
+
+  --track-wordmark:0.32em; --track-label:0.28em; --track-eyebrow:0.22em;
+  --u:8px;
+  --radius-pill:9999px; --radius-card:12px;
+
+  --chrome:linear-gradient(180deg,#FFFFFF 0%,#DCE9FF 30%,#7FB6F5 62%,#2E6FD0 100%);
+  --divider:linear-gradient(90deg,var(--ink-600) 0%,var(--blue-500) 85%,transparent 100%);
+  --glow:0 0 40px rgba(59,142,240,.35);
+
+  --col:min(1180px,92vw);
+}
+
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation-duration:.001ms!important;transition-duration:.001ms!important}
+}
+
+body{
+  margin:0;
+  background:var(--ink-900);
+  color:var(--gray-200);
+  font-family:var(--font-display);
+  font-weight:400;
+  font-size:16px;
+  line-height:1.5;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+
+/* Film grain — kills gradient banding on large dark fields */
+body::after{
+  content:"";position:fixed;inset:0;pointer-events:none;z-index:200;opacity:.035;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='140' height='140'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/></filter><rect width='140' height='140' filter='url(%23n)'/></svg>");
+}
+
+a{color:var(--blue-400);text-decoration:none}
+a:focus-visible,button:focus-visible{outline:2px solid var(--blue-400);outline-offset:3px;border-radius:2px}
+
+/* ---------- Type primitives ---------- */
+.eyebrow{
+  font-size:12px;font-weight:500;text-transform:uppercase;
+  letter-spacing:var(--track-eyebrow);color:var(--blue-400);margin:0;
+}
+.label{
+  font-size:12px;font-weight:500;text-transform:uppercase;
+  letter-spacing:var(--track-label);color:var(--white);margin:0;
+}
+.micro{
+  font-family:var(--font-mono);font-size:11px;letter-spacing:.04em;
+  color:var(--gray-400);margin:0;font-variant-numeric:tabular-nums;
+}
+h1,h2,h3,h4{font-weight:800;text-transform:uppercase;margin:0;text-wrap:balance;color:var(--white)}
+h2{font-size:clamp(30px,4.6vw,58px);line-height:.96;letter-spacing:-.005em}
+h3{font-size:clamp(17px,1.5vw,21px);line-height:1.15;letter-spacing:.01em}
+h4{font-size:13px;letter-spacing:var(--track-label);font-weight:500}
+p{margin:0;max-width:66ch}
+.lede{font-size:clamp(16px,1.35vw,19px);line-height:1.55;color:var(--gray-200);font-weight:300}
+.dim{color:var(--gray-400)}
+.chrome{
+  background:var(--chrome);-webkit-background-clip:text;background-clip:text;
+  -webkit-text-fill-color:transparent;color:var(--blue-300);
+  filter:drop-shadow(0 0 26px rgba(59,142,240,.30));
+}
+.accent{color:var(--blue-400)}
+
+.rule{width:70px;height:2px;background:var(--blue-500);border:0;margin:0;box-shadow:var(--glow)}
+.hair{height:1px;background:var(--divider);border:0;margin:0;width:100%}
+
+/* ---------- Ambient arc motif ---------- */
+.arcs{position:absolute;pointer-events:none;z-index:0;opacity:.5}
+.arcs svg{display:block}
+.arcs circle{fill:none;stroke:var(--blue-800);stroke-width:1}
+.arcs--tr{top:-180px;right:-200px}
+.arcs--bl{bottom:-220px;left:-260px}
+
+/* ---------- Shell ---------- */
+.deck{position:relative;z-index:1}
+.spread{
+  position:relative;overflow:hidden;
+  padding:clamp(56px,7vw,104px) 0;
+  border-top:1px solid var(--ink-600);
+}
+.spread:first-child{border-top:0}
+.spread--raise{background:linear-gradient(180deg,var(--ink-800) 0%,var(--ink-900) 100%)}
+.wrap{width:var(--col);margin:0 auto;position:relative;z-index:2}
+
+/* Giant spread numeral — brand chrome type promoted to structure */
+.spread-no{
+  position:absolute;top:-.28em;right:2vw;z-index:0;
+  font-size:clamp(180px,26vw,420px);font-weight:900;line-height:1;
+  letter-spacing:-.04em;
+  background:linear-gradient(180deg,rgba(255,255,255,.09) 0%,rgba(59,142,240,.07) 55%,rgba(5,5,7,0) 92%);
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+  pointer-events:none;user-select:none;font-variant-numeric:tabular-nums;
+}
+
+.head{display:flex;flex-direction:column;gap:calc(var(--u)*2);margin-bottom:calc(var(--u)*6)}
+.head .row{display:flex;align-items:baseline;gap:calc(var(--u)*2);flex-wrap:wrap}
+
+/* ---------- Index rail ---------- */
+.rail{
+  position:fixed;left:calc(var(--u)*3);top:50%;transform:translateY(-50%);
+  z-index:100;display:flex;flex-direction:column;gap:10px;
+}
+.rail a{
+  width:22px;height:6px;border-radius:var(--radius-pill);
+  background:var(--ink-500);display:block;transition:background .25s,width .25s;
+}
+.rail a:hover,.rail a:focus-visible{background:var(--blue-500);width:34px}
+@media (max-width:1500px){.rail{display:none}}
+
+/* ---------- Generic grid ---------- */
+.grid{display:grid;gap:calc(var(--u)*3)}
+.g2{grid-template-columns:repeat(2,minmax(0,1fr))}
+.g3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.g4{grid-template-columns:repeat(4,minmax(0,1fr))}
+.g5{grid-template-columns:repeat(5,minmax(0,1fr))}
+.split{display:grid;grid-template-columns:1.05fr .95fr;gap:calc(var(--u)*7);align-items:start}
+@media (max-width:900px){
+  .g3,.g4,.g5,.split{grid-template-columns:1fr}
+  .g2{grid-template-columns:1fr}
+}
+
+.card{
+  background:var(--ink-800);border:1px solid var(--ink-600);
+  border-radius:var(--radius-card);padding:calc(var(--u)*3);
+  display:flex;flex-direction:column;gap:calc(var(--u)*1.5);
+}
+.card--flat{background:transparent}
+.stack{display:flex;flex-direction:column;gap:calc(var(--u)*2)}
+.stack-sm{display:flex;flex-direction:column;gap:var(--u)}
+.row{display:flex;gap:calc(var(--u)*2);align-items:center;flex-wrap:wrap}
+
+.scroll{overflow-x:auto;-webkit-overflow-scrolling:touch}
+
+/* ---------- Tables ---------- */
+table{border-collapse:collapse;width:100%;font-size:13px;min-width:520px}
+th{
+  text-align:left;font-weight:500;font-size:11px;text-transform:uppercase;
+  letter-spacing:var(--track-eyebrow);color:var(--blue-400);
+  padding:0 calc(var(--u)*2) var(--u) 0;border-bottom:1px solid var(--ink-600);white-space:nowrap;
+}
+td{
+  padding:calc(var(--u)*1.5) calc(var(--u)*2) calc(var(--u)*1.5) 0;
+  border-bottom:1px solid var(--ink-600);color:var(--gray-200);vertical-align:top;
+}
+td.m,th.m{font-family:var(--font-mono);font-variant-numeric:tabular-nums}
+td.dim{color:var(--gray-400)}
+
+/* ---------- Buttons (brand component) ---------- */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;
+  height:56px;padding:0 calc(var(--u)*5);border-radius:var(--radius-pill);
+  border:1px solid var(--blue-500);background:transparent;color:var(--white);
+  font-family:var(--font-display);font-size:14px;font-weight:500;
+  text-transform:uppercase;letter-spacing:var(--track-label);cursor:pointer;
+  transition:border-color .25s,box-shadow .25s,color .25s;
+}
+.btn:hover{border-color:var(--blue-400);box-shadow:var(--glow);color:var(--blue-300)}
+.btn--sm{height:42px;padding:0 calc(var(--u)*3);font-size:12px}
+.btn--ghost{border-color:var(--ink-500);color:var(--gray-200)}
+.btn--ghost:hover{border-color:var(--gray-400);box-shadow:none;color:var(--white)}
+</style>
+<style>
+/* ---------- Logo ---------- */
+.lockup{display:flex;flex-direction:column;align-items:flex-start;gap:calc(var(--u)*1.5)}
+.lockup svg{display:block}
+.wordmark{
+  font-weight:300;text-transform:uppercase;letter-spacing:var(--track-wordmark);
+  color:var(--white);line-height:1;
+}
+.lockup--h{flex-direction:row;align-items:center;gap:calc(var(--u)*2.5)}
+.clearspace{position:relative;padding:44px;border:1px dashed var(--ink-500);border-radius:8px}
+.clearspace::before{
+  content:"";position:absolute;inset:44px;border:1px solid rgba(59,142,240,.28);border-radius:4px;
+}
+
+/* ---------- Colour swatches ---------- */
+.swatch{
+  border:1px solid var(--ink-600);border-radius:10px;overflow:hidden;
+  display:flex;flex-direction:column;
+}
+.swatch .chip{height:110px;display:block}
+.swatch .meta{padding:calc(var(--u)*2);display:flex;flex-direction:column;gap:4px;background:var(--ink-800)}
+.swatch .name{font-size:11px;font-weight:500;letter-spacing:var(--track-eyebrow);text-transform:uppercase;color:var(--white)}
+.swatch .hex{font-family:var(--font-mono);font-size:13px;color:var(--blue-400)}
+.swatch .use{font-size:11px;color:var(--gray-400);line-height:1.4}
+
+/* Ratio bar */
+.ratio{display:flex;height:64px;border-radius:8px;overflow:hidden;border:1px solid var(--ink-600)}
+.ratio span{display:flex;align-items:flex-end;padding:10px;font-family:var(--font-mono);font-size:11px}
+
+/* Contrast bars */
+.bar{display:grid;grid-template-columns:150px 1fr 62px;gap:calc(var(--u)*2);align-items:center;font-size:12px}
+.bar .track{height:10px;background:var(--ink-700);border-radius:var(--radius-pill);overflow:hidden}
+.bar .fill{height:100%;border-radius:var(--radius-pill);background:linear-gradient(90deg,var(--blue-600),var(--blue-400))}
+.bar .val{font-family:var(--font-mono);font-variant-numeric:tabular-nums;text-align:right;color:var(--white)}
+.bar .nm{color:var(--gray-200)}
+.pass{color:var(--blue-300)} .warn{color:#E0A34B}
+
+/* ---------- Type specimens ---------- */
+.spec{border-left:2px solid var(--ink-600);padding-left:calc(var(--u)*3);display:flex;flex-direction:column;gap:6px}
+.spec .sample{color:var(--white);line-height:1}
+.scale-row{display:grid;grid-template-columns:96px 1fr;gap:calc(var(--u)*3);align-items:baseline;padding:calc(var(--u)*1.5) 0;border-bottom:1px solid var(--ink-600)}
+.scale-row .n{font-family:var(--font-mono);font-size:11px;color:var(--gray-400);font-variant-numeric:tabular-nums}
+.scale-row .s{color:var(--white);line-height:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+
+/* ---------- Spacing scale ---------- */
+.sp{display:flex;align-items:center;gap:calc(var(--u)*2)}
+.sp .blk{height:22px;background:linear-gradient(90deg,var(--blue-600),var(--blue-500));border-radius:3px}
+.sp .t{font-family:var(--font-mono);font-size:11px;color:var(--gray-400);font-variant-numeric:tabular-nums;white-space:nowrap}
+
+/* ---------- Grid demo ---------- */
+.griddemo{position:relative;border:1px solid var(--ink-600);border-radius:10px;background:var(--ink-800);height:320px;overflow:hidden}
+.griddemo .cols{position:absolute;inset:0;display:grid;grid-template-columns:repeat(12,1fr);gap:16px;padding:0 10.4%}
+.griddemo .cols i{background:rgba(59,142,240,.09);border-left:1px solid rgba(59,142,240,.16);border-right:1px solid rgba(59,142,240,.16)}
+.griddemo .content{position:absolute;inset:0;padding:32px 10.4%;display:flex;flex-direction:column;justify-content:center;gap:12px}
+.griddemo .bar2{height:14px;background:var(--ink-500);border-radius:3px}
+.griddemo .bar2.w1{width:52%;background:linear-gradient(90deg,#fff,#7FB6F5);height:26px}
+.griddemo .bar2.w2{width:38%}
+.griddemo .bar2.w3{width:44%}
+.marginlabel{position:absolute;top:10px;left:10.4%;transform:translateX(-100%);padding-right:8px;font-family:var(--font-mono);font-size:10px;color:var(--blue-400)}
+
+/* ---------- Gradient specimens ---------- */
+.gspec{height:120px;border-radius:10px;border:1px solid var(--ink-600)}
+.gchrome{background:var(--chrome)}
+.gambient{background:radial-gradient(120% 120% at 75% 0%,#1A1B20 0%,#050507 70%)}
+.gdiv{background:var(--divider)}
+.gglow{background:radial-gradient(60% 100% at 50% 100%,rgba(59,142,240,.45) 0%,rgba(5,5,7,0) 70%),var(--ink-900)}
+
+/* ---------- Photography direction ---------- */
+.photo{
+  position:relative;aspect-ratio:3/4;border-radius:10px;overflow:hidden;
+  border:1px solid var(--ink-600);
+  background:
+    radial-gradient(80% 60% at 72% 18%,rgba(255,255,255,.30) 0%,rgba(255,255,255,0) 55%),
+    radial-gradient(50% 40% at 30% 85%,rgba(5,5,7,.95) 0%,rgba(5,5,7,0) 70%),
+    linear-gradient(160deg,#3A3D42 0%,#16171B 42%,#050507 100%);
+  filter:grayscale(1) contrast(1.28) brightness(.92);
+}
+.photo::after{
+  content:"";position:absolute;inset:0;
+  background:linear-gradient(90deg,rgba(5,5,7,.92) 0%,rgba(5,5,7,0) 46%),
+             linear-gradient(0deg,rgba(5,5,7,.96) 0%,rgba(5,5,7,0) 34%);
+}
+.photo--bad1{filter:none;background:linear-gradient(160deg,#F2B23C 0%,#C2432E 45%,#5B2F8A 100%)}
+.photo--bad2{filter:grayscale(1) contrast(.72) brightness(1.5);background:linear-gradient(160deg,#EFEFEF 0%,#C9CBD0 60%,#9BA0A8 100%)}
+.photo--bad2::after{background:none}
+.photo--bad1::after{background:none}
+.ptag{
+  position:absolute;left:12px;bottom:12px;z-index:3;font-family:var(--font-mono);
+  font-size:10px;letter-spacing:.06em;padding:5px 9px;border-radius:var(--radius-pill);
+  background:rgba(5,5,7,.7);border:1px solid var(--ink-500);color:var(--gray-200);
+}
+.ptag.ok{border-color:var(--blue-500);color:var(--blue-300)}
+.ptag.no{border-color:#7A3C34;color:#E8A196}
+
+/* Tonal ramp */
+.ramp{display:flex;height:44px;border-radius:8px;overflow:hidden;border:1px solid var(--ink-600)}
+.ramp i{flex:1}
+
+/* ---------- Icons ---------- */
+.icons{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:calc(var(--u)*2)}
+@media (max-width:900px){.icons{grid-template-columns:repeat(3,minmax(0,1fr))}}
+.ic{
+  display:flex;flex-direction:column;align-items:center;gap:calc(var(--u)*1.5);
+  padding:calc(var(--u)*3) var(--u);border:1px solid var(--ink-600);border-radius:10px;
+  background:var(--ink-800);
+}
+.ic svg{width:36px;height:36px}
+.ic .nm{font-size:10px;letter-spacing:var(--track-label);text-transform:uppercase;color:var(--white);text-align:center}
+.icongrid{background:
+  linear-gradient(rgba(59,142,240,.14) 1px,transparent 1px) 0 0/12px 12px,
+  linear-gradient(90deg,rgba(59,142,240,.14) 1px,transparent 1px) 0 0/12px 12px,
+  var(--ink-800);
+  border:1px solid var(--ink-600);border-radius:10px;padding:24px;
+  display:flex;align-items:center;justify-content:center;
+}
+.icongrid svg{width:96px;height:96px}
+
+/* ---------- Capability rows (signature component) ---------- */
+.cap{display:flex;flex-direction:column}
+.cap .r{display:flex;align-items:center;gap:calc(var(--u)*3);height:74px}
+.cap .r svg{width:26px;height:26px;flex:none}
+.cap .r span{font-size:14px;font-weight:500;letter-spacing:var(--track-label);text-transform:uppercase;color:var(--white)}
+.cap .r + .r{border-top:1px solid transparent;border-image:var(--divider) 1}
+.capline{height:1px;background:var(--divider)}
+
+/* ---------- Do / Don't ---------- */
+.dd{border:1px solid var(--ink-600);border-radius:10px;overflow:hidden;display:flex;flex-direction:column}
+.dd .vis{height:158px;display:flex;align-items:center;justify-content:center;background:var(--ink-800);padding:16px;position:relative}
+.dd .cap2{padding:calc(var(--u)*2);font-size:12px;line-height:1.45;border-top:1px solid var(--ink-600);display:flex;gap:10px;align-items:flex-start}
+.dd .mark{font-family:var(--font-mono);font-size:11px;font-weight:500;flex:none;letter-spacing:.06em}
+.dd.is-do .mark{color:var(--blue-300)} .dd.is-no .mark{color:#E8A196}
+.dd.is-do{border-color:rgba(59,142,240,.42)} .dd.is-no{border-color:#4A2823}
+
+/* ---------- Mockups ---------- */
+.device{border:1px solid var(--ink-600);border-radius:14px;overflow:hidden;background:var(--ink-900);position:relative}
+.chrome-bar{height:34px;background:var(--ink-700);border-bottom:1px solid var(--ink-600);display:flex;align-items:center;gap:6px;padding:0 12px}
+.chrome-bar i{width:8px;height:8px;border-radius:50%;background:var(--ink-500);display:block}
+.chrome-bar .url{
+  margin-left:10px;flex:1;height:18px;border-radius:var(--radius-pill);background:var(--ink-800);
+  border:1px solid var(--ink-600);display:flex;align-items:center;padding:0 10px;
+  font-family:var(--font-mono);font-size:9px;color:var(--gray-400);
+}
+.site{padding:0;background:radial-gradient(120% 90% at 78% 0%,#16171C 0%,#050507 68%)}
+.sitenav{display:flex;align-items:center;justify-content:space-between;padding:16px 26px;border-bottom:1px solid var(--ink-600)}
+.sitenav .lnk{display:flex;gap:20px;font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--gray-400)}
+.sitehero{padding:44px 26px 40px;display:flex;flex-direction:column;gap:14px;position:relative;overflow:hidden}
+.sitecards{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;padding:0 26px 30px}
+.minicard{border:1px solid var(--ink-600);border-radius:8px;padding:14px;background:var(--ink-800);display:flex;flex-direction:column;gap:8px}
+.minicard svg{width:18px;height:18px}
+.minicard .t{font-size:8.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--white)}
+.minicard .b{height:5px;border-radius:2px;background:var(--ink-600)}
+
+/* Social */
+.post{aspect-ratio:1/1;border:1px solid var(--ink-600);border-radius:10px;overflow:hidden;position:relative;
+  background:radial-gradient(110% 90% at 80% 8%,#17181D 0%,#050507 70%);
+  padding:26px;display:flex;flex-direction:column;justify-content:space-between}
+.story{aspect-ratio:9/16;border:1px solid var(--ink-600);border-radius:10px;overflow:hidden;position:relative;
+  background:radial-gradient(110% 70% at 78% 6%,#17181D 0%,#050507 72%);
+  padding:24px;display:flex;flex-direction:column;justify-content:space-between}
+.banner{aspect-ratio:4/1;border:1px solid var(--ink-600);border-radius:10px;overflow:hidden;position:relative;
+  background:radial-gradient(80% 180% at 88% 10%,#191A20 0%,#050507 70%);
+  padding:22px 30px;display:flex;flex-direction:column;justify-content:center;gap:8px}
+.avatar{width:96px;height:96px;border-radius:50%;border:1px solid var(--ink-600);background:var(--ink-900);
+  display:flex;align-items:center;justify-content:center}
+
+/* Slides */
+.slide{aspect-ratio:16/9;border:1px solid var(--ink-600);border-radius:10px;overflow:hidden;position:relative;
+  background:var(--ink-900);padding:26px;display:flex;flex-direction:column;justify-content:center;gap:10px}
+.slide .foot{position:absolute;left:26px;right:26px;bottom:14px;display:flex;justify-content:space-between;
+  font-family:var(--font-mono);font-size:8px;color:var(--gray-600);letter-spacing:.08em}
+
+/* Collateral */
+.bcard{aspect-ratio:1.75/1;border:1px solid var(--ink-600);border-radius:8px;padding:22px;
+  background:radial-gradient(120% 140% at 88% 4%,#17181D 0%,#050507 72%);
+  display:flex;flex-direction:column;justify-content:space-between;position:relative;overflow:hidden}
+.letter{aspect-ratio:1/1.294;border:1px solid var(--ink-600);border-radius:8px;padding:26px;
+  background:var(--ink-900);display:flex;flex-direction:column;gap:14px;position:relative;overflow:hidden}
+.sigblock{display:flex;flex-direction:column;gap:2px}
+.sig{font-family:var(--font-script);color:var(--white);line-height:1}
+
+/* Messaging pyramid */
+.pyr{display:flex;flex-direction:column;gap:6px;align-items:center}
+.pyr .lvl{border:1px solid var(--ink-600);border-radius:8px;padding:16px 20px;text-align:center;background:var(--ink-800);width:100%}
+.pyr .l1{width:62%;border-color:rgba(59,142,240,.45);box-shadow:0 0 40px rgba(59,142,240,.14)}
+.pyr .l2{width:82%}
+@media (max-width:900px){.pyr .l1,.pyr .l2{width:100%}}
+
+.kv{display:grid;grid-template-columns:auto 1fr;gap:6px calc(var(--u)*2);font-size:13px;align-items:baseline}
+.kv dt{font-size:11px;text-transform:uppercase;letter-spacing:var(--track-eyebrow);color:var(--blue-400);white-space:nowrap}
+.kv dd{margin:0;color:var(--gray-200)}
+
+.note{border-left:2px solid var(--blue-500);padding-left:calc(var(--u)*2);font-size:13px;color:var(--gray-400);line-height:1.55}
+code{font-family:var(--font-mono);font-size:12px;color:var(--blue-300);background:var(--ink-700);padding:2px 6px;border-radius:4px}
+pre{font-family:var(--font-mono);font-size:11.5px;line-height:1.7;color:var(--gray-200);background:var(--ink-800);
+  border:1px solid var(--ink-600);border-radius:10px;padding:calc(var(--u)*2.5);overflow-x:auto;margin:0}
+pre .k{color:var(--blue-400)} pre .v{color:var(--blue-300)} pre .c{color:var(--gray-600)}
+ul{margin:0;padding-left:18px} li{margin-bottom:7px;line-height:1.55}
+li::marker{color:var(--blue-500)}
+</style>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <g id="i-visibility"><path d="M2 12s3.6-6.5 10-6.5S22 12 22 12s-3.6 6.5-10 6.5S2 12 2 12Z"/><circle cx="12" cy="12" r="3.1"/></g>
+    <g id="i-capture"><circle cx="12" cy="12" r="7.4"/><circle cx="12" cy="12" r="2.6"/><path d="M12 1.6v3.6M12 18.8v3.6M1.6 12h3.6M18.8 12h3.6"/></g>
+    <g id="i-followup"><path d="M3 6.2a1.8 1.8 0 0 1 1.8-1.8h14.4A1.8 1.8 0 0 1 21 6.2v8.6a1.8 1.8 0 0 1-1.8 1.8H9l-4.4 3.4a.6.6 0 0 1-1-.5v-2.9H4.8A1.8 1.8 0 0 1 3 14.8Z"/><path d="M8.4 10.5h.02M12 10.5h.02M15.6 10.5h.02" stroke-width="2.4" stroke-linecap="round"/></g>
+    <g id="i-portals"><rect x="2.6" y="4.2" width="18.8" height="15.6" rx="1.8"/><path d="M2.6 8.6h18.8"/><path d="M5.6 6.4h.02M8 6.4h.02" stroke-width="1.8" stroke-linecap="round"/><path d="M6.2 12.4h4.4M6.2 15.6h4.4M14 12.4h3.8M14 15.6h3.8"/></g>
+    <g id="i-automation"><circle cx="12" cy="12" r="3.1"/><path d="M12 1.9v2.7M12 19.4v2.7M22.1 12h-2.7M4.6 12H1.9M19.1 4.9 17.2 6.8M6.8 17.2l-1.9 1.9M19.1 19.1 17.2 17.2M6.8 6.8 4.9 4.9"/></g>
+    <g id="i-ai"><path d="M12.8 3.4a3.4 3.4 0 0 0-5.9 2.3 3.2 3.2 0 0 0-1.6 5.6 3.3 3.3 0 0 0 .9 5.3 3.3 3.3 0 0 0 6.6.4Z"/><path d="M12.8 8.2h3.4M16.2 8.2a1.5 1.5 0 1 0 3 0 1.5 1.5 0 0 0-3 0Z"/><path d="M12.8 14.2h4.6M17.4 14.2a1.5 1.5 0 1 0 3 0 1.5 1.5 0 0 0-3 0Z"/><path d="M9 6.4v11.4"/></g>
+    <g id="i-arrow"><path d="M4 12h15M13.4 6.4 19 12l-5.6 5.6"/></g>
+
+    <g id="mark">
+      <path d="M96 52c0-14 10-22 20-19 9 3 12 14 6 22-4 5-11 6-16 3"/>
+      <path d="M96 52c-12-8-28-8-40 0-8 5-12 12-13 20"/>
+      <path d="M106 58c-2 8-8 14-16 16-12 3-24 0-32-6"/>
+      <path d="M100 70v18c0 4-3 7-7 7M88 74v16c0 4-3 7-7 7"/>
+      <path d="M52 70c0 10 2 18 6 23M44 74c-1 10 1 18 5 22"/>
+      <path d="M43 72c-13 2-23-6-23-19s10-23 22-23c9 0 15 7 13 14-2 6-9 7-12 3"/>
+      <circle cx="114" cy="41" r="2.2" fill="currentColor" stroke="none"/>
+    </g>
+  </defs>
+</svg>
+
+<nav class="rail" aria-label="Deck sections">
+  <a href="#s00" title="Cover"></a><a href="#s01" title="Positioning"></a>
+  <a href="#s02" title="Growth system"></a><a href="#s03" title="Logo"></a>
+  <a href="#s04" title="Logo rules"></a><a href="#s05" title="Colour"></a>
+  <a href="#s06" title="Colour behaviour"></a><a href="#s07" title="Typography"></a>
+  <a href="#s08" title="Hierarchy"></a><a href="#s09" title="Grid"></a>
+  <a href="#s10" title="Gradients"></a><a href="#s11" title="Photography"></a>
+  <a href="#s12" title="Iconography"></a><a href="#s13" title="Motifs"></a>
+  <a href="#s14" title="Voice"></a><a href="#s15" title="Messaging"></a>
+  <a href="#s16" title="Website"></a><a href="#s17" title="Social"></a>
+  <a href="#s18" title="Presentation"></a><a href="#s19" title="Collateral"></a>
+  <a href="#s20" title="Components"></a><a href="#s21" title="Do and don't"></a>
+  <a href="#s22" title="Files"></a>
+</nav>
+
+<main class="deck">
+
+<!-- ══════════════ 00 · COVER ══════════════ -->
+<section class="spread" id="s00" style="padding-top:clamp(70px,9vw,130px);padding-bottom:clamp(70px,9vw,130px)">
+  <div class="arcs arcs--tr" aria-hidden="true">
+    <svg width="820" height="820" viewBox="0 0 820 820">
+      <circle cx="410" cy="410" r="180"/><circle cx="410" cy="410" r="240"/>
+      <circle cx="410" cy="410" r="300"/><circle cx="410" cy="410" r="360"/>
+      <circle cx="410" cy="410" r="405"/>
+    </svg>
+  </div>
+  <div class="arcs arcs--bl" aria-hidden="true">
+    <svg width="900" height="900" viewBox="0 0 900 900">
+      <circle cx="450" cy="450" r="200"/><circle cx="450" cy="450" r="280"/>
+      <circle cx="450" cy="450" r="355"/><circle cx="450" cy="450" r="425"/>
+    </svg>
+  </div>
+
+  <div class="wrap">
+    <div class="split" style="align-items:center;gap:clamp(40px,6vw,90px)">
+      <div class="stack" style="gap:calc(var(--u)*4)">
+        <div class="lockup">
+          <svg viewBox="0 0 140 120" width="112" height="96" fill="none" stroke="#FFFFFF"
+               stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" role="img"
+               aria-label="ArmoSpectra mark"><use href="#mark"/></svg>
+          <span class="wordmark" style="font-size:23px">ArmoSpectra</span>
+        </div>
+
+        <h1 style="font-size:clamp(40px,6.4vw,84px);line-height:.94;letter-spacing:-.01em;font-weight:800">
+          Build the <span class="chrome">system</span><br>behind your <span class="chrome">growth.</span>
+        </h1>
+
+        <hr class="rule">
+
+        <p class="lede" style="max-width:34ch">
+          The complete visual identity system. Growth Operating Systems
+          for <span class="accent">modern businesses</span>.
+        </p>
+
+        <div class="row" style="gap:calc(var(--u)*4);margin-top:calc(var(--u)*2)">
+          <div class="stack-sm"><p class="micro">DOCUMENT</p><p class="label">Brand System v1.0</p></div>
+          <div class="stack-sm"><p class="micro">SCOPE</p><p class="label">Identity &amp; Applications</p></div>
+          <div class="stack-sm"><p class="micro">MODE</p><p class="label">Dark&nbsp;First</p></div>
+        </div>
+      </div>
+
+      <div class="stack" style="gap:calc(var(--u)*3)">
+        <div class="capline"></div>
+        <div class="cap">
+          <div class="r"><svg viewBox="0 0 24 24" fill="none" stroke="#FFF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><use href="#i-visibility"/></svg><span>Visibility</span></div>
+          <div class="capline"></div>
+          <div class="r"><svg viewBox="0 0 24 24" fill="none" stroke="#FFF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><use href="#i-capture"/></svg><span>Capture</span></div>
+          <div class="capline"></div>
+          <div class="r"><svg viewBox="0 0 24 24" fill="none" stroke="#FFF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><use href="#i-followup"/></svg><span>Follow-up</span></div>
+          <div class="capline"></div>
+          <div class="r"><svg viewBox="0 0 24 24" fill="none" stroke="#FFF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><use href="#i-portals"/></svg><span>Portals</span></div>
+          <div class="capline"></div>
+          <div class="r"><svg viewBox="0 0 24 24" fill="none" stroke="#FFF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><use href="#i-automation"/></svg><span>Automation</span></div>
+          <div class="capline"></div>
+          <div class="r"><svg viewBox="0 0 24 24" fill="none" stroke="#FFF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><use href="#i-ai"/></svg><span>AI Readiness</span></div>
+          <div class="capline"></div>
+        </div>
+        <p class="lede" style="font-size:15px;max-width:38ch">
+          Websites, visibility, portals, dashboards, and workflows —
+          <span class="accent">connected into one system</span>.
+        </p>
+        <a class="btn" href="#s01" style="align-self:flex-start">Open the system</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+.flow{display:grid;grid-template-columns:repeat(4,1fr);gap:calc(var(--u)*2);position:relative}
+@media (max-width:900px){.flow{grid-template-columns:1fr}}
+.node{border:1px solid var(--ink-600);border-radius:var(--radius-card);background:var(--ink-800);
+  padding:calc(var(--u)*3);display:flex;flex-direction:column;gap:calc(var(--u)*1.5);position:relative}
+.node svg.ico{width:28px;height:28px}
+.node .stage{font-family:var(--font-mono);font-size:10px;color:var(--blue-500);letter-spacing:.1em}
+.node .t{font-size:13px;font-weight:500;letter-spacing:var(--track-label);text-transform:uppercase;color:var(--white)}
+.node .d{font-size:12.5px;line-height:1.5;color:var(--gray-400)}
+.node::after{content:"";position:absolute;top:50%;right:calc(var(--u)*-2);width:calc(var(--u)*2);height:1px;
+  background:linear-gradient(90deg,var(--blue-500),transparent)}
+.node:last-child::after{display:none}
+@media (max-width:900px){.node::after{display:none}}
+.substrate{border:1px solid var(--ink-600);border-radius:var(--radius-card);
+  background:linear-gradient(90deg,var(--ink-800),rgba(14,46,92,.22));
+  padding:calc(var(--u)*2.5) calc(var(--u)*3);display:flex;align-items:center;gap:calc(var(--u)*2.5);flex-wrap:wrap}
+.substrate svg{width:24px;height:24px;flex:none}
+.substrate .t{font-size:12px;font-weight:500;letter-spacing:var(--track-label);text-transform:uppercase;color:var(--white);flex:none}
+.substrate .d{font-size:12.5px;color:var(--gray-400);line-height:1.5}
+.vs{display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid var(--ink-600);border-radius:var(--radius-card);overflow:hidden}
+@media (max-width:700px){.vs{grid-template-columns:1fr}}
+.vs > div{padding:calc(var(--u)*3)}
+.vs .is{background:linear-gradient(180deg,rgba(59,142,240,.09),transparent)}
+.vs .isnt{background:var(--ink-800);border-left:1px solid var(--ink-600)}
+@media (max-width:700px){.vs .isnt{border-left:0;border-top:1px solid var(--ink-600)}}
+</style>
+
+<!-- ══════════════ 01 · POSITIONING ══════════════ -->
+<section class="spread spread--raise" id="s01">
+  <span class="spread-no" aria-hidden="true">01</span>
+  <div class="wrap">
+    <header class="head">
+      <div class="row"><p class="eyebrow">01 — Positioning</p></div>
+      <h2>The category we<br>are building in</h2>
+      <hr class="rule">
+    </header>
+
+    <div class="split">
+      <div class="stack" style="gap:calc(var(--u)*4)">
+        <div class="stack-sm">
+          <h4 class="dim">Positioning statement</h4>
+          <p class="lede" style="font-size:clamp(19px,2vw,25px);line-height:1.35;color:var(--white);font-weight:300;max-width:30ch">
+            ArmoSpectra builds <span class="accent">Growth Operating Systems</span> —
+            websites, visibility, portals, dashboards, and workflows connected into
+            one system rather than assembled as separate tools.
+          </p>
+        </div>
+
+        <div class="stack-sm">
+          <h4 class="dim">Category</h4>
+          <p>Premium marketing and growth systems agency. We sell architecture, not deliverables.</p>
+        </div>
+
+        <div class="stack-sm">
+          <h4 class="dim">Audience</h4>
+          <p>Modern businesses whose marketing runs across disconnected tools, and whose
+             owners are accountable for growth rather than for channels.</p>
+        </div>
+
+        <div class="stack-sm">
+          <h4 class="dim">Founder-led</h4>
+          <div class="row" style="gap:calc(var(--u)*3);align-items:flex-end">
+            <div class="sigblock">
+              <p class="eyebrow">CEO of ArmoSpectra</p>
+              <span class="sig" style="font-size:46px">Armo</span>
+            </div>
+          </div>
+          <p class="dim" style="font-size:13px;max-width:44ch">
+            The identity carries a named principal. Editorial founder photography and a
+            single script signature are permanent fixtures of the system, not campaign assets.
+          </p>
+        </div>
+      </div>
+
+      <div class="stack" style="gap:calc(var(--u)*3)">
+        <h4 class="dim">Brand attributes</h4>
+        <div class="grid g2" style="gap:calc(var(--u)*2)">
+          <div class="card"><p class="label">Engineered</p><p class="dim" style="font-size:12.5px">Systems vocabulary. Every claim maps to a component that exists.</p></div>
+          <div class="card"><p class="label">Composed</p><p class="dim" style="font-size:12.5px">Restraint reads as confidence. Nothing shouts.</p></div>
+          <div class="card"><p class="label">Premium</p><p class="dim" style="font-size:12.5px">Depth, contrast, and space. Not decoration.</p></div>
+          <div class="card"><p class="label">Direct</p><p class="dim" style="font-size:12.5px">Imperative headlines. Short sentences. No hedging.</p></div>
+        </div>
+
+        <h4 class="dim" style="margin-top:calc(var(--u)*2)">Territory</h4>
+        <div class="vs">
+          <div class="is">
+            <p class="eyebrow" style="margin-bottom:12px">What we are</p>
+            <ul style="font-size:13px;color:var(--gray-200)">
+              <li>An operating system for growth</li>
+              <li>One connected architecture</li>
+              <li>Founder-led and accountable</li>
+              <li>Built to be handed over and run</li>
+            </ul>
+          </div>
+          <div class="isnt">
+            <p class="eyebrow" style="margin-bottom:12px;color:var(--gray-400)">What we are not</p>
+            <ul style="font-size:13px;color:var(--gray-400)">
+              <li>A channel-by-channel service menu</li>
+              <li>A template marketplace</li>
+              <li>An anonymous agency roster</li>
+              <li>A one-off campaign vendor</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ 02 · GROWTH SYSTEM ══════════════ -->
+<section class="spread" id="s02">
+  <span class="spread-no" aria-hidden="true">02</span>
+  <div class="arcs arcs--tr" aria-hidden="true" style="opacity:.35">
+    <svg width="700" height="700" viewBox="0 0 700 700">
+      <circle cx="350" cy="350" r="160"/><circle cx="350" cy="350" r="225"/>
+      <circle cx="350" cy="350" r="290"/><circle cx="350" cy="350" r="345"/>
+    </svg>
+  </div>
+  <div class="wrap">
+    <header class="head">
+      <p class="eyebrow">02 — The offer, as architecture</p>
+      <h2>Six capabilities.<br><span class="chrome">One system.</span></h2>
+      <hr class="rule">
+      <p class="lede" style="max-width:62ch">
+        The capability list on every ArmoSpectra surface is a sequence, not a menu.
+        Four stages carry a prospect from unknown to managed. Two layers run underneath
+        all four. Never reorder them, never present them as independent services.
+      </p>
+    </header>
+
+    <div class="stack" style="gap:calc(var(--u)*3)">
+      <div class="flow">
+        <div class="node">
+          <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="#6BB4FF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><use href="#i-visibility"/></svg>
+          <p class="stage">STAGE 01</p>
+          <p class="t">Visibility</p>
+          <p class="d">Being findable. Search, content, and presence that put the business in front of demand.</p>
+        </div>
+        <div class="node">
+          <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="#6BB4FF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><use href="#i-capture"/></svg>
+          <p class="stage">STAGE 02</p>
+          <p class="t">Capture</p>
+          <p class="d">Turning attention into a record. Sites, forms, and lead paths that hold what visibility earns.</p>
+        </div>
+        <div class="node">
+          <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="#6BB4FF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><use href="#i-followup"/></svg>
+          <p class="stage">STAGE 03</p>
+          <p class="t">Follow-up</p>
+          <p class="d">Nothing waits. Sequences and reminders that keep every captured lead in a conversation.</p>
+        </div>
+        <div class="node">
+          <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="#6BB4FF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><use href="#i-portals"/></svg>
+          <p class="stage">STAGE 04</p>
+          <p class="t">Portals</p>
+          <p class="d">The client-facing surface. Dashboards and portals where the work becomes visible to the customer.</p>
+        </div>
+      </div>
+
+      <div class="capline"></div>
+
+      <div class="substrate">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#6BB4FF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><use href="#i-automation"/></svg>
+        <span class="t">Automation</span>
+        <span class="d">The connective layer. Workflows that move data between the four stages without a person carrying it.</span>
+      </div>
+      <div class="substrate">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#6BB4FF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><use href="#i-ai"/></svg>
+        <span class="t">AI Readiness</span>
+        <span class="d">Structured data, clean records, and defined processes — the preconditions for anything intelligent on top.</span>
+      </div>
+
+      <div class="note" style="margin-top:calc(var(--u)*2)">
+        Naming discipline: these six words are fixed. They appear in this order,
+        in uppercase, with wide tracking, on every surface that lists them.
+        Do not substitute synonyms (&ldquo;lead gen&rdquo; for Capture, &ldquo;CRM&rdquo; for Follow-up)
+        — the vocabulary is part of the identity.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ 03 · LOGO SYSTEM ══════════════ -->
+<section class="spread spread--raise" id="s03">
+  <span class="spread-no" aria-hidden="true">03</span>
+  <div class="wrap">
+    <header class="head">
+      <p class="eyebrow">03 — Identity</p>
+      <h2>Logo system</h2>
+      <hr class="rule">
+      <p class="lede" style="max-width:64ch">
+        One outline mark, one light wordmark, three lockups. The mark is monochrome
+        in every context — never chrome, never blue, never filled.
+      </p>
+    </header>
+
+    <div class="grid g3" style="margin-bottom:calc(var(--u)*6)">
+      <div class="card" style="align-items:center;padding:calc(var(--u)*5) calc(var(--u)*3);gap:calc(var(--u)*3)">
+        <div class="lockup" style="align-items:center">
+          <svg viewBox="0 0 140 120" width="96" height="82" fill="none" stroke="#FFF" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><use href="#mark"/></svg>
+          <span class="wordmark" style="font-size:17px">ArmoSpectra</span>
+        </div>
+        <div class="stack-sm" style="align-items:center">
+          <p class="label">Primary · Vertical</p>
+          <p class="micro">Covers, posters, profile surfaces</p>
+        </div>
+      </div>
+
+      <div class="card" style="align-items:center;justify-content:center;padding:calc(var(--u)*5) calc(var(--u)*3);gap:calc(var(--u)*3)">
+        <div class="lockup lockup--h">
+          <svg viewBox="0 0 140 120" width="60" height="51" fill="none" stroke="#FFF" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><use href="#mark"/></svg>
+          <span class="wordmark" style="font-size:13px">ArmoSpectra</span>
+        </div>
+        <div class="stack-sm" style="align-items:center">
+          <p class="label">Secondary · Horizontal</p>
+          <p class="micro">Navigation bars, letterhead, signatures</p>
+        </div>
+      </div>
+
+      <div class="card" style="align-items:center;justify-content:center;padding:calc(var(--u)*5) calc(var(--u)*3);gap:calc(var(--u)*3)">
+        <svg viewBox="0 0 140 120" width="78" height="67" fill="none" stroke="#FFF" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><use href="#mark"/></svg>
+        <div class="stack-sm" style="align-items:center">
+          <p class="label">Mark alone</p>
+          <p class="micro">Avatars, favicons, watermarks, stamps</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="split">
+      <div class="stack" style="gap:calc(var(--u)*3)">
+        <h3>Construction &amp; clearspace</h3>
+        <div class="clearspace">
+          <div class="lockup" style="align-items:center">
+            <svg viewBox="0 0 140 120" width="88" height="75" fill="none" stroke="#FFF" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><use href="#mark"/></svg>
+            <span class="wordmark" style="font-size:15px">ArmoSpectra</span>
+          </div>
+        </div>
+        <p class="micro">Dashed boundary = minimum clearspace. Solid inner line = lockup bounding box.</p>
+        <dl class="kv">
+          <dt>Clearspace</dt><dd>Wordmark cap-height (<code>1×</code>) on all four sides. Nothing enters it — not type, not the arc motif, not a photo edge.</dd>
+          <dt>Stack gap</dt><dd>Mark-to-wordmark gap = <code>0.4×</code> mark height.</dd>
+          <dt>Optical width</dt><dd>Wordmark tracking is tuned so its width matches the mark. Re-tune tracking if the mark is ever rescaled independently.</dd>
+          <dt>Stroke</dt><dd>Mark stroke scales with the mark. Never below <code>1.25px</code> rendered, or the line art breaks up.</dd>
+        </dl>
+      </div>
+
+      <div class="stack" style="gap:calc(var(--u)*3)">
+        <h3>Minimum sizes</h3>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>Lockup</th><th class="m">Digital min</th><th class="m">Print min</th><th>Context</th></tr></thead>
+            <tbody>
+              <tr><td>Vertical</td><td class="m">96&nbsp;px wide</td><td class="m">26&nbsp;mm</td><td class="dim">Covers, posters</td></tr>
+              <tr><td>Horizontal</td><td class="m">140&nbsp;px wide</td><td class="m">34&nbsp;mm</td><td class="dim">Nav, letterhead</td></tr>
+              <tr><td>Mark alone</td><td class="m">32&nbsp;px</td><td class="m">9&nbsp;mm</td><td class="dim">Avatar, favicon</td></tr>
+              <tr><td>Wordmark alone</td><td class="m">120&nbsp;px wide</td><td class="m">30&nbsp;mm</td><td class="dim">Footer, spine</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3 style="margin-top:calc(var(--u)*2)">Colourways</h3>
+        <div class="grid g3" style="gap:calc(var(--u)*2)">
+          <div class="stack-sm">
+            <div style="background:var(--ink-900);border:1px solid var(--ink-600);border-radius:8px;height:88px;display:flex;align-items:center;justify-content:center">
+              <svg viewBox="0 0 140 120" width="54" height="46" fill="none" stroke="#FFF" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><use href="#mark"/></svg>
+            </div>
+            <p class="micro">White on ink — primary</p>
+          </div>
+          <div class="stack-sm">
+            <div style="background:#FFFFFF;border:1px solid var(--ink-600);border-radius:8px;height:88px;display:flex;align-items:center;justify-content:center">
+              <svg viewBox="0 0 140 120" width="54" height="46" fill="none" stroke="#050507" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><use href="#mark"/></svg>
+            </div>
+            <p class="micro">Ink on white — invert only</p>
+          </div>
+          <div class="stack-sm">
+            <div style="background:var(--ink-700);border:1px solid var(--ink-600);border-radius:8px;height:88px;display:flex;align-items:center;justify-content:center">
+              <svg viewBox="0 0 140 120" width="54" height="46" fill="none" stroke="#FFFFFF" stroke-opacity=".22" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><use href="#mark"/></svg>
+            </div>
+            <p class="micro">Watermark — 22% white</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ 04 · LOGO MISUSE ══════════════ -->
+<section class="spread" id="s04">
+  <span class="spread-no" aria-hidden="true">04</span>
+  <div class="wrap">
+    <header class="head">
+      <p class="eyebrow">04 — Identity guardrails</p>
+      <h2>Logo misuse</h2>
+      <hr class="rule">
+      <p class="lede" style="max-width:60ch">
+        The mark's authority comes from consistency. Every example on the right
+        breaks a rule that has already been set.
+      </p>
+    </header>
+
+    <div class="grid g4">
+      <div class="dd is-do">
+        <div class="vis"><svg viewBox="0 0 140 120" width="72" height="62" fill="none" stroke="#FFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><use href="#mark"/></svg></div>
+        <div class="cap2"><span class="mark">DO</span><span>Single-weight white outline on a near-black ground.</span></div>
+      </div>
+      <div class="dd is-no">
+        <div class="vis"><svg viewBox="0 0 140 120" width="72" height="62" fill="none" stroke="#3B8EF0" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><use href="#mark"/></svg></div>
+        <div class="cap2"><span class="mark">DON'T</span><span>Never colour the mark blue. Blue is for accents, never identity.</span></div>
+      </div>
+      <div class="dd is-no">
+        <div class="vis">
+          <svg viewBox="0 0 140 120" width="72" height="62" stroke="none" style="filter:drop-shadow(0 0 10px rgba(59,142,240,.6))"><use href="#mark" fill="#7FB6F5"/></svg>
+        </div>
+        <div class="cap2"><span class="mark">DON'T</span><span>Never fill the mark or apply the chrome gradient to it.</span></div>
+      </div>
+      <div class="dd is-no">
+        <div class="vis" style="background:linear-gradient(120deg,#C2432E,#F2B23C)">
+          <svg viewBox="0 0 140 120" width="72" height="62" fill="none" stroke="#FFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><use href="#mark"/></svg>
+        </div>
+        <div class="cap2"><span class="mark">DON'T</span><span>Never place the mark on a chromatic or photographic background.</span></div>
+      </div>
+      <div class="dd is-no">
+        <div class="vis"><svg viewBox="0 0 140 120" width="104" height="46" preserveAspectRatio="none" fill="none" stroke="#FFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><use href="#mark"/></svg></div>
+        <div class="cap2"><span class="mark">DON'T</span><span>Never stretch, squash, or distort the proportions.</span></div>
+      </div>
+      <div class="dd is-no">
+        <div class="vis"><svg viewBox="0 0 140 120" width="72" height="62" fill="none" stroke="#FFF" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"><use href="#mark"/></svg></div>
+        <div class="cap2"><span class="mark">DON'T</span><span>Never thicken the stroke. The line weight is fixed to the mark size.</span></div>
+      </div>
+      <div class="dd is-no">
+        <div class="vis">
+          <div class="lockup" style="align-items:center;gap:2px">
+            <svg viewBox="0 0 140 120" width="52" height="45" fill="none" stroke="#FFF" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><use href="#mark"/></svg>
+            <span class="wordmark" style="font-size:12px;letter-spacing:0">ArmoSpectra</span>
+          </div>
+        </div>
+        <div class="cap2"><span class="mark">DON'T</span><span>Never remove the wordmark tracking or close the stack gap.</span></div>
+      </div>
+      <div class="dd is-no">
+        <div class="vis">
+          <div class="lockup lockup--h" style="gap:10px">
+            <svg viewBox="0 0 140 120" width="46" height="39" fill="none" stroke="#FFF" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"><use href="#mark"/></svg>
+            <span style="font-family:Georgia,serif;font-size:15px;color:#fff;letter-spacing:.02em">ArmoSpectra</span>
+          </div>
+        </div>
+        <div class="cap2"><span class="mark">DON'T</span><span>Never reset the wordmark in another typeface.</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ 05 · COLOUR ══════════════ -->
+<section class="spread spread--raise" id="s05">
+  <span class="spread-no" aria-hidden="true">05</span>
+  <div class="wrap">
+    <header class="head">
+      <p class="eyebrow">05 — Colour system</p>
+      <h2>Near-black ground.<br>One <span class="chrome">chrome-blue</span> accent.</h2>
+      <hr class="rule">
+      <p class="lede" style="max-width:64ch">
+        Ten values. Four carry the ground, five carry the accent, and the neutrals
+        are deliberately biased cool toward the accent so no grey reads as unconsidered.
+        There is no second chromatic family.
+      </p>
+    </header>
+
+    <div class="stack" style="gap:calc(var(--u)*5)">
+      <div>
+        <h4 class="dim" style="margin-bottom:calc(var(--u)*2)">Foundation — the ground</h4>
+        <div class="grid g5">
+          <div class="swatch"><span class="chip" style="background:#050507"></span><span class="meta"><span class="name">Ink 900</span><span class="hex">#050507</span><span class="use">Page base, deepest corners</span></span></div>
+          <div class="swatch"><span class="chip" style="background:#0B0B0F"></span><span class="meta"><span class="name">Ink 800</span><span class="hex">#0B0B0F</span><span class="use">Primary surface, cards</span></span></div>
+          <div class="swatch"><span class="chip" style="background:#131318"></span><span class="meta"><span class="name">Ink 700</span><span class="hex">#131318</span><span class="use">Raised panel, inputs</span></span></div>
+          <div class="swatch"><span class="chip" style="background:#1C1C22"></span><span class="meta"><span class="name">Ink 600</span><span class="hex">#1C1C22</span><span class="use">Hairlines, borders</span></span></div>
+          <div class="swatch"><span class="chip" style="background:#26262E"></span><span class="meta"><span class="name">Ink 500</span><span class="hex">#26262E</span><span class="use">Disabled, inert states</span></span></div>
+        </div>
+      </div>
+
+      <div>
+        <h4 class="dim" style="margin-bottom:calc(var(--u)*2)">Accent — the only chromatic family</h4>
+        <div class="grid g5">
+          <div class="swatch"><span class="chip" style="background:#BFDBFF"></span><span class="meta"><span class="name">Blue 300</span><span class="hex">#BFDBFF</span><span class="use">Chrome highlight stop, hover text</span></span></div>
+          <div class="swatch"><span class="chip" style="background:#6BB4FF"></span><span class="meta"><span class="name">Blue 400</span><span class="hex">#6BB4FF</span><span class="use">Inline emphasis, eyebrows, icon glow</span></span></div>
+          <div class="swatch"><span class="chip" style="background:#3B8EF0"></span><span class="meta"><span class="name">Blue 500</span><span class="hex">#3B8EF0</span><span class="use">Primary accent, CTA border, rules</span></span></div>
+          <div class="swatch"><span class="chip" style="background:#1F63C4"></span><span class="meta"><span class="name">Blue 600</span><span class="hex">#1F63C4</span><span class="use">Gradient mid, divider glow</span></span></div>
+          <div class="swatch"><span class="chip" style="background:#0E2E5C"></span><span class="meta"><span class="name">Blue 800</span><span class="hex">#0E2E5C</span><span class="use">Arc motif, ambient wash</span></span></div>
+        </div>
+      </div>
+
+      <div>
+        <h4 class="dim" style="margin-bottom:calc(var(--u)*2)">Neutrals — cool-biased, not pure grey</h4>
+        <div class="grid g4">
+          <div class="swatch"><span class="chip" style="background:#FFFFFF"></span><span class="meta"><span class="name">White</span><span class="hex">#FFFFFF</span><span class="use">Headlines, logo, capability labels</span></span></div>
+          <div class="swatch"><span class="chip" style="background:#D8DADE"></span><span class="meta"><span class="name">Gray 200</span><span class="hex">#D8DADE</span><span class="use">Body copy</span></span></div>
+          <div class="swatch"><span class="chip" style="background:#9AA0A8"></span><span class="meta"><span class="name">Gray 400</span><span class="hex">#9AA0A8</span><span class="use">Secondary, captions, metadata</span></span></div>
+          <div class="swatch"><span class="chip" style="background:#5A5F66"></span><span class="meta"><span class="name">Gray 600</span><span class="hex">#5A5F66</span><span class="use">Photo mid-tones, slide footers</span></span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ 06 · COLOUR BEHAVIOUR ══════════════ -->
+<section class="spread" id="s06">
+  <span class="spread-no" aria-hidden="true">06</span>
+  <div class="wrap">
+    <header class="head">
+      <p class="eyebrow">06 — Colour behaviour</p>
+      <h2>Blue is a scalpel,<br>not a paint bucket</h2>
+      <hr class="rule">
+    </header>
+
+    <div class="split">
+      <div class="stack" style="gap:calc(var(--u)*4)">
+        <div class="stack" style="gap:calc(var(--u)*2)">
+          <h3>Coverage ratio</h3>
+          <div class="ratio">
+            <span style="background:#0B0B0F;width:80%;color:#9AA0A8">80% BLACK</span>
+            <span style="background:#D8DADE;width:15%;color:#0B0B0F">15% WHITE</span>
+            <span style="background:#3B8EF0;width:5%;color:#050507">5%</span>
+          </div>
+          <p class="dim" style="font-size:13px">
+            Target pixel coverage on any ArmoSpectra surface. Blue at roughly one part
+            in twenty. <span style="color:var(--white)">If a layout reads as blue, it is wrong</span> —
+            reduce the accent before adjusting anything else.
+          </p>
+        </div>
+
+        <div class="stack" style="gap:calc(var(--u)*2)">
+          <h3>Accent allocation</h3>
+          <dl class="kv">
+            <dt>Always blue</dt><dd>Eyebrows and kickers, inline emphasis in a subhead, section rules, divider glow, CTA border, focus rings, active nav state.</dd>
+            <dt>Never blue</dt><dd>The logo. Body copy. Headline base weight. Icon strokes in default state. Large background fills.</dd>
+            <dt>One per view</dt><dd>A single primary CTA per screen or spread. Secondary actions take the ghost variant in <code>--ink-500</code>.</dd>
+          </dl>
+        </div>
+
+        <div class="note">
+          Semantic colours for product UI (success, warning, critical) are a separate,
+          desaturated set introduced only when a real interface needs them. They are
+          not part of the brand accent and never appear in marketing surfaces.
+        </div>
+      </div>
+
+      <div class="stack" style="gap:calc(var(--u)*3)">
+        <h3>Contrast on <code>#0B0B0F</code></h3>
+        <div class="stack-sm" style="gap:12px">
+          <div class="bar"><span class="nm">White</span><span class="track"><span class="fill" style="width:93%"></span></span><span class="val pass">19.6</span></div>
+          <div class="bar"><span class="nm">Gray 200</span><span class="track"><span class="fill" style="width:67%"></span></span><span class="val pass">14.0</span></div>
+          <div class="bar"><span class="nm">Blue 300</span><span class="track"><span class="fill" style="width:66%"></span></span><span class="val pass">13.8</span></div>
+          <div class="bar"><span class="nm">Blue 400</span><span class="track"><span class="fill" style="width:43%"></span></span><span class="val pass">8.98</span></div>
+          <div class="bar"><span class="nm">Gray 400</span><span class="track"><span class="fill" style="width:35%"></span></span><span class="val pass">7.45</span></div>
+          <div class="bar"><span class="nm">Blue 500</span><span class="track"><span class="fill" style="width:28%"></span></span><span class="val pass">5.91</span></div>
+          <div class="bar"><span class="nm">Blue 600</span><span class="track"><span class="fill" style="width:16%"></span></span><span class="val warn">3.41</span></div>
+          <div class="bar"><span class="nm">Blue 800</span><span class="track"><span class="fill" style="width:7%"></span></span><span class="val warn">1.46</span></div>
+        </div>
+        <p class="micro">WCAG 2.1 contrast ratios, computed against surface <code>#0B0B0F</code>. AA body text needs 4.5.</p>
+
+        <div class="capline" style="margin:calc(var(--u)*2) 0"></div>
+
+        <h3>Two rules this produces</h3>
+        <div class="grid g2" style="gap:calc(var(--u)*2)">
+          <div class="dd is-no">
+            <div class="vis"><span style="display:inline-flex;align-items:center;height:44px;padding:0 24px;border-radius:9999px;background:#3B8EF0;color:#fff;font-size:12px;font-weight:500;letter-spacing:.28em;text-transform:uppercase">Contact</span></div>
+            <div class="cap2"><span class="mark">DON'T</span><span>White on Blue 500 measures <b style="color:#E8A196">3.33:1</b> — it fails AA. This is the technical reason solid-fill blue buttons are off-brand.</span></div>
+          </div>
+          <div class="dd is-do">
+            <div class="vis"><span class="btn btn--sm">Contact</span></div>
+            <div class="cap2"><span class="mark">DO</span><span>Outlined pill: white text stays at <b style="color:#BFDBFF">19.6:1</b> and the blue does structural work at the border.</span></div>
+          </div>
+        </div>
+        <p class="micro">If a filled blue chip is unavoidable, set its label in Ink 900 — that pairing measures 6.12:1.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ 07 · TYPOGRAPHY ══════════════ -->
+<section class="spread spread--raise" id="s07">
+  <span class="spread-no" aria-hidden="true">07</span>
+  <div class="wrap">
+    <header class="head">
+      <p class="eyebrow">07 — Typography</p>
+      <h2>Two brand faces.<br>Hard cap.</h2>
+      <hr class="rule">
+      <p class="lede" style="max-width:64ch">
+        A geometric sans carries everything. A script face appears exactly once per
+        composition, only for the founder's name. A third brand face is not a stylistic
+        choice we are reserving — it is a rule violation.
+      </p>
+    </header>
+
+    <div class="stack" style="gap:calc(var(--u)*5)">
+      <div class="split" style="gap:calc(var(--u)*6)">
+        <div class="spec">
+          <p class="eyebrow">Primary — geometric sans</p>
+          <p class="sample" style="font-size:clamp(46px,7vw,96px);font-weight:800;letter-spacing:-.01em">Aa</p>
+          <p class="label" style="font-size:15px;letter-spacing:.06em">Montserrat</p>
+          <p class="dim" style="font-size:13px">Weights in use: 200 · 300 · 400 · 500 · 800 · 900</p>
+          <p class="dim" style="font-size:13px">Fallback stack: <code>Archivo</code>, <code>Helvetica Neue</code>, <code>system-ui</code></p>
+          <p style="font-size:15px;font-weight:300;color:var(--gray-200);margin-top:8px">ABCDEFGHIJKLMNOPQRSTUVWXYZ</p>
+          <p style="font-size:15px;font-weight:300;color:var(--gray-400)">abcdefghijklmnopqrstuvwxyz 0123456789</p>
+        </div>
+
+        <div class="spec">
+          <p class="eyebrow">Signature — script</p>
+          <p class="sample" style="font-family:var(--font-script);font-size:clamp(52px,8vw,104px);line-height:1.1">Armo</p>
+          <p class="label" style="font-size:15px;letter-spacing:.06em">Great Vibes</p>
+          <p class="dim" style="font-size:13px">One weight. One use: the principal's name.</p>
+          <p class="dim" style="font-size:13px">Fallback stack: <code>Snell Roundhand</code>, <code>cursive</code></p>
+          <div class="note" style="margin-top:8px;font-size:12.5px">
+            Never set headlines, quotes, taglines, or decorative flourishes in the script face.
+            One instance per composition, always paired with the
+            <span class="accent">CEO OF ARMOSPECTRA</span> eyebrow above it.
+          </div>
+        </div>
+      </div>
+
+      <div class="capline"></div>
+
+      <div class="split" style="gap:calc(var(--u)*6)">
+        <div class="stack" style="gap:calc(var(--u)*2)">
+          <h3>Weight roles</h3>
+          <div class="stack-sm" style="gap:10px">
+            <p style="font-weight:900;font-size:22px;text-transform:uppercase;color:var(--white);letter-spacing:-.005em">900 &nbsp;Display black — spread numerals only</p>
+            <p style="font-weight:800;font-size:22px;text-transform:uppercase;color:var(--white);letter-spacing:-.005em">800 &nbsp;Headlines</p>
+            <p style="font-weight:500;font-size:16px;text-transform:uppercase;letter-spacing:.24em;color:var(--white)">500 &nbsp;Labels · buttons · eyebrows</p>
+            <p style="font-weight:400;font-size:16px;color:var(--gray-200)">400 &nbsp;Body copy and running text</p>
+            <p style="font-weight:300;font-size:18px;color:var(--gray-200)">300 &nbsp;Lede paragraphs and subheads</p>
+            <p style="font-weight:200;font-size:18px;letter-spacing:.32em;text-transform:uppercase;color:var(--white)">200 &nbsp;Wordmark</p>
+          </div>
+        </div>
+
+        <div class="stack" style="gap:calc(var(--u)*2)">
+          <h3>Documentation face</h3>
+          <p class="dim" style="font-size:13.5px">
+            <code>JetBrains Mono</code> appears in specifications, token tables, and code
+            samples — including in this deck. It is a documentation utility, deliberately
+            excluded from the brand faces. It never appears in marketing, social, or
+            client-facing surfaces.
+          </p>
+          <pre><span class="c">/* correct usage */</span>
+<span class="k">--font-display</span>: <span class="v">"Montserrat"</span>;  <span class="c">/* everything */</span>
+<span class="k">--font-script</span> : <span class="v">"Great Vibes"</span>;  <span class="c">/* signature only */</span>
+<span class="k">--font-mono</span>   : <span class="v">"JetBrains Mono"</span>; <span class="c">/* docs only */</span></pre>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ 08 · HIERARCHY ══════════════ -->
+<section class="spread" id="s08">
+  <span class="spread-no" aria-hidden="true">08</span>
+  <div class="wrap">
+    <header class="head">
+      <p class="eyebrow">08 — Scale &amp; hierarchy</p>
+      <h2>Six tiers, always<br>in the same order</h2>
+      <hr class="rule">
+    </header>
+
+    <div class="split" style="gap:calc(var(--u)*6)">
+      <div class="stack" style="gap:calc(var(--u)*3)">
+        <h3>Type scale</h3>
+        <div>
+          <div class="scale-row"><span class="n">84 / 0.94</span><span class="s" style="font-size:40px;font-weight:800;text-transform:uppercase">Display XL</span></div>
+          <div class="scale-row"><span class="n">58 / 0.96</span><span class="s" style="font-size:32px;font-weight:800;text-transform:uppercase">Display L</span></div>
+          <div class="scale-row"><span class="n">40 / 1.00</span><span class="s" style="font-size:26px;font-weight:800;text-transform:uppercase">Display M</span></div>
+          <div class="scale-row"><span class="n">21 / 1.15</span><span class="s" style="font-size:21px;font-weight:800;text-transform:uppercase">Heading</span></div>
+          <div class="scale-row"><span class="n">19 / 1.55</span><span class="s" style="font-size:19px;font-weight:300;text-transform:none">Lede paragraph</span></div>
+          <div class="scale-row"><span class="n">16 / 1.50</span><span class="s" style="font-size:16px;font-weight:400;text-transform:none;color:var(--gray-200)">Body copy</span></div>
+          <div class="scale-row"><span class="n">14 / 1.00</span><span class="s" style="font-size:14px;font-weight:500;letter-spacing:.28em;text-transform:uppercase">Capability label</span></div>
+          <div class="scale-row"><span class="n">13 / 1.45</span><span class="s" style="font-size:13px;font-weight:400;text-transform:none;color:var(--gray-400)">Secondary / caption</span></div>
+          <div class="scale-row"><span class="n">12 / 1.00</span><span class="s" style="font-size:12px;font-weight:500;letter-spacing:.22em;text-transform:uppercase;color:var(--blue-400)">Eyebrow</span></div>
+          <div class="scale-row" style="border-bottom:0"><span class="n">11 / 1.40</span><span class="s micro" style="font-size:11px;color:var(--gray-400)">MICRO / METADATA</span></div>
+        </div>
+        <p class="micro">Sizes in px at 1440&nbsp;pt viewport. Display tiers scale fluidly with <code>clamp()</code>; text tiers are fixed.</p>
+      </div>
+
+      <div class="stack" style="gap:calc(var(--u)*3)">
+        <h3>Hierarchy in place</h3>
+        <div class="card" style="padding:calc(var(--u)*4);gap:calc(var(--u)*2.5)">
+          <div class="lockup lockup--h"><svg viewBox="0 0 140 120" width="40" height="34" fill="none" stroke="#FFF" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><use href="#mark"/></svg><span class="wordmark" style="font-size:10px">ArmoSpectra</span></div>
+          <p style="font-size:clamp(26px,3vw,40px);font-weight:800;text-transform:uppercase;line-height:.96;color:var(--white);margin-top:8px">Build the <span class="chrome">system</span><br>behind your growth.</p>
+          <hr class="rule">
+          <p style="font-size:17px;font-weight:300;color:var(--gray-200)">Growth Operating Systems for <span class="accent">Modern Businesses</span>.</p>
+          <div class="sigblock" style="margin-top:6px">
+            <p class="eyebrow">CEO of ArmoSpectra</p>
+            <span class="sig" style="font-size:34px">Armo</span>
+          </div>
+          <div class="capline" style="margin-top:6px"></div>
+          <p class="dim" style="font-size:13px">Websites, visibility, portals, dashboards, and workflows — <span class="accent">connected into one system</span>.</p>
+          <a class="btn btn--sm" style="align-self:flex-start;margin-top:6px" href="#s09">armospectra.com</a>
+        </div>
+
+        <ol style="margin:0;padding-left:20px;font-size:13px;color:var(--gray-400);line-height:1.6">
+          <li><span style="color:var(--white)">Logo lockup</span> — identity</li>
+          <li><span style="color:var(--white)">Headline</span> — the promise, ~3.5× the next element</li>
+          <li><span style="color:var(--white)">Subhead</span> — category definition, one blue phrase</li>
+          <li><span style="color:var(--white)">Attribution + signature</span> — the human</li>
+          <li><span style="color:var(--white)">Capability list</span> — six equal items, none emphasised</li>
+          <li><span style="color:var(--white)">Summary → CTA</span> — the action</li>
+        </ol>
+        <p class="micro">Tiers separate by whitespace jump or a rule — never by colour alone.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ 09 · GRID & SPACING ══════════════ -->
+<section class="spread spread--raise" id="s09">
+  <span class="spread-no" aria-hidden="true">09</span>
+  <div class="wrap">
+    <header class="head">
+      <p class="eyebrow">09 — Layout grid &amp; spacing</p>
+      <h2>An 8-point rhythm<br>and a 10.4% margin</h2>
+      <hr class="rule">
+    </header>
+
+    <div class="split" style="gap:calc(var(--u)*6)">
+      <div class="stack" style="gap:calc(var(--u)*3)">
+        <h3>Grid</h3>
+        <div class="griddemo">
+          <div class="cols" aria-hidden="true">
+            <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+          </div>
+          <div class="content">
+            <div class="bar2 w1"></div>
+            <div class="bar2 w2"></div>
+            <div class="bar2 w3"></div>
+          </div>
+          <span class="marginlabel">10.4%</span>
+        </div>
+        <dl class="kv">
+          <dt>Columns</dt><dd>12 columns, 16&nbsp;px gutter at desktop. 6 at tablet, 4 at mobile.</dd>
+          <dt>Page margin</dt><dd><code>10.4%</code> of viewport width — inherited directly from the source poster, where the text column starts at 98&nbsp;px on a 940&nbsp;px canvas.</dd>
+          <dt>Text column</dt><dd>Never wider than <code>7 of 12</code> columns when paired with an image; never wider than <code>66ch</code> for running text.</dd>
+          <dt>Alignment</dt><dd>Left-aligned, single column. Centred layouts are reserved for the avatar and the standalone mark.</dd>
+          <dt>Image bleed</dt><dd>Photography bleeds off the right and bottom edges. Copy never overlaps the subject's face or hands.</dd>
+        </dl>
+      </div>
+
+      <div class="stack" style="gap:calc(var(--u)*3)">
+        <h3>Spacing scale — base unit 8&nbsp;px</h3>
+        <div class="stack-sm" style="gap:10px">
+          <div class="sp"><span class="blk" style="width:8px"></span><span class="t">8 · 1u · inline gaps, icon padding</span></div>
+          <div class="sp"><span class="blk" style="width:16px"></span><span class="t">16 · 2u · label to value</span></div>
+          <div class="sp"><span class="blk" style="width:24px"></span><span class="t">24 · 3u · card padding, grid gap</span></div>
+          <div class="sp"><span class="blk" style="width:40px"></span><span class="t">40 · 5u · block separation</span></div>
+          <div class="sp"><span class="blk" style="width:56px"></span><span class="t">56 · 7u · section opener</span></div>
+          <div class="sp"><span class="blk" style="width:72px"></span><span class="t">72 · 9u · major section break</span></div>
+          <div class="sp"><span class="blk" style="width:96px"></span><span class="t">96 · 12u · spread padding</span></div>
+        </div>
+        <p class="micro">Only these seven values. If a gap needs 30&nbsp;px, the composition is wrong, not the scale.</p>
+
+        <div class="capline" style="margin:calc(var(--u)*2) 0"></div>
+
+        <h3>Fixed component metrics</h3>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>Component</th><th class="m">Value</th><th>Note</th></tr></thead>
+            <tbody>
+              <tr><td>Capability row height</td><td class="m">74 px</td><td class="dim">Fixed. Divider sits below each row.</td></tr>
+              <tr><td>Icon box</td><td class="m">44 px</td><td class="dim">Icon drawn at 24–26 px inside it.</td></tr>
+              <tr><td>CTA pill height</td><td class="m">56 px</td><td class="dim">Radius = height ÷ 2.</td></tr>
+              <tr><td>Section rule</td><td class="m">70 × 2 px</td><td class="dim">Precedes subhead and footer tiers.</td></tr>
+              <tr><td>Card radius</td><td class="m">12 px</td><td class="dim">The only radius besides the pill.</td></tr>
+              <tr><td>Hairline</td><td class="m">1 px</td><td class="dim">Gradient, never a flat stroke.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ 10 · GRADIENTS & LIGHT ══════════════ -->
+<section class="spread" id="s10">
+  <span class="spread-no" aria-hidden="true">10</span>
+  <div class="wrap">
+    <header class="head">
+      <p class="eyebrow">10 — Gradients, light &amp; texture</p>
+      <h2>One light source.<br>Upper right.</h2>
+      <hr class="rule">
+      <p class="lede" style="max-width:64ch">
+        Every ArmoSpectra surface is lit from the top right and falls to black toward
+        the lower left. This single decision makes gradients, photography, and the
+        divider glow agree with each other.
+      </p>
+    </header>
+
+    <div class="grid g4" style="margin-bottom:calc(var(--u)*5)">
+      <div class="stack-sm">
+        <div class="gspec gchrome"></div>
+        <p class="label" style="font-size:11px">Chrome — display type</p>
+        <p class="micro">#FFFFFF → #DCE9FF 30% → #7FB6F5 62% → #2E6FD0</p>
+      </div>
+      <div class="stack-sm">
+        <div class="gspec gambient"></div>
+        <p class="label" style="font-size:11px">Ambient — page ground</p>
+        <p class="micro">radial 120% at 75% 0% · #1A1B20 → #050507</p>
+      </div>
+      <div class="stack-sm">
+        <div class="gspec gdiv" style="height:120px;background:var(--ink-800);display:flex;align-items:center;padding:0 16px">
+          <span style="display:block;width:100%;height:1px;background:var(--divider)"></span>
+        </div>
+        <p class="label" style="font-size:11px">Divider — hairline glow</p>
+        <p class="micro">90° · #1C1C22 → #3B8EF0 85% → transparent</p>
+      </div>
+      <div class="stack-sm">
+        <div class="gspec gglow"></div>
+        <p class="label" style="font-size:11px">Bloom — ambient accent</p>
+        <p class="micro">radial 60% at 50% 100% · rgba(59,142,240,.45)</p>
+      </div>
+    </div>
+
+    <div class="split" style="gap:calc(var(--u)*6)">
+      <div class="stack" style="gap:calc(var(--u)*3)">
+        <h3>Chrome type rules</h3>
+        <div class="grid g2" style="gap:calc(var(--u)*2)">
+          <div class="dd is-do">
+            <div class="vis"><p style="font-size:26px;font-weight:800;text-transform:uppercase;line-height:1;text-align:center">Build the<br><span class="chrome">system</span></p></div>
+            <div class="cap2"><span class="mark">DO</span><span>One or two words per headline, at 48&nbsp;px or larger.</span></div>
+          </div>
+          <div class="dd is-no">
+            <div class="vis"><p class="chrome" style="font-size:22px;font-weight:800;text-transform:uppercase;line-height:1.05;text-align:center">Build the system behind your growth</p></div>
+            <div class="cap2"><span class="mark">DON'T</span><span>Never chrome an entire headline — the emphasis cancels itself.</span></div>
+          </div>
+        </div>
+        <ul style="font-size:13px;color:var(--gray-400)">
+          <li>Chrome is for display type only. Never on body copy, buttons, icons, or the logo.</li>
+          <li>Minimum size 48&nbsp;px — below that the four gradient stops compress into mud.</li>
+          <li>Always paired with a <code>drop-shadow</code> glow at roughly 30% opacity, never a hard stroke.</li>
+          <li>Always declare a solid fallback colour (<code>#BFDBFF</code>) behind the clip for renderers that drop <code>background-clip</code>.</li>
+        </ul>
+      </div>
+
+      <div class="stack" style="gap:calc(var(--u)*3)">
+        <h3>Light &amp; texture</h3>
+        <dl class="kv">
+          <dt>Key light</dt><dd>Upper right, always. Rim light on the subject's shoulder and hair.</dd>
+          <dt>Falloff</dt><dd>To pure <code>#050507</code> in the lower-left quadrant. Corners go black.</dd>
+          <dt>Grain</dt><dd>Fractal noise at <code>2–4%</code> opacity over any large gradient field. Not decoration — it prevents visible banding on dark 8-bit displays.</dd>
+          <dt>Shadows</dt><dd>None on UI elements. Depth comes from the ground gradient and hairlines, never from drop shadows on cards.</dd>
+          <dt>Glass</dt><dd>No glassmorphism, no blur panels, no frosted overlays.</dd>
+        </dl>
+        <div class="note">
+          The grain layer on this page is a <code>feTurbulence</code> SVG at 3.5% opacity,
+          fixed to the viewport. Reproduce it on any surface with a gradient larger
+          than roughly 400&nbsp;px in either dimension.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ 11 · PHOTOGRAPHY ══════════════ -->
+<section class="spread spread--raise" id="s11">
+  <span class="spread-no" aria-hidden="true">11</span>
+  <div class="wrap">
+    <header class="head">
+      <p class="eyebrow">11 — Photography direction</p>
+      <h2>Monochrome.<br>Editorial. <span class="chrome">Black.</span></h2>
+      <hr class="rule">
+      <p class="lede" style="max-width:64ch">
+        Photography is not illustration of a service — it is the presence of a principal.
+        Desaturated, high-contrast, black wardrobe, subject dissolving into the ground.
+        The panels below are tonal treatment studies, not final imagery.
+      </p>
+    </header>
+
+    <div class="grid g4" style="margin-bottom:calc(var(--u)*5)">
+      <div class="photo"><span class="ptag ok">ON BRAND — graded</span></div>
+      <div class="photo" style="filter:grayscale(1) contrast(1.34) brightness(.82)"><span class="ptag ok">ON BRAND — deeper key</span></div>
+      <div class="photo photo--bad1"><span class="ptag no">OFF — colour grade</span></div>
+      <div class="photo photo--bad2"><span class="ptag no">OFF — high-key studio</span></div>
+    </div>
+
+    <div class="split" style="gap:calc(var(--u)*6)">
+      <div class="stack" style="gap:calc(var(--u)*3)">
+        <h3>Grading specification</h3>
+        <div class="stack-sm">
+          <p class="label" style="font-size:11px">Target tonal ramp</p>
+          <div class="ramp">
+            <i style="background:#050507"></i><i style="background:#0E0F12"></i><i style="background:#1A1C20"></i>
+            <i style="background:#2A2D33"></i><i style="background:#40444B"></i><i style="background:#5A5F66"></i>
+            <i style="background:#7C8189"></i><i style="background:#A2A7AE"></i><i style="background:#C9CCD1"></i>
+            <i style="background:#FFFFFF"></i>
+          </div>
+          <p class="micro">Blacks crushed to #050507. Highlights clip to white only on the rim. Mid-tones sit low.</p>
+        </div>
+        <dl class="kv">
+          <dt>Saturation</dt><dd>0% with a faint cool cast permitted. Never a warm cast.</dd>
+          <dt>Contrast</dt><dd>High. Roughly +28% over a neutral grade.</dd>
+          <dt>Wardrobe</dt><dd>All black. The subject merges with the ground at the frame edge.</dd>
+          <dt>Cutout</dt><dd>Soft-edge feather into the background. Never a hard mask, never a visible outline.</dd>
+          <dt>Framing</dt><dd>Full or three-quarter body. Generous headroom. Subject occupies the right ~55% of a vertical layout.</dd>
+          <dt>Direction</dt><dd>Confident and relaxed. Direct-to-camera or slightly off-axis. Never mid-gesture, never a laugh.</dd>
+        </dl>
+      </div>
+
+      <div class="stack" style="gap:calc(var(--u)*3)">
+        <h3>Subject matter</h3>
+        <div class="grid g2" style="gap:calc(var(--u)*2)">
+          <div class="card"><p class="label">Principal portraiture</p><p class="dim" style="font-size:12.5px">The founder. The primary and default image class across every surface.</p></div>
+          <div class="card"><p class="label">Environment</p><p class="dim" style="font-size:12.5px">Architectural interiors, glass, structure. Empty of people. Same grade.</p></div>
+          <div class="card"><p class="label">Interface capture</p><p class="dim" style="font-size:12.5px">Portals and dashboards shown in the brand's own dark UI. Never a light-mode screenshot.</p></div>
+          <div class="card"><p class="label">Abstract structure</p><p class="dim" style="font-size:12.5px">Long-exposure light, contour, orbit. Used sparingly behind type.</p></div>
+        </div>
+
+        <h3 style="margin-top:calc(var(--u)*2)">Never</h3>
+        <ul style="font-size:13px;color:var(--gray-400)">
+          <li>Colour portraits or colour-graded environments</li>
+          <li>White, cream, or studio-cyclorama backdrops</li>
+          <li>Stock-photo staging: handshakes, whiteboards, laptop-and-coffee, pointing at charts</li>
+          <li>Groups arranged for the camera, or any image with more than one subject</li>
+          <li>Hard-masked cutouts with a visible edge against the black</li>
+          <li>Any image that would still read as on-brand if it were someone else's brand</li>
+        </ul>
+        <div class="note">
+          Photography carries the founder-led attribute. Where no principal image exists
+          for a surface, use environment or abstract structure — never substitute stock people.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ 12 · ICONOGRAPHY ══════════════ -->
+<section class="spread" id="s12">
+  <span class="spread-no" aria-hidden="true">12</span>
+  <div class="wrap">
+    <header class="head">
+      <p class="eyebrow">12 — Iconography</p>
+      <h2>Outline only.<br>1.5&nbsp;px. No fills.</h2>
+      <hr class="rule">
+    </header>
+
+    <div class="icons" style="margin-bottom:calc(var(--u)*5)">
+      <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="#FFF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><use href="#i-visibility"/></svg><span class="nm">Visibility</span></div>
+      <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="#FFF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><use href="#i-capture"/></svg><span class="nm">Capture</span></div>
+      <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="#FFF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><use href="#i-followup"/></svg><span class="nm">Follow-up</span></div>
+      <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="#FFF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><use href="#i-portals"/></svg><span class="nm">Portals</span></div>
+      <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="#FFF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><use href="#i-automation"/></svg><span class="nm">Automation</span></div>
+      <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="#FFF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><use href="#i-ai"/></svg><span class="nm">AI Readiness</span></div>
+    </div>
+
+    <div class="split" style="gap:calc(var(--u)*6)">
+      <div class="stack" style="gap:calc(var(--u)*3)">
+        <h3>Construction</h3>
+        <div class="icongrid">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#6BB4FF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><use href="#i-capture"/></svg>
+        </div>
+        <dl class="kv">
+          <dt>Canvas</dt><dd><code>24 × 24</code> viewBox, square. Live area <code>20 × 20</code> with 2&nbsp;px of padding on all sides.</dd>
+          <dt>Stroke</dt><dd><code>1.5</code> units, uniform. Never varies within an icon, never varies between icons.</dd>
+          <dt>Terminals</dt><dd><code>stroke-linecap: round</code>, <code>stroke-linejoin: round</code>.</dd>
+          <dt>Geometry</dt><dd>Built from circles, rectangles, and straight runs. Curves are circular arcs, not freehand.</dd>
+          <dt>Fill</dt><dd><code>none</code>, without exception. The one permitted solid is a dot terminal under 2.5&nbsp;units.</dd>
+          <dt>Colour</dt><dd>White at rest. <code>#6BB4FF</code> when the icon marks an active or accented state.</dd>
+        </dl>
+      </div>
+
+      <div class="stack" style="gap:calc(var(--u)*3)">
+        <h3>States</h3>
+        <div class="grid g3" style="gap:calc(var(--u)*2)">
+          <div class="card" style="align-items:center;gap:12px">
+            <svg viewBox="0 0 24 24" width="34" height="34" fill="none" stroke="#FFF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><use href="#i-portals"/></svg>
+            <p class="micro">REST — white</p>
+          </div>
+          <div class="card" style="align-items:center;gap:12px">
+            <svg viewBox="0 0 24 24" width="34" height="34" fill="none" stroke="#6BB4FF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="filter:drop-shadow(0 0 10px rgba(59,142,240,.55))"><use href="#i-portals"/></svg>
+            <p class="micro">ACTIVE — blue + glow</p>
+          </div>
+          <div class="card" style="align-items:center;gap:12px">
+            <svg viewBox="0 0 24 24" width="34" height="34" fill="none" stroke="#5A5F66" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><use href="#i-portals"/></svg>
+            <p class="micro">INERT — gray 600</p>
+          </div>
+        </div>
+
+        <h3 style="margin-top:calc(var(--u)*2)">Guardrails</h3>
+        <div class="grid g2" style="gap:calc(var(--u)*2)">
+          <div class="dd is-no">
+            <div class="vis"><svg viewBox="0 0 24 24" width="46" height="46" stroke="none" fill="#3B8EF0"><use href="#i-automation"/></svg></div>
+            <div class="cap2"><span class="mark">DON'T</span><span>No solid or duotone fills.</span></div>
+          </div>
+          <div class="dd is-no">
+            <div class="vis"><span style="width:52px;height:52px;border-radius:12px;background:#1F63C4;display:flex;align-items:center;justify-content:center"><svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="#FFF" stroke-width="1.5"><use href="#i-automation"/></svg></span></div>
+            <div class="cap2"><span class="mark">DON'T</span><span>No app-tile containers behind icons.</span></div>
+          </div>
+        </div>
+        <p class="micro">Extending the set: match the 24&nbsp;px canvas, 1.5 stroke, and round terminals. If a new icon needs a fill to read, redraw it — do not grant the exception.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ 13 · MOTIFS ══════════════ -->
+<section class="spread spread--raise" id="s13">
+  <span class="spread-no" aria-hidden="true">13</span>
+  <div class="wrap">
+    <header class="head">
+      <p class="eyebrow">13 — Graphic motifs</p>
+      <h2>Arcs and glowing<br>hairlines</h2>
+      <hr class="rule">
+      <p class="lede" style="max-width:64ch">
+        Two graphic devices, and only two. Both are ambient — they organise the surface
+        without competing for attention.
+      </p>
+    </header>
+
+    <div class="split" style="gap:calc(var(--u)*6)">
+      <div class="stack" style="gap:calc(var(--u)*3)">
+        <h3>Ambient arc motif</h3>
+        <div style="position:relative;height:280px;border:1px solid var(--ink-600);border-radius:10px;overflow:hidden;background:radial-gradient(120% 120% at 78% 0%,#16171B,#050507 72%)">
+          <svg width="440" height="440" viewBox="0 0 440 440" style="position:absolute;top:-120px;right:-110px" aria-hidden="true">
+            <g fill="none" stroke="#0E2E5C" stroke-width="1">
+              <circle cx="220" cy="220" r="90"/><circle cx="220" cy="220" r="130"/>
+              <circle cx="220" cy="220" r="168"/><circle cx="220" cy="220" r="203"/>
+              <circle cx="220" cy="220" r="218"/>
+            </g>
+          </svg>
+          <svg width="380" height="380" viewBox="0 0 380 380" style="position:absolute;bottom:-150px;left:-130px" aria-hidden="true">
+            <g fill="none" stroke="#0E2E5C" stroke-width="1">
+              <circle cx="190" cy="190" r="86"/><circle cx="190" cy="190" r="122"/>
+              <circle cx="190" cy="190" r="155"/><circle cx="190" cy="190" r="184"/>
+            </g>
+          </svg>
+          <p style="position:absolute;left:26px;top:50%;transform:translateY(-50%);font-size:22px;font-weight:800;text-transform:uppercase;line-height:1;color:var(--white)">Type sits<br><span class="chrome">above</span> the arcs</p>
+        </div>
+        <dl class="kv">
+          <dt>Form</dt><dd>Concentric circles, <code>1&nbsp;px</code> stroke, no fill. Radar, orbit, topography.</dd>
+          <dt>Colour</dt><dd><code>#0E2E5C</code> at <code>12–20%</code> effective opacity. Never brighter.</dd>
+          <dt>Placement</dt><dd>Anchored off-canvas at top-right and bottom-left, so only arcs enter the frame — never a whole circle.</dd>
+          <dt>Spacing</dt><dd>Radii step irregularly and tighten toward the outer edge. Evenly spaced rings read as a target, not an orbit.</dd>
+          <dt>Layer</dt><dd>Always behind content. Never crosses a headline, never sits above photography.</dd>
+          <dt>Frequency</dt><dd>At most two anchors per surface. Not every surface needs them.</dd>
+        </dl>
+      </div>
+
+      <div class="stack" style="gap:calc(var(--u)*3)">
+        <h3>Glowing hairline divider</h3>
+        <div class="card" style="padding:calc(var(--u)*4) calc(var(--u)*3)">
+          <div class="cap">
+            <div class="capline"></div>
+            <div class="r"><svg viewBox="0 0 24 24" fill="none" stroke="#FFF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><use href="#i-visibility"/></svg><span>Visibility</span></div>
+            <div class="capline"></div>
+            <div class="r"><svg viewBox="0 0 24 24" fill="none" stroke="#FFF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><use href="#i-capture"/></svg><span>Capture</span></div>
+            <div class="capline"></div>
+            <div class="r"><svg viewBox="0 0 24 24" fill="none" stroke="#FFF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><use href="#i-followup"/></svg><span>Follow-up</span></div>
+            <div class="capline"></div>
+          </div>
+        </div>
+        <dl class="kv">
+          <dt>Gradient</dt><dd><code>90deg, #1C1C22 0%, #3B8EF0 85%, transparent 100%</code></dd>
+          <dt>Reading</dt><dd>The bright end travels down the right edge of a stack, implying a single light source consistent with the page grade.</dd>
+          <dt>Direction</dt><dd>Always left-dark to right-bright. Mirror it only in a right-to-left locale.</dd>
+          <dt>Use</dt><dd>Separating list rows and section tiers. Not for table rules, not for card borders.</dd>
+        </dl>
+        <div class="note">
+          Separation comes from these hairlines and from whitespace — never from
+          drop shadows, never from an added container. If a divider is not enough
+          to separate two things, they need more space, not a box.
+        </div>
+
+        <h3 style="margin-top:calc(var(--u)*2)">Section rule</h3>
+        <div class="row" style="gap:calc(var(--u)*3)">
+          <hr class="rule">
+          <p class="micro">70 × 2 px · #3B8EF0 · glow 40px @ 35%</p>
+        </div>
+        <p class="dim" style="font-size:13px">Precedes a subhead or a footer tier. One per tier, never decorative.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ 14 · VOICE ══════════════ -->
+<section class="spread" id="s14">
+  <span class="spread-no" aria-hidden="true">14</span>
+  <div class="wrap">
+    <header class="head">
+      <p class="eyebrow">14 — Tone of voice</p>
+      <h2>Declarative.<br>Systems vocabulary.</h2>
+      <hr class="rule">
+    </header>
+
+    <div class="split" style="gap:calc(var(--u)*6)">
+      <div class="stack" style="gap:calc(var(--u)*3)">
+        <h3>Voice attributes</h3>
+        <div class="grid g2" style="gap:calc(var(--u)*2)">
+          <div class="card"><p class="label">Imperative</p><p class="dim" style="font-size:12.5px">Headlines are commands. &ldquo;Build the system.&rdquo; Not &ldquo;We help you build.&rdquo;</p></div>
+          <div class="card"><p class="label">Concrete</p><p class="dim" style="font-size:12.5px">Name the component. Portals, workflows, dashboards — things that exist.</p></div>
+          <div class="card"><p class="label">Unhurried</p><p class="dim" style="font-size:12.5px">No urgency devices. No countdowns, no &ldquo;limited spots&rdquo;, no exclamation marks.</p></div>
+          <div class="card"><p class="label">Accountable</p><p class="dim" style="font-size:12.5px">First person singular where the principal is speaking. No corporate &ldquo;we&rdquo; hiding a solo decision.</p></div>
+        </div>
+
+        <h3 style="margin-top:calc(var(--u)*2)">Mechanics</h3>
+        <dl class="kv">
+          <dt>Sentences</dt><dd>Short. Mix one-line punches with two- or three-sentence runs.</dd>
+          <dt>Headlines</dt><dd>Uppercase, under 10 words, one emphasis word in chrome.</dd>
+          <dt>Body</dt><dd>Sentence case. Active voice. Second person.</dd>
+          <dt>Numbers</dt><dd>Only measured ones, with the source named. Never a rounded impression.</dd>
+          <dt>Banned</dt><dd>Exclamation marks, emoji, &ldquo;unlock&rdquo;, &ldquo;supercharge&rdquo;, &ldquo;game-changing&rdquo;, &ldquo;revolutionise&rdquo;, &ldquo;seamless&rdquo;, &ldquo;solutions&rdquo; as a standalone noun.</dd>
+        </dl>
+      </div>
+
+      <div class="stack" style="gap:calc(var(--u)*3)">
+        <h3>Rewrites</h3>
+
+        <div class="dd is-no" style="border-radius:10px">
+          <div class="cap2" style="border-top:0"><span class="mark">OFF</span><span style="color:var(--gray-400)">&ldquo;We're a full-service digital agency offering cutting-edge solutions to supercharge your online presence!&rdquo;</span></div>
+        </div>
+        <div class="dd is-do" style="border-radius:10px">
+          <div class="cap2" style="border-top:0"><span class="mark">ON</span><span style="color:var(--white)">&ldquo;Your marketing runs across six tools that don't talk to each other. We connect them into one system.&rdquo;</span></div>
+        </div>
+
+        <div class="dd is-no" style="border-radius:10px;margin-top:8px">
+          <div class="cap2" style="border-top:0"><span class="mark">OFF</span><span style="color:var(--gray-400)">&ldquo;Let us help you unlock your growth potential with our proven methodology.&rdquo;</span></div>
+        </div>
+        <div class="dd is-do" style="border-radius:10px">
+          <div class="cap2" style="border-top:0"><span class="mark">ON</span><span style="color:var(--white)">&ldquo;Build the system behind your growth.&rdquo;</span></div>
+        </div>
+
+        <div class="dd is-no" style="border-radius:10px;margin-top:8px">
+          <div class="cap2" style="border-top:0"><span class="mark">OFF</span><span style="color:var(--gray-400)">&ldquo;Our lead gen services deliver high-quality leads at scale.&rdquo;</span></div>
+        </div>
+        <div class="dd is-do" style="border-radius:10px">
+          <div class="cap2" style="border-top:0"><span class="mark">ON</span><span style="color:var(--white)">&ldquo;Capture holds what visibility earns. Follow-up makes sure nothing waits.&rdquo;</span></div>
+        </div>
+
+        <div class="note" style="margin-top:calc(var(--u)*2)">
+          Test before publishing: does the sentence name something that exists, could
+          it have been written by any other agency, and does it survive being read aloud
+          without an exclamation mark? Three yeses in the wrong direction means rewrite.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ 15 · MESSAGING ══════════════ -->
+<section class="spread spread--raise" id="s15">
+  <span class="spread-no" aria-hidden="true">15</span>
+  <div class="wrap">
+    <header class="head">
+      <p class="eyebrow">15 — Messaging framework</p>
+      <h2>One master message.<br>Three pillars.</h2>
+      <hr class="rule">
+    </header>
+
+    <div class="pyr" style="margin-bottom:calc(var(--u)*5)">
+      <div class="lvl l1">
+        <p class="eyebrow" style="margin-bottom:8px">Master message</p>
+        <p style="font-size:clamp(18px,2vw,24px);font-weight:800;text-transform:uppercase;line-height:1.1;color:var(--white)">Build the <span class="chrome">system</span> behind your growth.</p>
+      </div>
+      <div class="lvl l2" style="background:transparent;border:0;padding:6px 0">
+        <p class="micro">↓ supported by</p>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:6px;width:100%">
+        <div class="lvl"><p class="eyebrow" style="margin-bottom:6px">Pillar 01</p><p class="label" style="font-size:13px">Connected, not assembled</p><p class="dim" style="font-size:12px;margin-top:6px">The parts were always available. The connection is the product.</p></div>
+        <div class="lvl"><p class="eyebrow" style="margin-bottom:6px">Pillar 02</p><p class="label" style="font-size:13px">Built to be run</p><p class="dim" style="font-size:12px;margin-top:6px">A system you operate, not a dependency on the agency that made it.</p></div>
+        <div class="lvl"><p class="eyebrow" style="margin-bottom:6px">Pillar 03</p><p class="label" style="font-size:13px">Ready for what's next</p><p class="dim" style="font-size:12px;margin-top:6px">Clean data and defined process are the precondition for anything intelligent.</p></div>
+      </div>
+    </div>
+
+    <div class="split" style="gap:calc(var(--u)*6)">
+      <div class="stack" style="gap:calc(var(--u)*3)">
+        <h3>Message by audience</h3>
+        <div class="scroll">
+          <table>
+            <thead><tr><th>Audience</th><th>Lead with</th><th>Entry point</th></tr></thead>
+            <tbody>
+              <tr><td>Owner-operator</td><td class="dim">Nothing waits, and nothing is lost between tools.</td><td class="dim">Capture &amp; Follow-up</td></tr>
+              <tr><td>Marketing lead</td><td class="dim">One architecture instead of six subscriptions.</td><td class="dim">Visibility &amp; Automation</td></tr>
+              <tr><td>Operations lead</td><td class="dim">The client-facing surface stops being email.</td><td class="dim">Portals</td></tr>
+              <tr><td>Investor / partner</td><td class="dim">A repeatable system, not a bespoke engagement.</td><td class="dim">The full six-stage architecture</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3 style="margin-top:calc(var(--u)*2)">Approved short forms</h3>
+        <ul style="font-size:13.5px">
+          <li><span style="color:var(--white)">Tagline</span> — Build the system behind your growth.</li>
+          <li><span style="color:var(--white)">Descriptor</span> — Growth Operating Systems for Modern Businesses.</li>
+          <li><span style="color:var(--white)">One-liner</span> — Websites, visibility, portals, dashboards, and workflows, connected into one system.</li>
+          <li><span style="color:var(--white)">Capability list</span> — Visibility · Capture · Follow-up · Portals · Automation · AI Readiness</li>
+        </ul>
+        <p class="micro">These four strings are fixed. Do not paraphrase them for a specific channel.</p>
+      </div>
+
+      <div class="stack" style="gap:calc(var(--u)*3)">
+        <h3>The proof tier is deliberately empty</h3>
+        <div class="card" style="border-style:dashed;border-color:var(--ink-500);gap:calc(var(--u)*2)">
+          <p class="eyebrow">Proof slot 01 — outcome</p>
+          <div style="height:9px;background:var(--ink-700);border-radius:3px;width:78%"></div>
+          <div style="height:9px;background:var(--ink-700);border-radius:3px;width:56%"></div>
+          <p class="eyebrow" style="margin-top:12px">Proof slot 02 — named client</p>
+          <div style="height:9px;background:var(--ink-700);border-radius:3px;width:64%"></div>
+          <div style="height:9px;background:var(--ink-700);border-radius:3px;width:44%"></div>
+          <p class="eyebrow" style="margin-top:12px">Proof slot 03 — measured result</p>
+          <div style="height:9px;background:var(--ink-700);border-radius:3px;width:70%"></div>
+          <div style="height:9px;background:var(--ink-700);border-radius:3px;width:38%"></div>
+        </div>
+        <div class="note">
+          This framework asserts no metrics, client names, or results, because none are
+          established in the source material. The slots stay visibly empty until real,
+          attributable evidence exists.
+        </div>
+        <dl class="kv">
+          <dt>Rule</dt><dd>A number appears in ArmoSpectra copy only with a named source and a stated period.</dd>
+          <dt>Rule</dt><dd>A client name appears only with written permission on file.</dd>
+          <dt>Rule</dt><dd>Never fill a proof slot with a capability restatement. &ldquo;We automate follow-up&rdquo; is a claim about the offer, not proof.</dd>
+        </dl>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ 16 · WEBSITE ══════════════ -->
+<section class="spread" id="s16">
+  <span class="spread-no" aria-hidden="true">16</span>
+  <div class="wrap">
+    <header class="head">
+      <p class="eyebrow">16 — Website direction</p>
+      <h2>Dark by default.<br>Left-aligned. Quiet.</h2>
+      <hr class="rule">
+    </header>
+
+    <div class="split" style="gap:calc(var(--u)*5);align-items:start">
+      <div class="device">
+        <div class="chrome-bar"><i></i><i></i><i></i><span class="url">armospectra.com</span></div>
+        <div class="site">
+          <div class="sitenav">
+            <div class="lockup lockup--h" style="gap:10px">
+              <svg viewBox="0 0 140 120" width="30" height="26" fill="none" stroke="#FFF" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"><use href="#mark"/></svg>
+              <span class="wordmark" style="font-size:8px">ArmoSpectra</span>
+            </div>
+            <div class="lnk"><span>System</span><span style="color:#6BB4FF">Work</span><span>About</span><span>Contact</span></div>
+          </div>
+          <div class="sitehero">
+            <svg width="300" height="300" viewBox="0 0 300 300" style="position:absolute;top:-110px;right:-70px;opacity:.55" aria-hidden="true">
+              <g fill="none" stroke="#0E2E5C" stroke-width="1"><circle cx="150" cy="150" r="62"/><circle cx="150" cy="150" r="92"/><circle cx="150" cy="150" r="118"/><circle cx="150" cy="150" r="140"/></g>
+            </svg>
+            <p style="font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:#6BB4FF;position:relative">Growth Operating Systems</p>
+            <p style="font-size:clamp(20px,3.4vw,34px);font-weight:800;text-transform:uppercase;line-height:.98;color:#fff;position:relative;max-width:14ch">Build the <span class="chrome">system</span> behind your growth.</p>
+            <span style="display:block;width:52px;height:2px;background:#3B8EF0;box-shadow:0 0 30px rgba(59,142,240,.5)"></span>
+            <p style="font-size:12px;font-weight:300;color:#D8DADE;max-width:38ch;position:relative">Websites, visibility, portals, dashboards, and workflows — <span style="color:#6BB4FF">connected into one system</span>.</p>
+            <span style="display:inline-flex;align-items:center;height:34px;padding:0 20px;border-radius:9999px;border:1px solid #3B8EF0;color:#fff;font-size:9px;letter-spacing:.28em;text-transform:uppercase;align-self:flex-start;margin-top:6px">Start a system</span>
+          </div>
+          <div class="sitecards">
+            <div class="minicard"><svg viewBox="0 0 24 24" fill="none" stroke="#6BB4FF" stroke-width="1.5"><use href="#i-visibility"/></svg><span class="t">Visibility</span><span class="b" style="width:88%"></span><span class="b" style="width:62%"></span></div>
+            <div class="minicard"><svg viewBox="0 0 24 24" fill="none" stroke="#6BB4FF" stroke-width="1.5"><use href="#i-capture"/></svg><span class="t">Capture</span><span class="b" style="width:78%"></span><span class="b" style="width:54%"></span></div>
+            <div class="minicard"><svg viewBox="0 0 24 24" fill="none" stroke="#6BB4FF" stroke-width="1.5"><use href="#i-followup"/></svg><span class="t">Follow-up</span><span class="b" style="width:84%"></span><span class="b" style="width:48%"></span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="stack" style="gap:calc(var(--u)*3)">
+        <h3>Direction</h3>
+        <dl class="kv">
+          <dt>Ground</dt><dd>Radial ambient from upper right over <code>#050507</code>. No light mode.</dd>
+          <dt>Nav</dt><dd>Horizontal lockup left, four uppercase links right at <code>0.18em</code> tracking. Active state in Blue 400. No hamburger above 900&nbsp;px.</dd>
+          <dt>Hero</dt><dd>Eyebrow → headline with one chrome word → section rule → subhead → single outlined CTA. Arc motif behind, never crossing type.</dd>
+          <dt>Sections</dt><dd>Capability cards use the outline icon, a tracked label, and two lines maximum. Separated by glowing hairlines, not boxes.</dd>
+          <dt>Motion</dt><dd>Fade-and-rise on scroll, 400&nbsp;ms, 12&nbsp;px travel, once per element. Respect <code>prefers-reduced-motion</code>. No parallax, no counters, no autoplay video.</dd>
+          <dt>Focus</dt><dd>2&nbsp;px Blue 400 ring at 3&nbsp;px offset on every interactive element.</dd>
+          <dt>Imagery</dt><dd>Principal portrait bleeding off the right edge on the hero. Product surfaces shown in the brand's own dark UI.</dd>
+        </dl>
+        <div class="note">
+          A light mode is a separate project with its own contrast study. Do not
+          auto-invert these tokens — the accent stops working on white and the
+          chrome gradient inverts to mud.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ 17 · SOCIAL ══════════════ -->
+<section class="spread spread--raise" id="s17">
+  <span class="spread-no" aria-hidden="true">17</span>
+  <div class="wrap">
+    <header class="head">
+      <p class="eyebrow">17 — Social applications</p>
+      <h2>The same system,<br>at thumbnail size</h2>
+      <hr class="rule">
+      <p class="lede" style="max-width:64ch">
+        Social is where identities decay first. These templates hold the rules at
+        small sizes: one chrome word, one blue phrase, one rule, one CTA.
+      </p>
+    </header>
+
+    <div class="grid" style="grid-template-columns:1.1fr .62fr 1fr;gap:calc(var(--u)*3);align-items:start;margin-bottom:calc(var(--u)*4)">
+      <div class="stack-sm">
+        <div class="post">
+          <svg width="260" height="260" viewBox="0 0 260 260" style="position:absolute;top:-90px;right:-70px;opacity:.6" aria-hidden="true">
+            <g fill="none" stroke="#0E2E5C" stroke-width="1"><circle cx="130" cy="130" r="56"/><circle cx="130" cy="130" r="84"/><circle cx="130" cy="130" r="108"/><circle cx="130" cy="130" r="126"/></g>
+          </svg>
+          <div class="lockup lockup--h" style="gap:9px;position:relative">
+            <svg viewBox="0 0 140 120" width="28" height="24" fill="none" stroke="#FFF" stroke-width="4.6" stroke-linecap="round" stroke-linejoin="round"><use href="#mark"/></svg>
+            <span class="wordmark" style="font-size:7.5px">ArmoSpectra</span>
+          </div>
+          <div class="stack-sm" style="position:relative;gap:10px">
+            <p style="font-size:clamp(17px,2.6vw,27px);font-weight:800;text-transform:uppercase;line-height:.98;color:#fff">Capture holds<br>what <span class="chrome">visibility</span><br>earns.</p>
+            <span style="display:block;width:44px;height:2px;background:#3B8EF0;box-shadow:0 0 24px rgba(59,142,240,.5)"></span>
+          </div>
+          <p style="font-size:9px;letter-spacing:.24em;text-transform:uppercase;color:#9AA0A8;position:relative">armospectra.com</p>
+        </div>
+        <p class="micro">1:1 — feed post · 1080 × 1080</p>
+      </div>
+
+      <div class="stack-sm">
+        <div class="story">
+          <div class="lockup" style="gap:6px;align-items:flex-start">
+            <svg viewBox="0 0 140 120" width="30" height="26" fill="none" stroke="#FFF" stroke-width="4.6" stroke-linecap="round" stroke-linejoin="round"><use href="#mark"/></svg>
+            <span class="wordmark" style="font-size:7px">ArmoSpectra</span>
+          </div>
+          <div class="stack-sm" style="gap:9px">
+            <p style="font-size:8px;letter-spacing:.2em;text-transform:uppercase;color:#6BB4FF">Stage 03</p>
+            <p style="font-size:19px;font-weight:800;text-transform:uppercase;line-height:1;color:#fff">Nothing<br><span class="chrome">waits.</span></p>
+            <span style="display:block;width:36px;height:2px;background:#3B8EF0"></span>
+            <p style="font-size:9px;font-weight:300;color:#D8DADE;line-height:1.4">Follow-up keeps every captured lead in a conversation.</p>
+          </div>
+          <span style="display:inline-flex;align-items:center;justify-content:center;height:28px;border-radius:9999px;border:1px solid #3B8EF0;color:#fff;font-size:7.5px;letter-spacing:.26em;text-transform:uppercase">Learn more</span>
+        </div>
+        <p class="micro">9:16 — story · 1080 × 1920</p>
+      </div>
+
+      <div class="stack" style="gap:calc(var(--u)*3)">
+        <div class="stack-sm">
+          <div class="banner">
+            <svg width="200" height="200" viewBox="0 0 200 200" style="position:absolute;top:-70px;right:-40px;opacity:.6" aria-hidden="true">
+              <g fill="none" stroke="#0E2E5C" stroke-width="1"><circle cx="100" cy="100" r="44"/><circle cx="100" cy="100" r="66"/><circle cx="100" cy="100" r="85"/><circle cx="100" cy="100" r="97"/></g>
+            </svg>
+            <div class="lockup lockup--h" style="gap:10px;position:relative">
+              <svg viewBox="0 0 140 120" width="26" height="22" fill="none" stroke="#FFF" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"><use href="#mark"/></svg>
+              <span class="wordmark" style="font-size:7px">ArmoSpectra</span>
+            </div>
+            <p style="font-size:clamp(11px,1.5vw,17px);font-weight:800;text-transform:uppercase;line-height:1;color:#fff;position:relative">Growth Operating Systems for <span class="chrome">modern businesses.</span></p>
+          </div>
+          <p class="micro">4:1 — LinkedIn / X banner · 1584 × 396</p>
+        </div>
+
+        <div class="row" style="gap:calc(var(--u)*3);align-items:flex-start">
+          <div class="stack-sm" style="align-items:center">
+            <div class="avatar">
+              <svg viewBox="0 0 140 120" width="56" height="48" fill="none" stroke="#FFF" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"><use href="#mark"/></svg>
+            </div>
+            <p class="micro">Avatar — mark only</p>
+          </div>
+          <div class="stack-sm" style="flex:1;min-width:180px">
+            <p class="label" style="font-size:11px">Avatar rules</p>
+            <ul style="font-size:12.5px;color:var(--gray-400)">
+              <li>Mark only, centred, on <code>#050507</code></li>
+              <li>Mark occupies 58% of the circle diameter</li>
+              <li>Never the full lockup — the wordmark is illegible below 120&nbsp;px</li>
+              <li>No blue ring, no gradient border</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="split" style="gap:calc(var(--u)*6)">
+      <div class="stack" style="gap:calc(var(--u)*2)">
+        <h3>Post architecture</h3>
+        <dl class="kv">
+          <dt>Anchor</dt><dd>Horizontal lockup, top-left, always. It is the only fixed element.</dd>
+          <dt>Statement</dt><dd>Under 9 words, uppercase, one chrome word maximum.</dd>
+          <dt>Rule</dt><dd>44&nbsp;px section rule below the statement. Never above it.</dd>
+          <dt>Close</dt><dd>Either the domain in tracked caps, or one outlined pill. Never both.</dd>
+          <dt>Safe area</dt><dd>Keep all content 12% inside every edge — story UI overlays the top and bottom bands.</dd>
+        </dl>
+      </div>
+      <div class="stack" style="gap:calc(var(--u)*2)">
+        <h3>Social don'ts</h3>
+        <ul style="font-size:13px;color:var(--gray-400)">
+          <li>No emoji, in graphics or in captions</li>
+          <li>No coloured backgrounds, gradients meshes, or duotone photo treatments</li>
+          <li>No carousel where slide 2+ drops the lockup</li>
+          <li>No screenshot of a light-mode interface</li>
+          <li>No text over the subject's face when a portrait is used</li>
+          <li>No platform-specific typeface substitution — if Montserrat is unavailable in a tool, the tool is wrong</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ 18 · PRESENTATION ══════════════ -->
+<section class="spread" id="s18">
+  <span class="spread-no" aria-hidden="true">18</span>
+  <div class="wrap">
+    <header class="head">
+      <p class="eyebrow">18 — Presentation templates</p>
+      <h2>Four slide masters</h2>
+      <hr class="rule">
+      <p class="lede" style="max-width:64ch">16:9. Same margins, same rhythm, same restraint as every other surface.</p>
+    </header>
+
+    <div class="grid g2" style="margin-bottom:calc(var(--u)*4)">
+      <div class="stack-sm">
+        <div class="slide" style="justify-content:space-between;padding:30px">
+          <svg width="240" height="240" viewBox="0 0 240 240" style="position:absolute;top:-88px;right:-56px;opacity:.55" aria-hidden="true">
+            <g fill="none" stroke="#0E2E5C" stroke-width="1"><circle cx="120" cy="120" r="52"/><circle cx="120" cy="120" r="78"/><circle cx="120" cy="120" r="100"/><circle cx="120" cy="120" r="116"/></g>
+          </svg>
+          <div class="lockup" style="gap:6px;position:relative">
+            <svg viewBox="0 0 140 120" width="42" height="36" fill="none" stroke="#FFF" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"><use href="#mark"/></svg>
+            <span class="wordmark" style="font-size:8px">ArmoSpectra</span>
+          </div>
+          <div class="stack-sm" style="gap:8px;position:relative">
+            <p style="font-size:clamp(15px,2.4vw,26px);font-weight:800;text-transform:uppercase;line-height:.98;color:#fff">Build the <span class="chrome">system</span><br>behind your growth.</p>
+            <span style="display:block;width:44px;height:2px;background:#3B8EF0"></span>
+            <p style="font-size:10px;font-weight:300;color:#D8DADE">Growth Operating Systems for Modern Businesses.</p>
+          </div>
+          <div class="foot"><span>ARMOSPECTRA</span><span>01</span></div>
+        </div>
+        <p class="micro">MASTER A — title</p>
+      </div>
+
+      <div class="stack-sm">
+        <div class="slide" style="justify-content:center;align-items:flex-start;padding:30px">
+          <p style="font-family:var(--font-mono);font-size:9px;color:#3B8EF0;letter-spacing:.14em">SECTION 02</p>
+          <p style="font-size:clamp(18px,3vw,34px);font-weight:800;text-transform:uppercase;line-height:.98;color:#fff;margin-top:6px">The <span class="chrome">architecture</span></p>
+          <span style="display:block;width:44px;height:2px;background:#3B8EF0;margin-top:12px"></span>
+          <div class="foot"><span>ARMOSPECTRA</span><span>07</span></div>
+        </div>
+        <p class="micro">MASTER B — section divider</p>
+      </div>
+
+      <div class="stack-sm">
+        <div class="slide" style="justify-content:flex-start;padding:30px;gap:12px">
+          <p style="font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:#6BB4FF">Capabilities</p>
+          <p style="font-size:clamp(13px,1.9vw,20px);font-weight:800;text-transform:uppercase;line-height:1;color:#fff">Six capabilities, one system</p>
+          <span style="display:block;width:38px;height:2px;background:#3B8EF0"></span>
+          <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:6px">
+            <div class="minicard" style="padding:9px;gap:5px"><svg viewBox="0 0 24 24" fill="none" stroke="#6BB4FF" stroke-width="1.5"><use href="#i-visibility"/></svg><span class="t">Visibility</span><span class="b" style="width:80%"></span></div>
+            <div class="minicard" style="padding:9px;gap:5px"><svg viewBox="0 0 24 24" fill="none" stroke="#6BB4FF" stroke-width="1.5"><use href="#i-capture"/></svg><span class="t">Capture</span><span class="b" style="width:66%"></span></div>
+            <div class="minicard" style="padding:9px;gap:5px"><svg viewBox="0 0 24 24" fill="none" stroke="#6BB4FF" stroke-width="1.5"><use href="#i-followup"/></svg><span class="t">Follow-up</span><span class="b" style="width:74%"></span></div>
+          </div>
+          <div class="foot"><span>ARMOSPECTRA</span><span>08</span></div>
+        </div>
+        <p class="micro">MASTER C — content</p>
+      </div>
+
+      <div class="stack-sm">
+        <div class="slide" style="justify-content:flex-start;padding:30px;gap:10px">
+          <p style="font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:#6BB4FF">Chart template</p>
+          <p style="font-size:clamp(12px,1.7vw,18px);font-weight:800;text-transform:uppercase;line-height:1;color:#fff">Metric name — data slot</p>
+          <div style="display:flex;align-items:flex-end;gap:10px;height:96px;margin-top:10px;padding-left:2px;border-left:1px solid #1C1C22;border-bottom:1px solid #1C1C22">
+            <span style="flex:1;height:38%;background:#26262E;border-radius:2px 2px 0 0"></span>
+            <span style="flex:1;height:52%;background:#26262E;border-radius:2px 2px 0 0"></span>
+            <span style="flex:1;height:46%;background:#26262E;border-radius:2px 2px 0 0"></span>
+            <span style="flex:1;height:71%;background:#26262E;border-radius:2px 2px 0 0"></span>
+            <span style="flex:1;height:64%;background:linear-gradient(180deg,#6BB4FF,#1F63C4);border-radius:2px 2px 0 0;box-shadow:0 0 22px rgba(59,142,240,.4)"></span>
+          </div>
+          <p style="font-family:var(--font-mono);font-size:7.5px;color:#5A5F66;letter-spacing:.06em">SOURCE: ____________ · PERIOD: ____________</p>
+          <div class="foot"><span>ARMOSPECTRA</span><span>14</span></div>
+        </div>
+        <p class="micro">MASTER D — data</p>
+      </div>
+    </div>
+
+    <div class="split" style="gap:calc(var(--u)*6)">
+      <div class="stack" style="gap:calc(var(--u)*2)">
+        <h3>Slide rules</h3>
+        <dl class="kv">
+          <dt>Margin</dt><dd><code>7.5%</code> on all sides of a 1920 × 1080 canvas.</dd>
+          <dt>Footer</dt><dd>Wordmark left, slide number right, both in Gray 600 mono at 8&nbsp;px. Absent on Master A only.</dd>
+          <dt>One idea</dt><dd>One headline per slide. If it needs two, it needs two slides.</dd>
+          <dt>Chrome</dt><dd>One chrome word per slide, on Masters A and B only.</dd>
+          <dt>Density</dt><dd>Maximum six bullets, or three cards, or one chart. Never a combination.</dd>
+        </dl>
+      </div>
+      <div class="stack" style="gap:calc(var(--u)*2)">
+        <h3>Chart rules</h3>
+        <dl class="kv">
+          <dt>Bars</dt><dd>Ink 500 for the set. One emphasised bar in the blue gradient — the point of the slide.</dd>
+          <dt>Grid</dt><dd>One baseline and one axis in Ink 600. No gridlines behind the data.</dd>
+          <dt>Numerals</dt><dd><code>tabular-nums</code>, always. Axis labels in Gray 400.</dd>
+          <dt>Source line</dt><dd>Mandatory. A chart without a named source and period does not ship.</dd>
+          <dt>Never</dt><dd>3D, pie charts, gradient-filled backgrounds, drop shadows on bars, or a second accent hue to distinguish series — use lightness within the blue ramp.</dd>
+        </dl>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ 19 · COLLATERAL ══════════════ -->
+<section class="spread spread--raise" id="s19">
+  <span class="spread-no" aria-hidden="true">19</span>
+  <div class="wrap">
+    <header class="head">
+      <p class="eyebrow">19 — Business collateral</p>
+      <h2>Printed, the system<br>gets quieter</h2>
+      <hr class="rule">
+      <p class="lede" style="max-width:64ch">
+        In print the chrome gradient cannot be reproduced and the glow disappears.
+        Collateral drops both and leans on paper, ink density, and the mark.
+      </p>
+    </header>
+
+    <div class="grid" style="grid-template-columns:1fr 1fr .8fr;gap:calc(var(--u)*3);margin-bottom:calc(var(--u)*4)">
+      <div class="stack-sm">
+        <div class="bcard">
+          <svg width="180" height="180" viewBox="0 0 180 180" style="position:absolute;top:-64px;right:-40px;opacity:.6" aria-hidden="true">
+            <g fill="none" stroke="#0E2E5C" stroke-width="1"><circle cx="90" cy="90" r="38"/><circle cx="90" cy="90" r="58"/><circle cx="90" cy="90" r="76"/><circle cx="90" cy="90" r="88"/></g>
+          </svg>
+          <div class="lockup" style="gap:7px;position:relative">
+            <svg viewBox="0 0 140 120" width="40" height="34" fill="none" stroke="#FFF" stroke-width="3.8" stroke-linecap="round" stroke-linejoin="round"><use href="#mark"/></svg>
+            <span class="wordmark" style="font-size:7.5px">ArmoSpectra</span>
+          </div>
+          <div class="stack-sm" style="gap:3px;position:relative">
+            <span style="display:block;width:30px;height:1.5px;background:#3B8EF0;margin-bottom:6px"></span>
+            <p style="font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:#fff">Armo</p>
+            <p style="font-size:7.5px;letter-spacing:.2em;text-transform:uppercase;color:#6BB4FF">CEO of ArmoSpectra</p>
+            <p style="font-family:var(--font-mono);font-size:7px;color:#9AA0A8;margin-top:6px">armospectra.com</p>
+          </div>
+        </div>
+        <p class="micro">Business card — face · 85 × 55 mm</p>
+      </div>
+
+      <div class="stack-sm">
+        <div class="bcard" style="align-items:center;justify-content:center;background:#050507">
+          <svg viewBox="0 0 140 120" width="66" height="57" fill="none" stroke="#FFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><use href="#mark"/></svg>
+        </div>
+        <p class="micro">Business card — reverse · mark only, centred at 58% width</p>
+      </div>
+
+      <div class="stack-sm">
+        <div class="letter">
+          <div class="lockup lockup--h" style="gap:8px">
+            <svg viewBox="0 0 140 120" width="24" height="21" fill="none" stroke="#FFF" stroke-width="5.4" stroke-linecap="round" stroke-linejoin="round"><use href="#mark"/></svg>
+            <span class="wordmark" style="font-size:6px">ArmoSpectra</span>
+          </div>
+          <span style="display:block;width:100%;height:1px;background:var(--divider)"></span>
+          <div class="stack-sm" style="gap:5px;flex:1">
+            <div style="height:5px;width:44%;background:#26262E;border-radius:2px"></div>
+            <div style="height:4px;width:92%;background:#1C1C22;border-radius:2px;margin-top:8px"></div>
+            <div style="height:4px;width:88%;background:#1C1C22;border-radius:2px"></div>
+            <div style="height:4px;width:94%;background:#1C1C22;border-radius:2px"></div>
+            <div style="height:4px;width:70%;background:#1C1C22;border-radius:2px"></div>
+            <div style="height:4px;width:90%;background:#1C1C22;border-radius:2px;margin-top:8px"></div>
+            <div style="height:4px;width:62%;background:#1C1C22;border-radius:2px"></div>
+          </div>
+          <div class="sigblock">
+            <span class="sig" style="font-size:22px">Armo</span>
+            <p style="font-size:6px;letter-spacing:.2em;text-transform:uppercase;color:#6BB4FF">CEO of ArmoSpectra</p>
+          </div>
+          <p style="font-family:var(--font-mono);font-size:5.5px;color:#5A5F66;letter-spacing:.08em">ARMOSPECTRA.COM</p>
+        </div>
+        <p class="micro">Letterhead · A4</p>
+      </div>
+    </div>
+
+    <div class="split" style="gap:calc(var(--u)*6)">
+      <div class="stack" style="gap:calc(var(--u)*3)">
+        <h3>Print specification</h3>
+        <dl class="kv">
+          <dt>Stock</dt><dd>Uncoated black-cored board, 600&nbsp;gsm, for cards. Uncoated 120&nbsp;gsm for letterhead.</dd>
+          <dt>Ink</dt><dd>Mark and wordmark in opaque white screen or white foil. Never white toner on coated stock — it greys.</dd>
+          <dt>Accent</dt><dd>Blue 500 as a spot colour only, on the rule and the eyebrow. Nothing else.</dd>
+          <dt>Finish</dt><dd>Soft-touch matte. Never gloss — the identity is matte-dark and gloss reads as consumer.</dd>
+          <dt>Chrome</dt><dd>Not reproducible in print. Substitute plain white display type or white foil. Never a silver-metallic ink approximation.</dd>
+          <dt>Glow</dt><dd>Omitted entirely. The 70 × 2&nbsp;px rule prints flat.</dd>
+        </dl>
+      </div>
+
+      <div class="stack" style="gap:calc(var(--u)*3)">
+        <h3>Email signature</h3>
+        <div class="card" style="gap:calc(var(--u)*1.5);padding:calc(var(--u)*3)">
+          <div class="lockup lockup--h" style="gap:10px">
+            <svg viewBox="0 0 140 120" width="28" height="24" fill="none" stroke="#FFF" stroke-width="4.8" stroke-linecap="round" stroke-linejoin="round"><use href="#mark"/></svg>
+            <span class="wordmark" style="font-size:8px">ArmoSpectra</span>
+          </div>
+          <span style="display:block;width:100%;height:1px;background:var(--divider);margin:6px 0"></span>
+          <p style="font-size:13px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--white)">Armo</p>
+          <p class="eyebrow">CEO of ArmoSpectra</p>
+          <p class="micro" style="margin-top:6px">armospectra.com</p>
+        </div>
+        <ul style="font-size:13px;color:var(--gray-400)">
+          <li>Horizontal lockup as a single PNG at 2× — never live SVG, mail clients strip it</li>
+          <li>Maximum width 320&nbsp;px; the divider is a 1&nbsp;px background-image gradient with a flat Ink 600 fallback</li>
+          <li>No social icon row, no quote, no legal disclaimer block, no &ldquo;sent from&rdquo; line</li>
+          <li>Dark-background signatures break on light-mode mail clients — set type colours explicitly and never rely on the container</li>
+        </ul>
+        <h3 style="margin-top:calc(var(--u)*2)">Proposal &amp; document covers</h3>
+        <p class="dim" style="font-size:13px">
+          Reuse presentation Master A at A4 portrait. Vertical lockup top-left,
+          document title in the headline tier, one chrome word, section rule,
+          recipient name in the eyebrow tier. Arc motif at the top-right anchor only.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+.field{display:flex;flex-direction:column;gap:8px}
+.input{height:48px;border-radius:8px;border:1px solid var(--ink-600);background:var(--ink-700);
+  color:var(--white);font-family:var(--font-display);font-size:14px;padding:0 16px;width:100%;
+  transition:border-color .2s,box-shadow .2s}
+.input::placeholder{color:var(--gray-600)}
+.input:focus{outline:none;border-color:var(--blue-500);box-shadow:0 0 0 3px rgba(59,142,240,.16)}
+.badge{display:inline-flex;align-items:center;gap:7px;height:26px;padding:0 12px;border-radius:9999px;
+  border:1px solid var(--ink-500);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--gray-200)}
+.badge.on{border-color:rgba(59,142,240,.5);color:var(--blue-300)}
+.badge .dot{width:5px;height:5px;border-radius:50%;background:var(--blue-500);box-shadow:0 0 8px var(--blue-500)}
+.tabs{display:flex;gap:calc(var(--u)*4);border-bottom:1px solid var(--ink-600)}
+.tabs span{padding-bottom:12px;font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--gray-400);position:relative}
+.tabs span.on{color:var(--white)}
+.tabs span.on::after{content:"";position:absolute;left:0;right:0;bottom:-1px;height:2px;background:var(--blue-500);box-shadow:0 0 16px rgba(59,142,240,.6)}
+.stat{border:1px solid var(--ink-600);border-radius:var(--radius-card);background:var(--ink-800);padding:calc(var(--u)*3);display:flex;flex-direction:column;gap:8px}
+.stat .n{font-size:34px;font-weight:800;color:var(--white);line-height:1;font-variant-numeric:tabular-nums}
+.filerow{display:grid;grid-template-columns:22px 1fr auto;gap:calc(var(--u)*2);align-items:center;
+  padding:calc(var(--u)*1.75) 0;border-bottom:1px solid var(--ink-600)}
+.filerow .p{font-family:var(--font-mono);font-size:12.5px;color:var(--gray-200)}
+.filerow .d{font-size:12px;color:var(--gray-400);text-align:right}
+.filerow svg{width:16px;height:16px}
+</style>
+
+<!-- ══════════════ 20 · COMPONENTS ══════════════ -->
+<section class="spread" id="s20">
+  <span class="spread-no" aria-hidden="true">20</span>
+  <div class="wrap">
+    <header class="head">
+      <p class="eyebrow">20 — Component library</p>
+      <h2>The parts, built<br>from the rules</h2>
+      <hr class="rule">
+      <p class="lede" style="max-width:64ch">
+        Every component below is derived — nothing here introduces a value that
+        is not already in the token set. That is the test for adding a new one.
+      </p>
+    </header>
+
+    <div class="grid g3" style="gap:calc(var(--u)*4)">
+      <div class="stack" style="gap:calc(var(--u)*2)">
+        <h4 class="dim">Buttons</h4>
+        <div class="stack-sm" style="gap:12px;align-items:flex-start">
+          <button class="btn" type="button">Start a system</button>
+          <button class="btn btn--sm" type="button">Book a call</button>
+          <button class="btn btn--sm btn--ghost" type="button">View the work</button>
+        </div>
+        <p class="micro">Hover raises the border to Blue 400 and adds the 40&nbsp;px glow. Focus adds a 2&nbsp;px ring at 3&nbsp;px offset.</p>
+      </div>
+
+      <div class="stack" style="gap:calc(var(--u)*2)">
+        <h4 class="dim">Form fields</h4>
+        <div class="field"><label class="micro" for="d-name">FULL NAME</label><input class="input" id="d-name" type="text" placeholder="Enter your name"></div>
+        <div class="field"><label class="micro" for="d-mail">WORK EMAIL</label><input class="input" id="d-mail" type="email" placeholder="name@company.com"></div>
+        <p class="micro">Labels in mono micro tier. Focus ring is Blue 500 at 16% — never a solid glow.</p>
+      </div>
+
+      <div class="stack" style="gap:calc(var(--u)*2)">
+        <h4 class="dim">Status &amp; navigation</h4>
+        <div class="row" style="gap:10px">
+          <span class="badge on"><span class="dot"></span>Live</span>
+          <span class="badge">Draft</span>
+          <span class="badge">Archived</span>
+        </div>
+        <div class="tabs" style="margin-top:10px"><span class="on">System</span><span>Work</span><span>About</span></div>
+        <p class="micro">Active state is the only blue in a navigation row.</p>
+      </div>
+
+      <div class="stack" style="gap:calc(var(--u)*2)">
+        <h4 class="dim">Capability row — signature component</h4>
+        <div class="cap">
+          <div class="capline"></div>
+          <div class="r"><svg viewBox="0 0 24 24" fill="none" stroke="#FFF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><use href="#i-automation"/></svg><span>Automation</span></div>
+          <div class="capline"></div>
+          <div class="r"><svg viewBox="0 0 24 24" fill="none" stroke="#FFF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><use href="#i-ai"/></svg><span>AI Readiness</span></div>
+          <div class="capline"></div>
+        </div>
+        <p class="micro">74&nbsp;px row · 44&nbsp;px icon box · 0.28em label tracking · glowing hairline below each row.</p>
+      </div>
+
+      <div class="stack" style="gap:calc(var(--u)*2)">
+        <h4 class="dim">Content card</h4>
+        <div class="card">
+          <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="#6BB4FF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><use href="#i-portals"/></svg>
+          <p class="label">Portals</p>
+          <p class="dim" style="font-size:12.5px">The client-facing surface. Dashboards where the work becomes visible.</p>
+          <a href="#s20" class="row" style="gap:8px;font-size:11px;letter-spacing:.2em;text-transform:uppercase;margin-top:4px">
+            Read more
+            <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><use href="#i-arrow"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <div class="stack" style="gap:calc(var(--u)*2)">
+        <h4 class="dim">Metric tile</h4>
+        <div class="stat">
+          <p class="eyebrow">Metric label</p>
+          <p class="n">—</p>
+          <p class="micro">SOURCE: ____ · PERIOD: ____</p>
+        </div>
+        <p class="micro">The tile ships with the source line attached. A metric tile without a source does not render.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ 21 · DO / DON'T ══════════════ -->
+<section class="spread spread--raise" id="s21">
+  <span class="spread-no" aria-hidden="true">21</span>
+  <div class="wrap">
+    <header class="head">
+      <p class="eyebrow">21 — Master rules</p>
+      <h2>Fifteen rules,<br>in priority order</h2>
+      <hr class="rule">
+      <p class="lede" style="max-width:64ch">
+        When two rules conflict, the lower number wins. When a rule conflicts with
+        a client request, this document is the record of what was agreed.
+      </p>
+    </header>
+
+    <div class="scroll">
+      <table>
+        <thead><tr><th class="m">#</th><th>Rule</th><th>Because</th></tr></thead>
+        <tbody>
+          <tr><td class="m">01</td><td>Dark is the default, not a theme.</td><td class="dim">Light mode is a separate project with its own contrast study. Never auto-invert.</td></tr>
+          <tr><td class="m">02</td><td>One accent hue. No second chromatic family.</td><td class="dim">Semantic UI states are desaturated and separate; they are not the accent.</td></tr>
+          <tr><td class="m">03</td><td>Blue never exceeds ~5% of pixels.</td><td class="dim">If a comp looks blue, reduce the accent before changing anything else.</td></tr>
+          <tr><td class="m">04</td><td>Chrome gradient on display type only, max two words.</td><td class="dim">Below 48&nbsp;px the four stops compress; on a full headline the emphasis cancels.</td></tr>
+          <tr><td class="m">05</td><td>Two brand typefaces. Hard cap.</td><td class="dim">Geometric sans for everything; the script appears once, for a person's name.</td></tr>
+          <tr><td class="m">06</td><td>The logo is monochrome, outline, unfilled — always.</td><td class="dim">Never blue, never chrome, never on a chromatic or photographic ground.</td></tr>
+          <tr><td class="m">07</td><td>Uppercase + wide tracking marks structure; body stays sentence case.</td><td class="dim">Tracking is how the system signals a label rather than a sentence.</td></tr>
+          <tr><td class="m">08</td><td>Icons are 1.5&nbsp;px outline strokes. No fills, no tiles.</td><td class="dim">A new icon that needs a fill to read must be redrawn, not excepted.</td></tr>
+          <tr><td class="m">09</td><td>Dividers glow. Containers don't.</td><td class="dim">Separation comes from hairlines and whitespace, never drop shadows or added boxes.</td></tr>
+          <tr><td class="m">10</td><td>8&nbsp;px vertical rhythm; section breaks at 56 / 72 / 96.</td><td class="dim">Seven spacing values only. A gap needing 30&nbsp;px means the composition is wrong.</td></tr>
+          <tr><td class="m">11</td><td>CTAs are outlined pills, transparent fill.</td><td class="dim">White on Blue 500 measures 3.33:1 and fails AA. The outline is an accessibility decision.</td></tr>
+          <tr><td class="m">12</td><td>Photography is monochrome, high-contrast, black wardrobe, edge-feathered.</td><td class="dim">No colour, no studio white, no stock staging, no groups.</td></tr>
+          <tr><td class="m">13</td><td>Left-aligned single column; text column ≤ 7 of 12 when paired with an image.</td><td class="dim">Centring is reserved for the avatar and the standalone mark.</td></tr>
+          <tr><td class="m">14</td><td>Arc motif is ambient: corners, under 20% opacity, always behind content.</td><td class="dim">At most two anchors per surface, and not every surface needs them.</td></tr>
+          <tr><td class="m">15</td><td>A number ships only with a named source and a stated period.</td><td class="dim">The proof tier stays visibly empty until real, attributable evidence exists.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="grid g4" style="margin-top:calc(var(--u)*5)">
+      <div class="dd is-do">
+        <div class="vis" style="background:radial-gradient(120% 120% at 78% 0%,#16171B,#050507 70%);flex-direction:column;gap:8px;align-items:flex-start">
+          <p style="font-size:18px;font-weight:800;text-transform:uppercase;line-height:1;color:#fff">Build the<br><span class="chrome">system</span></p>
+          <span style="width:34px;height:2px;background:#3B8EF0;display:block"></span>
+          <p style="font-size:10px;color:#9AA0A8">Left-aligned, one accent, quiet.</p>
+        </div>
+        <div class="cap2"><span class="mark">DO</span><span>Ground, hierarchy, and a single point of emphasis.</span></div>
+      </div>
+      <div class="dd is-no">
+        <div class="vis" style="background:linear-gradient(135deg,#1F63C4,#6BB4FF);flex-direction:column;gap:8px;align-items:center;text-align:center">
+          <p style="font-size:17px;font-weight:800;text-transform:uppercase;line-height:1;color:#fff">Build the system</p>
+          <p style="font-size:10px;color:#EAF2FF">Centred on a blue field.</p>
+        </div>
+        <div class="cap2"><span class="mark">DON'T</span><span>Blue as a background fill, and centred composition.</span></div>
+      </div>
+      <div class="dd is-no">
+        <div class="vis" style="flex-direction:column;gap:6px;align-items:flex-start">
+          <p style="font-size:16px;font-weight:800;text-transform:uppercase;color:#fff;line-height:1">Build the system</p>
+          <p style="font-family:Georgia,serif;font-size:12px;color:#D8DADE;font-style:italic">A third typeface for flavour</p>
+        </div>
+        <div class="cap2"><span class="mark">DON'T</span><span>A third typeface. Two brand faces, no exceptions.</span></div>
+      </div>
+      <div class="dd is-no">
+        <div class="vis" style="flex-direction:column;gap:10px;align-items:flex-start">
+          <span style="display:inline-flex;height:34px;align-items:center;padding:0 18px;border-radius:6px;background:#3B8EF0;color:#fff;font-size:10px;letter-spacing:.2em;text-transform:uppercase">Get started</span>
+          <span style="display:inline-flex;height:34px;align-items:center;padding:0 18px;border-radius:6px;background:#1F63C4;color:#fff;font-size:10px;letter-spacing:.2em;text-transform:uppercase">Learn more</span>
+        </div>
+        <div class="cap2"><span class="mark">DON'T</span><span>Filled buttons, square radii, and two competing CTAs.</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ 22 · FILES ══════════════ -->
+<section class="spread" id="s22">
+  <span class="spread-no" aria-hidden="true">22</span>
+  <div class="arcs arcs--bl" aria-hidden="true" style="opacity:.4">
+    <svg width="760" height="760" viewBox="0 0 760 760">
+      <circle cx="380" cy="380" r="170"/><circle cx="380" cy="380" r="240"/>
+      <circle cx="380" cy="380" r="305"/><circle cx="380" cy="380" r="360"/>
+    </svg>
+  </div>
+  <div class="wrap">
+    <header class="head">
+      <p class="eyebrow">22 — Source files &amp; governance</p>
+      <h2>Everything here<br>ships as <span class="chrome">source</span></h2>
+      <hr class="rule">
+    </header>
+
+    <div class="split" style="gap:calc(var(--u)*6)">
+      <div class="stack" style="gap:calc(var(--u)*3)">
+        <h3>Export-ready files</h3>
+        <div>
+          <div class="filerow"><svg viewBox="0 0 24 24" fill="none" stroke="#6BB4FF" stroke-width="1.5"><use href="#i-portals"/></svg><span class="p">armospectra-brand-deck.html</span><span class="d">This deck</span></div>
+          <div class="filerow"><svg viewBox="0 0 24 24" fill="none" stroke="#6BB4FF" stroke-width="1.5"><use href="#i-automation"/></svg><span class="p">tokens.css</span><span class="d">CSS custom properties</span></div>
+          <div class="filerow"><svg viewBox="0 0 24 24" fill="none" stroke="#6BB4FF" stroke-width="1.5"><use href="#i-automation"/></svg><span class="p">tokens.json</span><span class="d">Design tokens (DTCG)</span></div>
+          <div class="filerow"><svg viewBox="0 0 24 24" fill="none" stroke="#6BB4FF" stroke-width="1.5"><use href="#i-automation"/></svg><span class="p">tailwind.preset.js</span><span class="d">Tailwind theme preset</span></div>
+          <div class="filerow"><svg viewBox="0 0 24 24" fill="none" stroke="#6BB4FF" stroke-width="1.5"><use href="#i-followup"/></svg><span class="p">BRAND_SYSTEM.md</span><span class="d">Written specification</span></div>
+          <div class="filerow"><svg viewBox="0 0 24 24" fill="none" stroke="#6BB4FF" stroke-width="1.5"><use href="#i-visibility"/></svg><span class="p">assets/logo-mark.svg</span><span class="d">Mark, construction reference</span></div>
+          <div class="filerow"><svg viewBox="0 0 24 24" fill="none" stroke="#6BB4FF" stroke-width="1.5"><use href="#i-visibility"/></svg><span class="p">assets/logo-lockup-vertical.svg</span><span class="d">Primary lockup</span></div>
+          <div class="filerow"><svg viewBox="0 0 24 24" fill="none" stroke="#6BB4FF" stroke-width="1.5"><use href="#i-visibility"/></svg><span class="p">assets/logo-lockup-horizontal.svg</span><span class="d">Secondary lockup</span></div>
+          <div class="filerow"><svg viewBox="0 0 24 24" fill="none" stroke="#6BB4FF" stroke-width="1.5"><use href="#i-capture"/></svg><span class="p">assets/icons/*.svg</span><span class="d">Six capability icons</span></div>
+          <div class="filerow" style="border-bottom:0"><svg viewBox="0 0 24 24" fill="none" stroke="#6BB4FF" stroke-width="1.5"><use href="#i-ai"/></svg><span class="p">assets/arc-motif.svg</span><span class="d">Ambient arc anchor</span></div>
+        </div>
+
+        <div class="note">
+          The mark in these files is a <span style="color:var(--white)">construction reference</span> —
+          it encodes the stroke weight, proportion, and geometry rules, and it is not
+          a substitute for the original vector artwork. Replace it with the supplied
+          production file before anything is printed or published.
+        </div>
+      </div>
+
+      <div class="stack" style="gap:calc(var(--u)*3)">
+        <h3>Adding to the system</h3>
+        <div class="stack-sm" style="gap:14px">
+          <div class="card card--flat" style="border-left:2px solid var(--blue-500);border-top:0;border-right:0;border-bottom:0;border-radius:0;padding:0 0 0 calc(var(--u)*2.5)">
+            <p class="label">1 · Derive, don't invent</p>
+            <p class="dim" style="font-size:12.5px">A new component must be buildable from existing tokens. If it needs a new value, the case for that value gets made first, on its own.</p>
+          </div>
+          <div class="card card--flat" style="border-left:2px solid var(--blue-500);border-top:0;border-right:0;border-bottom:0;border-radius:0;padding:0 0 0 calc(var(--u)*2.5)">
+            <p class="label">2 · Check rule order</p>
+            <p class="dim" style="font-size:12.5px">Run the proposal against the fifteen master rules. Lower numbers win conflicts.</p>
+          </div>
+          <div class="card card--flat" style="border-left:2px solid var(--blue-500);border-top:0;border-right:0;border-bottom:0;border-radius:0;padding:0 0 0 calc(var(--u)*2.5)">
+            <p class="label">3 · Measure contrast</p>
+            <p class="dim" style="font-size:12.5px">Any new colour pairing gets a computed ratio before it ships. 4.5 for body, 3.0 for large type and UI boundaries.</p>
+          </div>
+          <div class="card card--flat" style="border-left:2px solid var(--blue-500);border-top:0;border-right:0;border-bottom:0;border-radius:0;padding:0 0 0 calc(var(--u)*2.5)">
+            <p class="label">4 · Test at thumbnail</p>
+            <p class="dim" style="font-size:12.5px">If it stops reading as ArmoSpectra at 200&nbsp;px wide, it is decoration, not identity.</p>
+          </div>
+        </div>
+
+        <div class="capline" style="margin:calc(var(--u)*2) 0"></div>
+
+        <h3>What this document does not contain</h3>
+        <ul style="font-size:13px;color:var(--gray-400)">
+          <li>Client names, case studies, or testimonials</li>
+          <li>Performance metrics, growth figures, or result claims</li>
+          <li>Pricing, packaging, or commercial terms</li>
+          <li>A light-mode palette</li>
+        </ul>
+        <p class="dim" style="font-size:13px">
+          Each is absent because it is not established in the source material.
+          They are additions to be made with evidence, not gaps to be filled with plausible copy.
+        </p>
+      </div>
+    </div>
+
+    <div class="capline" style="margin:calc(var(--u)*7) 0 calc(var(--u)*4)"></div>
+
+    <div class="row" style="justify-content:space-between;align-items:flex-end;gap:calc(var(--u)*4)">
+      <div class="lockup">
+        <svg viewBox="0 0 140 120" width="72" height="62" fill="none" stroke="#FFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><use href="#mark"/></svg>
+        <span class="wordmark" style="font-size:14px">ArmoSpectra</span>
+      </div>
+      <div class="stack-sm" style="align-items:flex-end;text-align:right">
+        <p class="micro">BRAND SYSTEM v1.0 · DARK-FIRST</p>
+        <p class="micro">ARMOSPECTRA.COM</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<script>
+(function(){
+  var rail = document.querySelector('.rail');
+  if(!rail || !('IntersectionObserver' in window)) return;
+  var links = {};
+  rail.querySelectorAll('a').forEach(function(a){ links[a.getAttribute('href').slice(1)] = a; });
+  var obs = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      var a = links[e.target.id];
+      if(!a) return;
+      if(e.isIntersecting){
+        Object.keys(links).forEach(function(k){
+          links[k].style.background = '#26262E';
+          links[k].style.width = '22px';
+        });
+        a.style.background = '#3B8EF0';
+        a.style.width = '34px';
+      }
+    });
+  }, { rootMargin: '-45% 0px -45% 0px' });
+  document.querySelectorAll('.spread').forEach(function(s){ obs.observe(s); });
+})();
+</script>
