@@ -1,0 +1,533 @@
+<title>Onyx Office Audit</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Roboto:wght@300;400;500;700&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  /* ---- Light palette (default / un-stamped light + explicit light) ---- */
+  :root {
+    --ground: #F3F1EC;
+    --paper: #FBFAF7;
+    --raised: #FFFFFF;
+    --ink: #16181A;
+    --ink-soft: #43464A;
+    --muted: #7C807A;
+    --hair: rgba(20,22,24,0.12);
+    --hair-soft: rgba(20,22,24,0.07);
+    --accent: #2C7D68;
+    --accent-quiet: rgba(44,125,104,0.10);
+    --crit: #C0483C;
+    --warn: #9A6B1E;
+    --good: #2F7D4C;
+    --crit-bg: rgba(192,72,60,0.10);
+    --warn-bg: rgba(154,107,30,0.10);
+    --good-bg: rgba(47,125,76,0.10);
+    --chip-ink: #FBFAF7;
+    /* onyx masthead is constant across themes */
+    --onyx: #0B0C0E;
+    --onyx-raised: #17191C;
+    --onyx-ink: #ECEAE3;
+    --onyx-muted: #8C9089;
+    --onyx-hair: rgba(236,234,227,0.14);
+    --onyx-accent: #8FC3B0;
+    --shadow: 0 1px 2px rgba(16,18,20,0.05), 0 12px 40px rgba(16,18,20,0.07);
+  }
+  /* ---- Dark palette: un-stamped dark (OS) unless explicit light chosen ---- */
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ground: #0B0C0E;
+      --paper: #101214;
+      --raised: #16191C;
+      --ink: #ECEAE3;
+      --ink-soft: #C3C2BB;
+      --muted: #8B8F88;
+      --hair: rgba(236,234,227,0.13);
+      --hair-soft: rgba(236,234,227,0.06);
+      --accent: #8FC3B0;
+      --accent-quiet: rgba(143,195,176,0.12);
+      --crit: #E77A6E;
+      --warn: #D6A85C;
+      --good: #79B08C;
+      --crit-bg: rgba(231,122,110,0.13);
+      --warn-bg: rgba(214,168,92,0.12);
+      --good-bg: rgba(121,176,140,0.13);
+      --chip-ink: #0B0C0E;
+      --shadow: 0 1px 2px rgba(0,0,0,0.4), 0 18px 50px rgba(0,0,0,0.5);
+    }
+  }
+  /* ---- Explicit dark toggle wins in both directions ---- */
+  :root[data-theme="dark"] {
+    --ground: #0B0C0E;
+    --paper: #101214;
+    --raised: #16191C;
+    --ink: #ECEAE3;
+    --ink-soft: #C3C2BB;
+    --muted: #8B8F88;
+    --hair: rgba(236,234,227,0.13);
+    --hair-soft: rgba(236,234,227,0.06);
+    --accent: #8FC3B0;
+    --accent-quiet: rgba(143,195,176,0.12);
+    --crit: #E77A6E;
+    --warn: #D6A85C;
+    --good: #79B08C;
+    --crit-bg: rgba(231,122,110,0.13);
+    --warn-bg: rgba(214,168,92,0.12);
+    --good-bg: rgba(121,176,140,0.13);
+    --chip-ink: #0B0C0E;
+    --shadow: 0 1px 2px rgba(0,0,0,0.4), 0 18px 50px rgba(0,0,0,0.5);
+  }
+
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    background: var(--ground);
+    color: var(--ink);
+    font-family: "Roboto", system-ui, -apple-system, sans-serif;
+    font-weight: 300;
+    line-height: 1.62;
+    font-size: 17px;
+    letter-spacing: 0.005em;
+  }
+  ::selection { background: var(--accent-quiet); }
+
+  .wrap { max-width: 1000px; margin: 0 auto; padding: 0 24px; }
+
+  .mono { font-family: "Roboto Mono", ui-monospace, monospace; }
+  .eyebrow {
+    font-family: "Roboto Mono", ui-monospace, monospace;
+    font-size: 11px; font-weight: 500;
+    letter-spacing: 0.24em; text-transform: uppercase;
+  }
+  h1, h2, h3 { font-family: "Cormorant Garamond", Georgia, serif; font-weight: 500; text-wrap: balance; margin: 0; }
+
+  /* ---------- Masthead (always onyx) ---------- */
+  .masthead {
+    background: var(--onyx);
+    color: var(--onyx-ink);
+    border-bottom: 1px solid var(--onyx-hair);
+    position: relative;
+    overflow: hidden;
+  }
+  .masthead::before {
+    content: "";
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 60% 120% at 82% -10%, rgba(143,195,176,0.10), transparent 60%),
+      radial-gradient(ellipse 50% 100% at 12% 120%, rgba(236,234,227,0.05), transparent 62%);
+    pointer-events: none;
+  }
+  .mast-inner { padding: 56px 0 44px; position: relative; }
+  .mast-top {
+    display: flex; justify-content: space-between; align-items: baseline;
+    gap: 16px; flex-wrap: wrap;
+    color: var(--onyx-muted);
+    border-bottom: 1px solid var(--onyx-hair);
+    padding-bottom: 18px; margin-bottom: 30px;
+  }
+  .mast-top .eyebrow { color: var(--onyx-accent); }
+  .mast-grid { display: grid; grid-template-columns: 1fr auto; gap: 40px; align-items: end; }
+  @media (max-width: 720px) { .mast-grid { grid-template-columns: 1fr; gap: 28px; } }
+  .mast-title { font-size: clamp(38px, 7vw, 68px); line-height: 1.0; letter-spacing: -0.01em; }
+  .mast-title .light { color: var(--onyx-muted); font-style: italic; font-weight: 400; }
+  .mast-sub { color: var(--onyx-muted); max-width: 52ch; margin-top: 18px; font-size: 15.5px; }
+  .mast-sub a { color: var(--onyx-accent); text-decoration: none; border-bottom: 1px solid var(--onyx-hair); }
+
+  .score {
+    text-align: right; min-width: 210px;
+    border: 1px solid var(--onyx-hair);
+    border-radius: 14px;
+    padding: 20px 24px;
+    background: linear-gradient(150deg, rgba(236,234,227,0.05), rgba(236,234,227,0.01));
+  }
+  .score .num { font-family: "Cormorant Garamond", serif; font-size: 66px; line-height: 0.9; font-weight: 600; letter-spacing: -0.01em; }
+  .score .num small { font-size: 26px; color: var(--onyx-muted); font-weight: 400; }
+  .score .verdict { color: var(--onyx-ink); font-size: 13.5px; margin-top: 8px; letter-spacing: 0.01em; }
+  .score .eyebrow { color: var(--onyx-muted); margin-bottom: 12px; }
+  .meter { height: 5px; border-radius: 4px; background: rgba(236,234,227,0.14); margin-top: 16px; overflow: hidden; }
+  .meter > i { display: block; height: 100%; width: 72%; background: linear-gradient(90deg, var(--onyx-accent), #cfe3da); }
+
+  /* ---------- Section scaffolding ---------- */
+  section { padding: 52px 0; border-bottom: 1px solid var(--hair-soft); }
+  .sec-head { display: flex; align-items: baseline; gap: 14px; margin-bottom: 26px; }
+  .sec-head .eyebrow { color: var(--accent); }
+  .sec-head h2 { font-size: clamp(26px, 4vw, 34px); letter-spacing: -0.01em; }
+  .lead { color: var(--ink-soft); max-width: 66ch; font-weight: 300; }
+
+  /* ---------- Grade table ---------- */
+  .table-scroll { overflow-x: auto; }
+  table.grades { width: 100%; border-collapse: collapse; font-size: 15px; min-width: 520px; }
+  table.grades th, table.grades td { text-align: left; padding: 13px 16px; border-bottom: 1px solid var(--hair); vertical-align: middle; }
+  table.grades thead th { font-family: "Roboto Mono", monospace; font-size: 10.5px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); font-weight: 500; border-bottom-color: var(--hair); }
+  table.grades tbody td:first-child { font-weight: 400; }
+  table.grades td.note { color: var(--ink-soft); font-size: 14px; font-weight: 300; }
+  .grade {
+    font-family: "Roboto Mono", monospace; font-weight: 500; font-size: 14px;
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 40px; height: 30px; border-radius: 7px; letter-spacing: 0.02em;
+  }
+  .g-a { color: var(--good); background: var(--good-bg); }
+  .g-b { color: var(--accent); background: var(--accent-quiet); }
+  .g-c { color: var(--warn); background: var(--warn-bg); }
+
+  /* ---------- Findings ---------- */
+  .findings { display: flex; flex-direction: column; gap: 18px; }
+  .finding {
+    position: relative;
+    background: var(--raised);
+    border: 1px solid var(--hair);
+    border-radius: 14px;
+    padding: 24px 26px 24px 30px;
+    box-shadow: var(--shadow);
+    overflow: hidden;
+  }
+  .finding::before { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 4px; background: var(--sev, var(--muted)); }
+  .finding.sev-high { --sev: var(--crit); }
+  .finding.sev-med  { --sev: var(--warn); }
+  .finding.sev-low  { --sev: var(--muted); }
+  .f-head { display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap; margin-bottom: 12px; }
+  .f-id { font-family: "Roboto Mono", monospace; font-size: 13px; font-weight: 500; color: var(--muted); }
+  .f-title { font-family: "Cormorant Garamond", serif; font-size: 25px; font-weight: 600; line-height: 1.15; letter-spacing: -0.005em; flex: 1 1 320px; }
+  .chip {
+    font-family: "Roboto Mono", monospace; font-size: 10px; font-weight: 500;
+    letter-spacing: 0.14em; text-transform: uppercase;
+    padding: 5px 10px; border-radius: 100px; white-space: nowrap;
+  }
+  .chip.high { color: var(--chip-ink); background: var(--crit); }
+  .chip.med { color: var(--chip-ink); background: var(--warn); }
+  .chip.low { color: var(--ink); background: transparent; border: 1px solid var(--hair); }
+  .f-body { color: var(--ink-soft); font-weight: 300; font-size: 15.5px; }
+  .f-body p { margin: 0 0 12px; }
+  .f-body p:last-child { margin-bottom: 0; }
+  .f-body strong { color: var(--ink); font-weight: 500; }
+  .tag { font-family: "Roboto Mono", monospace; font-size: 12px; background: var(--accent-quiet); color: var(--accent); padding: 1px 7px; border-radius: 5px; }
+  .fix { display: block; margin-top: 14px; padding-top: 14px; border-top: 1px dashed var(--hair); }
+  .fix b { font-family: "Roboto Mono", monospace; font-size: 10.5px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); }
+  pre {
+    margin: 12px 0 0; padding: 14px 16px; border-radius: 10px;
+    background: var(--onyx); color: var(--onyx-ink);
+    font-family: "Roboto Mono", monospace; font-size: 12.5px; line-height: 1.6;
+    overflow-x: auto; border: 1px solid var(--onyx-hair);
+  }
+  pre .c { color: var(--onyx-muted); }
+  pre .k { color: var(--onyx-accent); }
+
+  /* ---------- Metrics strip ---------- */
+  .metrics { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--hair); border: 1px solid var(--hair); border-radius: 14px; overflow: hidden; }
+  @media (max-width: 720px) { .metrics { grid-template-columns: repeat(2, 1fr); } }
+  .metric { background: var(--raised); padding: 20px 18px; }
+  .metric .k { font-family: "Roboto Mono", monospace; font-size: 10.5px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); }
+  .metric .v { font-family: "Cormorant Garamond", serif; font-size: 34px; font-weight: 600; letter-spacing: -0.01em; margin-top: 6px; line-height: 1; font-variant-numeric: tabular-nums; }
+  .metric .v small { font-size: 15px; color: var(--muted); font-weight: 400; }
+  .metric .d { font-size: 12.5px; color: var(--ink-soft); margin-top: 7px; font-weight: 300; }
+
+  /* ---------- Good list ---------- */
+  .good-panel { background: var(--good-bg); border: 1px solid color-mix(in srgb, var(--good) 26%, transparent); border-radius: 14px; padding: 26px 28px; }
+  .good-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px 30px; margin-top: 6px; }
+  @media (max-width: 640px) { .good-grid { grid-template-columns: 1fr; } }
+  .good-grid li { list-style: none; padding-left: 26px; position: relative; color: var(--ink-soft); font-weight: 300; font-size: 15px; padding-bottom: 4px; }
+  .good-grid li::before { content: ""; position: absolute; left: 4px; top: 10px; width: 8px; height: 8px; border-radius: 2px; background: var(--good); transform: rotate(45deg); }
+  .good-grid li b { color: var(--ink); font-weight: 500; }
+
+  /* ---------- Priority ladder ---------- */
+  ol.ladder { counter-reset: step; list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 10px; }
+  ol.ladder li { counter-increment: step; display: flex; gap: 18px; align-items: baseline; padding: 16px 20px; border: 1px solid var(--hair); border-radius: 11px; background: var(--raised); }
+  ol.ladder li::before { content: counter(step); font-family: "Cormorant Garamond", serif; font-size: 26px; font-weight: 600; color: var(--accent); min-width: 26px; line-height: 1; }
+  ol.ladder .lab { font-family: "Roboto Mono", monospace; font-size: 12px; color: var(--muted); letter-spacing: 0.04em; }
+  ol.ladder .txt { color: var(--ink-soft); font-weight: 300; font-size: 15px; }
+  ol.ladder .txt b { color: var(--ink); font-weight: 500; }
+
+  footer { padding: 40px 0 60px; color: var(--muted); font-size: 13px; }
+  footer .mono { font-size: 12px; }
+
+  /* ---------- theme toggle ---------- */
+  .toggle {
+    position: fixed; top: 16px; right: 16px; z-index: 20;
+    font-family: "Roboto Mono", monospace; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase;
+    background: rgba(11,12,14,0.55); color: #ECEAE3; border: 1px solid rgba(236,234,227,0.2);
+    border-radius: 100px; padding: 8px 14px; cursor: pointer; backdrop-filter: blur(8px);
+  }
+  .toggle:hover { border-color: var(--onyx-accent); color: var(--onyx-accent); }
+  .toggle:focus-visible { outline: 2px solid var(--onyx-accent); outline-offset: 2px; }
+  a { color: var(--accent); }
+  a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  @media (prefers-reduced-motion: reduce) { * { scroll-behavior: auto !important; } }
+</style>
+
+<button class="toggle mono" id="themeToggle" aria-label="Toggle light or dark theme">◐ Theme</button>
+
+<header class="masthead">
+  <div class="wrap mast-inner">
+    <div class="mast-top">
+      <span class="eyebrow">Full Site Audit</span>
+      <span class="eyebrow" style="letter-spacing:0.16em;">2026 · 08 · 22</span>
+    </div>
+    <div class="mast-grid">
+      <div>
+        <h1 class="mast-title">the Onyx Office <span class="light">/ audit</span></h1>
+        <p class="mast-sub">A render, accessibility, performance, and security review of
+          <a href="https://theonyxoffice.com/#atelier">theonyxoffice.com/#atelier</a>.
+          Headless Chromium at desktop and mobile, axe-core, real-origin headers and asset
+          weights, and static analysis of the shipped production bundle.</p>
+      </div>
+      <div class="score">
+        <div class="eyebrow">Health score</div>
+        <div class="num">72<small>/100</small></div>
+        <div class="verdict">Good build, one broken promise</div>
+        <div class="meter" aria-hidden="true"><i></i></div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section>
+    <div class="sec-head"><span class="eyebrow">01</span><h2>The verdict</h2></div>
+    <p class="lead" style="font-size:18px;">The site is well engineered where it counts: no console
+      errors, no runtime exceptions, no failed requests, clean HTTPS with HSTS, immutable caching plus
+      HTTP&nbsp;Range on media, gzipped JS, code splitting, zero layout shift, a single H1, and no
+      horizontal overflow at any width. The craft in the motion and glass system is real.</p>
+    <p class="lead" style="margin-top:14px;font-size:18px;">Two things hold the score down: the exact
+      URL being shared, <span class="mono" style="font-size:15px;">/#atelier</span>, does not actually
+      land on the Atelier section, and the page ships roughly 49&nbsp;MB of media with content images
+      as oversized PNGs. Neither is hard to fix.</p>
+
+    <div class="table-scroll" style="margin-top:30px;">
+      <table class="grades">
+        <thead><tr><th>Category</th><th>Grade</th><th>Reading</th></tr></thead>
+        <tbody>
+          <tr><td>Functional / correctness</td><td><span class="grade g-c">C</span></td><td class="note">Deep-link anchors fail on cold load — the shared URL is affected</td></tr>
+          <tr><td>Performance</td><td><span class="grade g-c">C+</span></td><td class="note">Fast TTFB and JS, but ~49&nbsp;MB of media; PNGs where WebP belongs</td></tr>
+          <tr><td>Accessibility</td><td><span class="grade g-c">C+</span></td><td class="note">No <span class="mono">&lt;main&gt;</span> / labels; placeholder-only form; weak focus ring</td></tr>
+          <tr><td>SEO / metadata</td><td><span class="grade g-c">C</span></td><td class="note">Leftover template tags, no canonical / og:url / JSON-LD, generic title</td></tr>
+          <tr><td>Security (headers)</td><td><span class="grade g-b">B-</span></td><td class="note">HSTS / nosniff / Referrer present; no CSP, X-Frame-Options, Permissions-Policy</td></tr>
+          <tr><td>Code quality / stability</td><td><span class="grade g-a">A-</span></td><td class="note">Clean console, no errors, code-split, CLS 0, responsive</td></tr>
+          <tr><td>Visual / design craft</td><td><span class="grade g-a">A-</span></td><td class="note">Strong, cohesive dark atelier system; motion is well tuned</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head"><span class="eyebrow">02 · High</span><h2>The finding that matters most</h2></div>
+    <div class="findings">
+      <article class="finding sev-high">
+        <div class="f-head">
+          <span class="f-id">H1</span>
+          <span class="f-title">Deep link <span class="mono" style="font-size:19px;">/#atelier</span> does not scroll to the Atelier section</span>
+          <span class="chip high">High</span>
+        </div>
+        <div class="f-body">
+          <p>Loading <span class="tag">theonyxoffice.com/#atelier</span> cold leaves the viewport at
+            the very top of the page (scrollY&nbsp;=&nbsp;0). Same for
+            <span class="mono">#practice</span>, <span class="mono">#selects</span>, and
+            <span class="mono">#contact</span>. Clicking the nav links <strong>after</strong> load
+            works perfectly (About → scrollY&nbsp;900, the Atelier offset), so the section IDs and
+            in-app navigation are fine. It is specifically first-load navigation from a URL fragment
+            that fails.</p>
+          <p><strong>Why it matters:</strong> this is the exact URL in the request — the kind of link
+            that gets shared, bookmarked, or dropped in a bio or DM. Every recipient lands on the hero
+            and has to find the section themselves. A deep link that doesn't deep-link is a broken
+            promise to the visitor.</p>
+          <p><strong>Root cause</strong> (confirmed in the production bundle): a
+            <span class="mono">ScrollToTop</span> effect runs
+            <span class="mono">window.scrollTo(&#123;top:0&#125;)</span> on route mount, and nothing
+            reads <span class="mono">location.hash</span> to scroll to the target after hydration
+            (<span class="mono">scrollIntoView</span>: 0, <span class="mono">hashchange</span>
+            listeners: 0). The browser's native "scroll to #id" is overridden on load and never
+            restored; Supabase's auth client also clears the hash during init.</p>
+          <span class="fix">
+            <b>Fix</b>
+<pre><span class="c">// after hydration, honor the fragment</span>
+useEffect(() =&gt; {
+  const { hash } = window.location;
+  if (!hash) <span class="k">return</span>;
+  const el = document.getElementById(hash.slice(1));
+  if (el) requestAnimationFrame(() =&gt;
+    el.scrollIntoView({ behavior: <span class="k">"auto"</span>, block: <span class="k">"start"</span> }));
+}, []);
+<span class="c">// and guard ScrollToTop: if (window.location.hash) return;</span></pre>
+          </span>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head"><span class="eyebrow">03 · Performance</span><h2>The weight the page carries</h2></div>
+    <p class="lead" style="margin-bottom:24px;">Measured directly from the origin. The shell is fast;
+      the media is where the budget goes. It loads progressively and caches well, so repeat visits are
+      cheap — a first visit on a phone pays the full tab.</p>
+    <div class="metrics">
+      <div class="metric"><div class="k">TTFB (real)</div><div class="v">0.2–0.7<small>s</small></div><div class="d">Cloudflare, HTML doc 11&nbsp;KB</div></div>
+      <div class="metric"><div class="k">Main JS (gzip)</div><div class="v">179<small>KB</small></div><div class="d">604&nbsp;KB raw, ~0.43&nbsp;s</div></div>
+      <div class="metric"><div class="k">Video ×11</div><div class="v">~32<small>MB</small></div><div class="d">largest 12.4&nbsp;MB single clip</div></div>
+      <div class="metric"><div class="k">Images ×17</div><div class="v">~16<small>MB</small></div><div class="d">PNG, up to 2.9&nbsp;MB each</div></div>
+    </div>
+
+    <div class="findings" style="margin-top:22px;">
+      <article class="finding sev-med">
+        <div class="f-head"><span class="f-id">M1</span><span class="f-title">~49&nbsp;MB of media on the page</span><span class="chip med">Medium</span></div>
+        <div class="f-body">
+          <p>Heaviest assets: <span class="mono">spiral-crystal.mp4</span> <strong>12.4&nbsp;MB</strong>,
+            <span class="mono">rice-cooker-scroll.mp4</span> 5.3&nbsp;MB,
+            <span class="mono">cp-02-communications.mp4</span> 4.2&nbsp;MB, plus two more ~3.5&nbsp;MB
+            clips. Range + immutable caching are in place, so this is a first-visit and
+            metered-connection cost, not a repeat-visit one.</p>
+          <span class="fix"><b>Fix</b><div style="margin-top:8px;">Re-encode the decorative loops (tighter H.264 CRF / lower bitrate, or AV1&nbsp;·&nbsp;HEVC), cap dimensions to display size, and play-on-visible the below-the-fold clips. A silent background loop rarely needs more than 1–2&nbsp;MB.</div></span>
+        </div>
+      </article>
+      <article class="finding sev-med">
+        <div class="f-head"><span class="f-id">M2</span><span class="f-title">Content images are oversized PNGs where WebP belongs</span><span class="chip med">Medium</span></div>
+        <div class="f-body">
+          <p><span class="mono">unicorn-card.png</span> is <strong>2.9&nbsp;MB</strong> (1920×1433);
+            <span class="mono">dangote-preview</span>, <span class="mono">ia-sub-1</span>,
+            <span class="mono">pierce-sub-1</span> all sit at 1.7–1.8&nbsp;MB. Converting to WebP/AVIF
+            and sizing to the display box typically cuts 70–85%.</p>
+          <p>The pipeline already emits WebP for the social share image, so this is a settings change,
+            not new tooling. Adding <span class="mono">srcset</span>/<span class="mono">sizes</span>
+            also stops phones downloading desktop-scale art.</p>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head"><span class="eyebrow">04 · Accessibility</span><h2>Where assistive tech struggles</h2></div>
+    <div class="findings">
+      <article class="finding sev-med">
+        <div class="f-head"><span class="f-id">M3</span><span class="f-title">Background videos ignore <span class="mono" style="font-size:18px;">prefers-reduced-motion</span></span><span class="chip med">Medium</span></div>
+        <div class="f-body"><p>The site partly honors reduced-motion — it drops the Lenis smooth-scroll
+          engine and lowers animation quality — but the autoplaying crystal video loops keep playing.
+          axe flags <span class="mono">no-autoplay-audio</span> on 5 videos (muted, so the issue is the
+          motion, not sound). <strong>Fix:</strong> pause or swap to a poster frame when
+          <span class="mono">reduce</span> matches, alongside the existing downgrade.</p></div>
+      </article>
+      <article class="finding sev-med">
+        <div class="f-head"><span class="f-id">M4</span><span class="f-title">Contact form fields have no programmatic labels</span><span class="chip med">Medium</span></div>
+        <div class="f-body"><p>Name, email, and message carry only <span class="mono">placeholder</span>
+          text — no <span class="mono">&lt;label&gt;</span>, <span class="mono">aria-label</span>,
+          <span class="mono">id</span>, <span class="mono">name</span>, or
+          <span class="mono">autocomplete</span>. Fails WCAG 1.3.1&nbsp;/&nbsp;4.1.2 and defeats
+          autofill. The type/scope/budget toggles are buttons with no
+          <span class="mono">aria-pressed</span>, so their selected state is invisible to a screen
+          reader. <strong>Fix:</strong> add hidden labels + <span class="mono">autocomplete</span>, and
+          give the toggles pressed state or radio semantics.</p></div>
+      </article>
+      <article class="finding sev-med">
+        <div class="f-head"><span class="f-id">M5</span><span class="f-title">No <span class="mono" style="font-size:18px;">&lt;main&gt;</span>, <span class="mono" style="font-size:18px;">&lt;nav&gt;</span>, or <span class="mono" style="font-size:18px;">&lt;footer&gt;</span> landmarks</span><span class="chip med">Medium</span></div>
+        <div class="f-body"><p>axe: <span class="mono">landmark-one-main</span> (0 main landmarks) and
+          <span class="mono">region</span> (55 nodes outside any landmark). A <span class="mono">&lt;header&gt;</span>
+          exists, but content and the contact area aren't wrapped, so rotor/region navigation has
+          nothing to jump to. <strong>Fix:</strong> wrap the body in <span class="mono">&lt;main&gt;</span>,
+          label the nav, add a <span class="mono">&lt;footer&gt;</span>.</p></div>
+      </article>
+      <article class="finding sev-low">
+        <div class="f-head"><span class="f-id">L4</span><span class="f-title">Keyboard focus ring is nearly invisible on primary nav</span><span class="chip low">Low</span></div>
+        <div class="f-body"><p>Several ring/menu links compute a transparent outline
+          (<span class="mono">solid 2px rgba(0,0,0,0)</span>), so a keyboard user can't see focus.
+          Inconsistent — some buttons do get a visible ring. <strong>Fix:</strong> a real
+          <span class="mono">:focus-visible</span> style on every interactive element.</p></div>
+      </article>
+      <article class="finding sev-low">
+        <div class="f-head"><span class="f-id">L3 · L5</span><span class="f-title">Sparse alt text; mobile menu ignores Escape</span><span class="chip low">Low</span></div>
+        <div class="f-body"><p>Only 3 of 16 content images have alt text (one truncated to "GOVERNMENT
+          AFFAIRS AN"); describe the case-study visuals, keep <span class="mono">alt=""</span> for
+          decorative layers only. Separately, the hamburger menu opens but Escape doesn't close it and
+          focus isn't moved into or trapped in the panel.</p></div>
+      </article>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head"><span class="eyebrow">05 · Security &amp; SEO</span><h2>Headers, metadata, and template leftovers</h2></div>
+    <div class="findings">
+      <article class="finding sev-med">
+        <div class="f-head"><span class="f-id">M6</span><span class="f-title">Missing hardening headers: CSP, X-Frame-Options, Permissions-Policy</span><span class="chip med">Medium</span></div>
+        <div class="f-body"><p><strong>Present and good:</strong> HSTS (1&nbsp;yr + subdomains),
+          <span class="mono">X-Content-Type-Options: nosniff</span>,
+          <span class="mono">Referrer-Policy</span>. <strong>Missing:</strong> no Content-Security-Policy
+          (no restriction on script/connect sources), no X-Frame-Options /
+          <span class="mono">frame-ancestors</span> (clickjackable), no Permissions-Policy.
+          <strong>Fix:</strong> add <span class="mono">X-Frame-Options: DENY</span>, a starter
+          Permissions-Policy, and a report-only CSP allowing self + the fonts / storage / Supabase
+          origins the app uses.</p></div>
+      </article>
+      <article class="finding sev-low">
+        <div class="f-head"><span class="f-id">L6</span><span class="f-title">Contact form posts to Supabase with the public anon key — verify RLS</span><span class="chip low">Owner check</span></div>
+        <div class="f-body"><p>The form inserts into <span class="mono">contact_enquiries</span> using the
+          anon key in the bundle. Normal for Supabase (anon keys are public), but safety rests entirely
+          on Row-Level Security. <strong>Two owner actions:</strong> confirm the anon key allows INSERT
+          but <strong>denies SELECT</strong> (or a public read would leak every submitted name/email/
+          message), and add a honeypot or rate-limit to this unauthenticated public insert. I did not
+          probe the endpoint — verify it directly.</p></div>
+      </article>
+      <article class="finding sev-low">
+        <div class="f-head"><span class="f-id">L1 · L2</span><span class="f-title">Lovable template leftovers &amp; SEO gaps</span><span class="chip low">Low</span></div>
+        <div class="f-body"><p>Shipped to production in <span class="mono">&lt;head&gt;</span>:
+          <span class="mono">meta author=Lovable</span>,
+          <span class="mono">twitter:site=@Lovable</span> (so a social card credits @Lovable), and a
+          literal <span class="mono">&lt;!-- TODO: Update og:title --&gt;</span> comment. Also no
+          canonical, no <span class="mono">og:url</span>, no <span class="mono">og:site_name</span>, no
+          JSON-LD, no <span class="mono">sitemap.xml</span>, and a bare title. <strong>Fix:</strong>
+          own the meta tags, add canonical + Organization JSON-LD, and a title like "The Onyx Office —
+          Digital Systems, Visual Direction &amp; Emerging Intelligence".</p></div>
+      </article>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head"><span class="eyebrow">06</span><h2>What's already good — keep it</h2></div>
+    <div class="good-panel">
+      <ul class="good-grid">
+        <li><b>No console errors</b>, no page exceptions, no failed requests on the real origin.</li>
+        <li><b>Clean transport:</b> HTTPS, HSTS, nosniff, sane Referrer-Policy.</li>
+        <li><b>Smart caching:</b> hashed assets immutable for a year; video supports HTTP Range (206).</li>
+        <li><b>Fast shell:</b> TTFB ~0.2–0.7&nbsp;s, 11&nbsp;KB HTML, 179&nbsp;KB gzip JS.</li>
+        <li><b>Stable layout:</b> CLS 0, single H1, clean heading hierarchy.</li>
+        <li><b>Responsive:</b> no horizontal overflow at 390&nbsp;px or 1440&nbsp;px.</li>
+        <li><b>Code splitting:</b> the landing page loads only its own chunk.</li>
+        <li><b>Design craft:</b> cohesive onyx/glass system; the spiral nav and scroll gallery are well tuned.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section style="border-bottom:none;">
+    <div class="sec-head"><span class="eyebrow">07</span><h2>Fix in this order</h2></div>
+    <ol class="ladder">
+      <li><div><span class="lab">H1</span> &nbsp; <span class="txt"><b>Fix hash deep-linking.</b> The shared URL is broken — small change, high leverage.</span></div></li>
+      <li><div><span class="lab">M1 · M2</span> &nbsp; <span class="txt"><b>Compress video, convert PNGs to WebP/AVIF.</b> Biggest real-world speed win.</span></div></li>
+      <li><div><span class="lab">M3 · M4 · M5</span> &nbsp; <span class="txt"><b>Form labels, landmarks, reduced-motion for video.</b> The accessibility floor.</span></div></li>
+      <li><div><span class="lab">M6</span> &nbsp; <span class="txt"><b>Add CSP, X-Frame-Options, Permissions-Policy</b> headers.</span></div></li>
+      <li><div><span class="lab">L1 · L2</span> &nbsp; <span class="txt"><b>Strip Lovable leftovers, fill SEO metadata.</b></span></div></li>
+      <li><div><span class="lab">L3–L7</span> &nbsp; <span class="txt"><b>Alt text, focus ring, menu Escape, verify Supabase RLS, 404 view.</b></span></div></li>
+    </ol>
+  </section>
+
+  <footer>
+    <div class="mono">Method — Playwright headless Chromium · 1440×900 &amp; 390×844 · axe-core · real-origin curl · production-bundle static analysis.</div>
+    <div style="margin-top:8px;">Runtime behavior was reproduced through a local origin mirror, then every root cause was confirmed against the real production bundle and real-origin responses.</div>
+  </footer>
+</main>
+
+<script>
+  (function () {
+    var btn = document.getElementById('themeToggle');
+    var root = document.documentElement;
+    function current() {
+      var t = root.getAttribute('data-theme');
+      if (t) return t;
+      return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    }
+    try {
+      var saved = localStorage.getItem('onyx-audit-theme');
+      if (saved === 'light' || saved === 'dark') root.setAttribute('data-theme', saved);
+    } catch (e) {}
+    btn.addEventListener('click', function () {
+      var next = current() === 'dark' ? 'light' : 'dark';
+      root.setAttribute('data-theme', next);
+      try { localStorage.setItem('onyx-audit-theme', next); } catch (e) {}
+    });
+  })();
+</script>
