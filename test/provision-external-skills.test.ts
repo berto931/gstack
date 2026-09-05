@@ -6,10 +6,7 @@ import * as os from 'os';
 
 const ROOT = path.resolve(import.meta.dir, '..');
 const PROVISIONER = path.join(ROOT, 'scripts', 'provision-external-skills.sh');
-const HOOK = path.join(ROOT, '.claude', 'hooks', 'session-start.sh');
-const SETTINGS = path.join(ROOT, '.claude', 'settings.json');
 const SETUP_SRC = fs.readFileSync(path.join(ROOT, 'setup'), 'utf-8');
-const HOOK_SRC = fs.readFileSync(HOOK, 'utf-8');
 
 const IS_WIN = process.platform === 'win32';
 
@@ -30,8 +27,7 @@ afterAll(() => {
 // A hermetic bin dir holding ONLY bash + coreutils — deliberately no python3,
 // uv, pipx, npx, pip, or node. This makes every install probe fail fast (so the
 // tests never touch the network) AND makes the "MISSING"/gate assertions
-// deterministic instead of operator-dependent — the earlier version inherited
-// process.env.PATH and passed only by luck. Real /usr/bin is excluded on
+// deterministic instead of operator-dependent. Real /usr/bin is excluded on
 // purpose: it contains python3, which would otherwise send the provisioner's
 // venv fallback down a real network install and hang the test.
 const HERMETIC_BIN = (() => {
@@ -80,11 +76,8 @@ function runInSandbox(
 }
 
 describe('provision-external-skills: executability + shape', () => {
-  test.skipIf(IS_WIN)('provisioner and hook are executable', () => {
-    // Unix exec bit only. On Windows, libuv doesn't surface it for .sh files,
-    // so this would spuriously fail — the whole feature is Unix-only anyway.
+  test.skipIf(IS_WIN)('provisioner is executable', () => {
     expect(fs.statSync(PROVISIONER).mode & 0o111).toBeGreaterThan(0);
-    expect(fs.statSync(HOOK).mode & 0o111).toBeGreaterThan(0);
   });
 
   test.skipIf(IS_WIN)('provisioner passes bash syntax check', () => {
@@ -92,11 +85,25 @@ describe('provision-external-skills: executability + shape', () => {
     expect(res.stderr).toBe('');
     expect(res.status).toBe(0);
   });
+});
 
-  test.skipIf(IS_WIN)('hook passes bash syntax check', () => {
-    const res = spawnSync('bash', ['-n', HOOK], { encoding: 'utf-8' });
-    expect(res.stderr).toBe('');
-    expect(res.status).toBe(0);
+describe('provision-external-skills: no auto-restore', () => {
+  // The auto-restore SessionStart hook was removed because it fired on every
+  // session resume. Provisioning is manual-only now. These guard against
+  // silently re-introducing the auto-fire.
+  test('no SessionStart hook registration is checked into the repo', () => {
+    const settings = path.join(ROOT, '.claude', 'settings.json');
+    if (!fs.existsSync(settings)) return; // removed entirely — the intended state
+    // If a settings.json exists for other reasons, it must not register the
+    // external-skills auto-restore hook.
+    const cfg = JSON.parse(fs.readFileSync(settings, 'utf-8'));
+    const cmds = JSON.stringify(cfg?.hooks?.SessionStart ?? []);
+    expect(cmds).not.toContain('session-start.sh');
+    expect(cmds).not.toContain('provision-external-skills');
+  });
+
+  test('the orphaned SessionStart hook script is gone', () => {
+    expect(fs.existsSync(path.join(ROOT, '.claude', 'hooks', 'session-start.sh'))).toBe(false);
   });
 });
 
@@ -129,9 +136,7 @@ describe.skipIf(IS_WIN)('provision-external-skills: opt-in gate', () => {
 
   test('--if-enabled proceeds past the gate when the marker is present', () => {
     // With the marker present and a PATH lacking every installer, the gate
-    // must OPEN (print the restore line) and then no-op cleanly — proving the
-    // marker actually flips the gate, which the old --if-enabled --check test
-    // never did (check-mode won and short-circuited before the gate).
+    // must OPEN (print the restore line) and then no-op cleanly.
     const home = mkTmp();
     const gs = path.join(home, '.gstack');
     fs.mkdirSync(gs, { recursive: true });
@@ -139,8 +144,6 @@ describe.skipIf(IS_WIN)('provision-external-skills: opt-in gate', () => {
     const res = spawnSync('bash', [PROVISIONER, '--if-enabled'], {
       encoding: 'utf-8',
       timeout: 30_000,
-      // PATH has coreutils but NO uv/pipx/npx/python3, so both installs fail
-      // fast and the run stays hermetic (no network, no real install).
       env: { HOME: home, GSTACK_HOME: gs, PATH: controlledPath() },
     });
     expect(res.status).toBe(0);
@@ -153,10 +156,10 @@ describe.skipIf(IS_WIN)('provision-external-skills: opt-in gate', () => {
     expect(stdout.trim()).toBe('');
   });
 
-  test('exit code stays 0 even when an install path fails (session-safety contract)', () => {
+  test('exit code stays 0 even when an install path fails', () => {
     // Opted in, PATH lacks every installer → both payloads fail → the script
-    // must still exit 0, because a non-zero exit from the SessionStart hook
-    // degrades the user's session for an optional feature.
+    // must still exit 0 so a caller (e.g. `./setup`) is never derailed by an
+    // optional install failing.
     const home = mkTmp();
     const gs = path.join(home, '.gstack');
     fs.mkdirSync(gs, { recursive: true });
@@ -195,83 +198,5 @@ describe('provision-external-skills: setup wiring', () => {
     expect(block).toContain('rm -f "$_EXTERNAL_SKILLS_MARKER"');
     // Guard against someone "helpfully" making this destructive later.
     expect(block).not.toContain('rm -rf');
-  });
-});
-
-describe('provision-external-skills: settings.json wiring', () => {
-  // settings.json is the piece that actually makes the hook fire. A JSON typo
-  // or a wrong path silently disables the whole feature (Claude Code skips
-  // malformed hooks) while every other test still passes — so validate it
-  // structurally here.
-  const cfg = JSON.parse(fs.readFileSync(SETTINGS, 'utf-8'));
-  const entry = cfg?.hooks?.SessionStart?.[0]?.hooks?.[0];
-
-  test('registers a SessionStart command hook pointing at session-start.sh', () => {
-    expect(entry).toBeTruthy();
-    expect(entry.type).toBe('command');
-    expect(entry.command).toContain('.claude/hooks/session-start.sh');
-  });
-
-  test('quotes $CLAUDE_PROJECT_DIR so a path with spaces survives', () => {
-    expect(entry.command).toContain('"$CLAUDE_PROJECT_DIR"');
-  });
-
-  test('hook is synchronous — async would land skills after the skill list is built', () => {
-    // This is the real home of the async knob (NOT the shell script). Async
-    // mode would return before the skills exist, so they wouldn't appear until
-    // the NEXT session, defeating the restore.
-    expect(entry.async).toBeUndefined();
-    expect(entry.timeout).toBeGreaterThan(0);
-  });
-});
-
-describe.skipIf(IS_WIN)('provision-external-skills: SessionStart hook', () => {
-  test('hook is inert outside a remote container', () => {
-    // Contributor laptop: CLAUDE_CODE_REMOTE unset → the hook must do nothing.
-    const home = mkTmp();
-    const res = spawnSync('bash', [HOOK], {
-      encoding: 'utf-8',
-      timeout: 30_000,
-      env: { HOME: home, PATH: controlledPath(), CLAUDE_PROJECT_DIR: ROOT, CLAUDE_CODE_REMOTE: '' },
-    });
-    expect(res.status).toBe(0);
-    expect(res.stdout.trim()).toBe('');
-    expect(fs.existsSync(path.join(home, '.agents'))).toBe(false);
-  });
-
-  test('hook invokes the provisioner with --if-enabled + opt-in when remote', () => {
-    // Positive path: point CLAUDE_PROJECT_DIR at a sandbox whose provisioner is
-    // a stub that records its argv + env, and assert the hook calls it exactly
-    // as designed. This is what proves the gate/path/env handoff actually works
-    // in a remote container, which no prior test covered.
-    const proj = mkTmp('gstack-hookpos-');
-    fs.mkdirSync(path.join(proj, 'scripts'), { recursive: true });
-    const stub = path.join(proj, 'scripts', 'provision-external-skills.sh');
-    fs.writeFileSync(stub, '#!/bin/bash\necho "args=$* opt=${GSTACK_EXTERNAL_SKILLS:-}"\n');
-    fs.chmodSync(stub, 0o755);
-    const res = spawnSync('bash', [HOOK], {
-      encoding: 'utf-8',
-      timeout: 30_000,
-      env: { HOME: mkTmp(), PATH: controlledPath(), CLAUDE_PROJECT_DIR: proj, CLAUDE_CODE_REMOTE: 'true' },
-    });
-    expect(res.status).toBe(0);
-    expect(res.stdout).toContain('args=--if-enabled opt=1');
-  });
-
-  test('hook exits 0 when the provisioner is missing', () => {
-    // The [ -x ] guard: a checkout without the script must not error the session.
-    const proj = mkTmp('gstack-hooknoprov-');
-    const res = spawnSync('bash', [HOOK], {
-      encoding: 'utf-8',
-      timeout: 30_000,
-      env: { HOME: mkTmp(), PATH: controlledPath(), CLAUDE_PROJECT_DIR: proj, CLAUDE_CODE_REMOTE: 'true' },
-    });
-    expect(res.status).toBe(0);
-  });
-
-  test('hook source gates on CLAUDE_CODE_REMOTE and can never fail the session', () => {
-    expect(HOOK_SRC).toContain('CLAUDE_CODE_REMOTE');
-    expect(HOOK_SRC).toContain('|| true');
-    expect(HOOK_SRC.trimEnd().endsWith('exit 0')).toBe(true);
   });
 });

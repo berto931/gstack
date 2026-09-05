@@ -1540,11 +1540,12 @@ fi
 # in every agent session plus a 50MB download. Imposing that on every gstack
 # user would be wrong, so setup only touches them when explicitly asked.
 #
-# --external-skills writes a marker under ~/.gstack that the provisioner reads
-# as its opt-in gate on LOCAL re-runs. In a remote container the marker is gone
-# (wiped with $HOME), so the checked-in SessionStart hook re-provisions by
-# force-setting GSTACK_EXTERNAL_SKILLS=1 there instead. Either way the restore
-# survives an ephemeral environment because the hook lives in the repo.
+# --external-skills provisions now and writes a marker under ~/.gstack that the
+# provisioner reads as its opt-in gate on later re-runs. Provisioning is manual:
+# an ephemeral container wipes $HOME (marker and skills both), so re-run
+# `./setup --external-skills` after a rebuild to restore the payloads. (An
+# earlier version auto-restored via a SessionStart hook; that was removed
+# because it fired on every session resume.)
 _EXTERNAL_SKILLS_SCRIPT="$SOURCE_GSTACK_DIR/scripts/provision-external-skills.sh"
 _EXTERNAL_SKILLS_MARKER="${GSTACK_HOME:-$HOME/.gstack}/external-skills-enabled"
 if [ "$EXTERNAL_SKILLS_MODE" = "yes" ] && [ -x "$_EXTERNAL_SKILLS_SCRIPT" ]; then
@@ -1558,9 +1559,9 @@ if [ "$EXTERNAL_SKILLS_MODE" = "yes" ] && [ -x "$_EXTERNAL_SKILLS_SCRIPT" ]; the
     "$_EXTERNAL_SKILLS_SCRIPT" || true
   fi
 elif [ "$EXTERNAL_SKILLS_MODE" = "no" ]; then
-  # Clearing the marker stops the SessionStart hook re-provisioning. Installed
-  # files are left alone on purpose — removing 323 skills is destructive and
-  # belongs to an explicit `npx skills remove`, not a setup flag.
+  # Clearing the marker turns the opt-in gate back off for future runs.
+  # Installed files are left alone on purpose — removing the skills is
+  # destructive and belongs to an explicit `npx skills remove`, not a setup flag.
   rm -f "$_EXTERNAL_SKILLS_MARKER"
   log ""
   log "External skills disabled (marker cleared; installed files left in place)."

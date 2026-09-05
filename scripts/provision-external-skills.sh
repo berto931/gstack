@@ -18,13 +18,15 @@
 #   GSTACK_EXTERNAL_SKILLS=1           (env opt-in)
 #   ~/.gstack/external-skills-enabled  (marker; what --external-skills writes)
 #
-# SURVIVING A CONTAINER REBUILD: the marker above is NOT what does it — it
-# lives in $HOME, which an ephemeral container wipes along with everything
-# else. Only the repo survives a rebuild, so the restore instruction has to be
-# checked in. That is .claude/hooks/session-start.sh, which calls this script
-# with --if-enabled and GSTACK_EXTERNAL_SKILLS=1 on every session start. That
-# hook gates on $CLAUDE_CODE_REMOTE so it fires in disposable web containers
-# and stays out of the way on contributor laptops.
+# MANUAL PROVISIONING ONLY (auto-restore removed): earlier versions shipped a
+# SessionStart hook that re-ran this on every session start so the payloads
+# survived an ephemeral container rebuild. That auto-restore was removed
+# because it fired on every resume. You now provision explicitly:
+#   ./setup --external-skills          (one-shot, this machine)
+#   GSTACK_EXTERNAL_SKILLS=1           (env opt-in)
+#   ~/.gstack/external-skills-enabled  (marker; what --external-skills writes)
+# In a rebuilt container these are gone with $HOME, so re-run `./setup
+# --external-skills` after a rebuild if you want the payloads back.
 #
 # SUPPLY-CHAIN NOTE: both payloads are third-party code fetched at install time
 # and executed in remote containers that hold git push credentials — agent-reach
@@ -42,8 +44,8 @@
 #   --quiet       suppress progress chatter
 #
 # EXIT CODE CONTRACT: this script exits 0 even when a payload fails to
-# install. It runs from a SessionStart hook, where a non-zero exit degrades
-# the user's session for something entirely optional. Failures are reported on
+# install. It runs from `./setup`, where a non-zero exit for an entirely
+# optional add-on would derail the rest of setup. Failures are reported on
 # stderr and re-attempted on the next run. --check is the one exception: it
 # exits 1 when provisioning is incomplete, so tests and humans can assert.
 # An UNKNOWN flag exits 2 (see the arg loop) — a typo must not silently fall
