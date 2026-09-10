@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 440 440" width="440" height="440"
+     aria-hidden="true" focusable="false">
+  <title>Ambient arc motif</title>
+  <desc>Concentric contour rings. Anchor OFF-CANVAS at top-right or bottom-left so only
+arcs enter the frame, never a whole circle. Radii step irregularly and tighten toward
+the outer edge — evenly spaced rings read as a target, not an orbit.
+Stroke #0E2E5C at 12-20% effective opacity. Always behind content. Max two anchors per surface.</desc>
+  <g fill="none" stroke="#0E2E5C" stroke-width="1">
+    <circle cx="220" cy="220" r="90"/>
+    <circle cx="220" cy="220" r="130"/>
+    <circle cx="220" cy="220" r="168"/>
+    <circle cx="220" cy="220" r="203"/>
+    <circle cx="220" cy="220" r="218"/>
+  </g>
+</svg>

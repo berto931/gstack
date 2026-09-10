@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"
+     fill="none" stroke="currentColor" stroke-width="1.5"
+     stroke-linecap="round" stroke-linejoin="round" role="img" aria-label="Portals">
+  <title>Portals</title>
+  <rect x="2.6" y="4.2" width="18.8" height="15.6" rx="1.8"/>
+  <path d="M2.6 8.6h18.8"/>
+  <path d="M5.6 6.4h.02M8 6.4h.02" stroke-width="1.8"/>
+  <path d="M6.2 12.4h4.4M6.2 15.6h4.4M14 12.4h3.8M14 15.6h3.8"/>
+</svg>
